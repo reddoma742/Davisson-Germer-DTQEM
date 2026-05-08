@@ -1,0 +1,29 @@
+### 3. ملف `LICENSE` (MIT) – نفس الصيغة السابقة.
+
+### 4. ملف `.gitignore` (لـ Python)
+
+```gitignore
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE files
+.vscode/
+.idea/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Data files (optional, keep examples but ignore large data)
+*.csv
+*.npy
+
+# OS metadata
+.DS_Store
+Thumbs.db
