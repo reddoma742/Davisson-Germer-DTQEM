@@ -1,12 +1,14 @@
-# مثال النفقية الكمومية في بئر مزدوج (Quantum Tunneling)
+# 🧪 Quantum Tunneling & DTQEM | محاكاة النفقية الكمومية
 
-هذا المثال يطبق نموذج `TunnelingEngine` من `core/tunneling_engine.py` لمحاكاة جسيم (مثل إلكترون) في بئر جهد مزدوج متماثل، مع إمكانية إضافة تبديد حراري و pure dephasing.
+[ English Version Below | النسخة العربية بالأسفل ]
 
-## المتطلبات
+---
 
-- Python 3.8+
-- المكتبات: numpy, scipy, matplotlib, ipywidgets
+## 🇸🇦 النسخة العربية (Arabic Version)
 
-يمكنك تثبيتها عبر:
+هذا الجزء من المشروع مخصص لمحاكاة ديناميكيات الجسيم داخل بئر مزدوج (Double-Well) باستخدام نموذج **DTQEM** (تعدد الأزمنة الكمي). الهدف هو دراسة تأثير البيئة والحرارة على "زمن النفقية" ودرجة فقدان الترابط (Decoherence).
+
+### 🚀 كيفية التشغيل
+من المجلد الرئيسي للمشروع، نفذ الأمر التالي:
 ```bash
-pip install numpy scipy matplotlib ipywidgets
+python examples/tunneling/main_tunneling.py
