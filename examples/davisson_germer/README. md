@@ -1,0 +1,11 @@
+# Davisson–Germer Experiment Example (Electron Diffraction)
+
+This example implements the `DavissonGermerEngine` from `core/dg_engine.py` to simulate electron diffraction from a crystal and link the diffraction peak to the concepts of Visibility (V) and Distinguishability (D) within the DTQEM framework.
+
+## Requirements
+
+Same as the main project: Python 3.8+, numpy, scipy, matplotlib, ipywidgets.
+
+Install with:
+```bash
+pip install numpy scipy matplotlib ipywidgets
