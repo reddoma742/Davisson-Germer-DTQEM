@@ -1,3 +1,7 @@
+markdown
+![Berramdane Model Result](images/Davisson_Germer_DTQEM.jpg)
+
+
 # Davisson-Germer-DTQEM
 Simulation of electron crystal diffraction (Davisson–Germer) linked to the DTQEM decoherence model. Computes Bragg angles, visibility V, distinguishability D, complementarity V²+D², and temperature‑dependent γ_t. A bridge between classical wave interference and quantum self‑consistent temporal dynamics.
 # Davisson–Germer + DTQEM: Decoherence, Temperature, Bragg Peaks
