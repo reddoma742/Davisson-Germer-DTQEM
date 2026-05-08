@@ -1,14 +1,10 @@
-# 🧪 Quantum Tunneling & DTQEM | محاكاة النفقية الكمومية
+# 🧪 Quantum Tunneling & DTQEM Simulation
 
-[ English Version Below | النسخة العربية بالأسفل ]
+This module focuses on simulating particle dynamics within a double-well potential, governed by the **DTQEM** (Dual-Time Quantum Entanglement Model) framework. It specifically investigates the interplay between environmental factors, temperature, and the intrinsic "Tunneling Time" through open quantum system dynamics.
 
----
+## 🚀 How to Run
 
-## 🇸🇦 النسخة العربية (Arabic Version)
+To execute the simulation from the project's root directory, use the following command:
 
-هذا الجزء من المشروع مخصص لمحاكاة ديناميكيات الجسيم داخل بئر مزدوج (Double-Well) باستخدام نموذج **DTQEM** (تعدد الأزمنة الكمي). الهدف هو دراسة تأثير البيئة والحرارة على "زمن النفقية" ودرجة فقدان الترابط (Decoherence).
-
-### 🚀 كيفية التشغيل
-من المجلد الرئيسي للمشروع، نفذ الأمر التالي:
 ```bash
 python examples/tunneling/main_tunneling.py
