@@ -11,7 +11,7 @@ class TunnelingEngine(LindbladSolver):
         - relaxation: sqrt(gamma_down) * sigma_-
         - excitation: sqrt(gamma_up)   * sigma_+
     """
-    def __init__(self, Delta_eV=0.001, gamma_phi0=0.0, gamma_relax0=0.0):
+    def __init__(self, Delta_eV=0.001, gamma_phi0=0.0, gamma_relax0=0.0, measurement_rate=0.0):
         """
         Parameters:
         -----------
