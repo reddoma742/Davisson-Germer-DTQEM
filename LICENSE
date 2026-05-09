@@ -1,21 +1,90 @@
-MIT License
+DTQEM RESEARCH & EDUCATIONAL LICENSE
+Version 1.0, May 2026
 
-Copyright (c) 2026 Al Rddouane BERRAMDANE
+Copyright (c) 2026 Al Reddouane BERRAMDANE (Reddouane Berramdane)
+Project: Dual-Time Quantum Entanglement Model (DTQEM)
+Location: Oujda, Morocco
+Contact: reddoma@gmail.com
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+---
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## 1. Definitions
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+**1.1 "Software"** means the DTQEM source code, all accompanying files, examples, documentation, and specifically the mathematical relation:
+
+    γφ₀ · t_obs = 2 ln(tan θ)
+
+and any derivatives thereof, whether in source or object form.
+
+**1.2 "Commercial Use"** means any use of the Software that is intended for or directed toward commercial advantage or monetary compensation, including but not limited to:
+   - Incorporating the Software into a product or service sold for a fee.
+   - Using the Software to improve a commercial product or service.
+   - Providing the Software as a service (SaaS) for a fee.
+   - Selling licenses or subscriptions related to the Software.
+   - Using the Software for internal business operations that generate revenue (e.g., proprietary simulations that yield commercial results).
+
+**1.3 "Academic, Educational, or Research Use"** means any use of the Software that is:
+   - Within a non‑profit educational institution (university, school, training course without commercial purpose).
+   - For scientific research (theses, papers, non‑commercial funded projects).
+   - For personal, non‑commercial development or open‑source collaboration without monetary gain.
+
+---
+
+## 2. Permitted Uses (Free of Charge)
+
+Any person, academic institution, or individual researcher may:
+
+- Download, run, study, modify, and redistribute copies of the Software, provided that:
+
+  a) This license and the copyright notice are retained in all copies or substantial portions.
+  
+  b) Any modified version includes a clear notice stating that it is based on DTQEM and lists the changes made.
+  
+  c) No names of the contributors (including the author) are used to endorse or promote derived products without explicit written permission.
+
+- Use the Software for academic, educational, or research purposes as defined above.
+
+- Publish results obtained with the Software, provided that proper attribution is given (see Section 5).
+
+---
+
+## 3. Commercial Use – Prohibited Without a Separate License
+
+**3.1** Commercial use of the Software, or any part thereof (including the core equation), is **strictly prohibited** without a separate written license from the copyright holder.
+
+**3.2** Entities wishing to use DTQEM for commercial purposes may contact the author to negotiate a commercial license (which may involve a fee or other conditions).
+
+**3.3** Any unauthorized commercial use automatically terminates this license and may be subject to legal action.
+
+---
+
+## 4. No Warranty
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHOR OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+## 5. Attribution and Citation
+
+Any publication, preprint, thesis, or other scientific work that uses the Software or the equation `γφ₀·t_obs = 2 ln(tan θ)` **must** cite:
+
+> Berramdane, R. (2026). DTQEM v13.0 – Dual‑Time Quantum Entanglement Model: Simulations of Davisson–Germer, Tunneling, Schottky Effect, and the Balance Condition V = D. Zenodo. https://doi.org/10.5281/zenodo.20043754 (or the DOI of the latest version).
+
+Failure to provide proper attribution constitutes a breach of this license.
+
+---
+
+## 6. Termination
+
+Any violation of the terms of this license (including unauthorized commercial use) automatically terminates all rights granted hereunder. Sections 4, 5, and 6 shall survive termination.
+
+---
+
+## 7. Governing Law
+
+This license shall be interpreted and enforced in accordance with the laws of Morocco and international copyright treaties.
+
+---
+
+**BY USING, COPYING, OR DISTRIBUTING THE SOFTWARE, YOU ACCEPT ALL TERMS OF THIS LICENSE.**  
+*For commercial licensing inquiries, contact: reddouane.berramdane@example.com*
