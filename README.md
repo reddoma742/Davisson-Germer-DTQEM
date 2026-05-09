@@ -4,9 +4,20 @@
 
 **Davisson–Germer | Quantum Tunneling | Schottky Effect | Balance Condition V = D**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: DTQEM Research & Educational](https://img.shields.io/badge/License-DTQEM%20Research%20%26%20Educational-blue)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20043754.svg)](https://doi.org/10.5281/zenodo.20043754)
+
+## ⚠️ License Change Notice (v13.0)
+
+Starting from version 13.0, DTQEM is released under the **DTQEM Research & Educational License** (see [`LICENSE`](LICENSE)).  
+
+**Commercial use is not permitted** without explicit written permission.  
+Academic, educational, and non‑commercial research use is free and encouraged.
+
+For commercial licensing inquiries, contact: reddouane.berramdane@example.com
+
+---
 
 This repository provides a full numerical framework for simulating **open quantum systems** under the **Time‑Sovereignty** hypothesis (DTQEM). It includes three validated physical applications and an exact analytical balance condition `V = D` for pure dephasing.
 
