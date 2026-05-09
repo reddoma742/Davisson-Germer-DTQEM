@@ -23,6 +23,8 @@ class TunnelingGUI:
             'gamma_relax0': widgets.FloatSlider(value=0.0, min=0.0, max=1e11, step=1e9, description='γrel₀ (1/s)', readout_format='.2e'),
             'T': widgets.FloatSlider(value=0.0, min=0.0, max=300.0, step=1.0, description='T (K)'),
             't_max_ps': widgets.FloatSlider(value=10.0, min=1.0, max=50.0, step=1.0, description='t_max (ps)')
+            'measurement_rate': widgets.FloatSlider(value=0.0, min=0.0, max=1e13, step=1e11, description='Γ_meas (1/s)', readout_format='.2e'),
+        
         }
         self.button_run = widgets.Button(description='Run Simulation', button_style='primary')
         self.button_run.on_click(self._run)
