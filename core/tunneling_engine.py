@@ -114,8 +114,10 @@ class TunnelingEngine(LindbladSolver):
         for i, t in enumerate(t_arr):
             rho = self.evolve(rho0, t, T)
             P[i] = np.real(rho[1, 1])
-            V[i] = 2.0 * np.abs(rho[0, 1])
+            V[i] = 2.0 * np.abs(rho[0, 1])    
             D[i] = np.abs(rho[0, 0] - rho[1, 1])
+            S[i] = self.entropy(rho)
+            
         return t_arr, P, V, D
     
     def first_tunneling_time(self, t_arr, P, thresh=0.5):
