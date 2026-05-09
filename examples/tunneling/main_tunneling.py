@@ -73,6 +73,11 @@ class TunnelingGUI:
             ax2.set_title('Wave‑particle balance during tunneling')
             ax2.legend()
             ax2.grid(alpha=0.3)
+
+            ax3 = ax2.twinx()
+            ax3.plot(t_arr*1e12, S, 'c:', label='Entropy S(t)')
+            ax3.set_ylabel('Entropy (nats)', color='c')
+
             plt.tight_layout()
             plt.show()
 
@@ -81,6 +86,7 @@ class TunnelingGUI:
             print(f"Isolated tunneling time: {tau_iso*1e12:.2f} ps")
             print(f"DTQEM tunneling time:   {tau_num*1e12:.2f} ps")
             print(f"Effective γφ₀ from V(t): {gamma_eff:.2e} 1/s")
+            print(f"Entanglement lifetime: {self.model.entanglement_lifetime(T)*1e12:.2f} ps")
             if not np.isnan(tau_num):
                 idx = np.argmin(np.abs(t_arr - tau_num))
                 V_tau = V[idx]
