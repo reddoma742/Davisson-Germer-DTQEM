@@ -1,0 +1,81 @@
+- **Precision:** Verified errors < 1e‑12 for isolated Rabi oscillations and pure dephasing decay.
+
+---
+
+## 4. Sample Results
+
+### 4.1 Davisson–Germer (E = 54 eV, d = 0.215 nm, γφ₀ = 1000 1/s, t_obs = 1 μs)
+- Bragg angle: φ = 22.84°, θ = 134.32°
+- V = 0.715, D = 0.699, V²+D² ≈ 1.000
+
+### 4.2 Tunneling (Δ = 4.4 meV, γφ₀ = 5.24e12 1/s, T = 0 K)
+- Isolated tunneling time: 0.24 ps
+- With dephasing: 0.34 ps, V(τ) = 0.385, D(τ) = 0.054, V²+D² = 0.151
+- The drop in V²+D² reflects the mixed state induced by pure dephasing.
+
+### 4.3 Tunneling at high temperature (Δ = 4.4 meV, γφ₀ = 5.24e12, γrel₀ = 6e10, T = 167 K)
+- Tunneling time increases to ~1.96 ps, V ≈ 0, D ≈ 0 → fully incoherent hopping.
+
+### 4.4 Schottky effect (φ = 4.5 eV, T = 300 K, E = 1e8 V/m, area = 1 nm²)
+- Emission rate γ_emit ≈ 1.2e6 1/s, current ≈ 0.19 pA (estimative).
+
+### 4.5 Balance condition verification
+For γφ₀ = 1000 1/s, t_obs = 1 μs → product = 0.001 → predicted θ ≈ 45.01°.  
+Numerical check: V = 0.70693, D = 0.70693, difference = 1.11e-16.  
+The formula holds to machine precision.
+
+---
+
+## 5. How to Run
+
+1. Clone the repository:  
+   `git clone https://github.com/reddoma742/Davisson-Germer-DTQEM.git`
+2. Install dependencies:  
+   `pip install -r requirements.txt`
+3. Run any example:  
+   `python examples/davisson_germer/main_dg_sim.py`  
+   `python examples/tunneling/main_tunneling.py`  
+   `python examples/schottky/main_schottky.py`
+4. For the balance condition explorer:  
+   `python experiments/balance_condition.py`
+5. Use interactive sliders to change parameters.
+
+---
+
+## 6. Discussion & Open Questions
+
+- The balance condition \(V = D\) provides a clean quantitative test for pure dephasing environments. We invite experimental groups to test this prediction using e.g. superconducting qubits or trapped ions with controlled dephasing.
+- In the tunneling and Schottky models, complementarity \(V^2 + D^2\) can drop far below 1 due to mixed-state dynamics. This is not an error but a feature of open quantum systems.
+- The exploratory codes in `experiments/` (negative tunneling time, observer frequency) are **hypothetical** and not yet experimentally validated. They are intended to stimulate theoretical discussion and may lead to new predictions if refined.
+- Future work includes:
+  - Extending the balance condition to non‑Markovian environments.
+  - Including the effect of finite temperature on the balance condition (beyond pure dephasing).
+  - Designing a realistic double‑slit experiment that can reach \(V = D\) using the derived relation.
+
+---
+
+## 7. Conclusion
+
+DTQEM provides a unified, numerically exact framework for simulating open quantum systems under the Time‑Sovereignty interpretation. Three concrete physical applications (Davisson–Germer, double‑well tunneling, Schottky effect) have been implemented, tested, and documented. The discovery of an **exact analytical balance condition** \(V = D\) for pure dephasing elevates the model from a numerical tool to a predictive theory. The condition corrects earlier misconceptions and opens the door to quantitative experimental tests.
+
+All code is open source (MIT license) and ready for educational or research use. Exploratory scripts are clearly marked and shared to foster collaboration and discussion.
+
+---
+
+## 8. References
+
+1. Davisson, C. & Germer, L. H. (1927). *Nature* **119**, 558–560.
+2. Lindblad, G. (1976). *Commun. Math. Phys.* **48**, 119–130.
+3. Breuer, H.‐P. & Petruccione, F. (2002). *The Theory of Open Quantum Systems*. Oxford.
+4. Berramdane, R. (2026). DTQEM v12.2: Time‑Sovereignty Model. Zenodo. DOI: 10.5281/zenodo.20043754
+5. Schottky, W. (1914). *Phys. Z.* **15**, 872–878.
+
+---
+
+## 9. Acknowledgments
+
+We thank Gemini, Claude, DeepSeek, and Plecity for fruitful collaboration. Special thanks to an independent physicist for deriving the exact balance condition and identifying the factor‑2 convention.
+
+---
+
+**“Every quantum system carries its own intrinsic time.”**
