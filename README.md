@@ -6,7 +6,8 @@
 
 [![License: DTQEM Research & Educational](https://img.shields.io/badge/License-DTQEM%20Research%20%26%20Educational-blue)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20043754.svg)](https://doi.org/10.5281/zenodo.20043754)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20090038.svg)](https://doi.org/10.5281/zenodo.20090038)
+
 
 ## ⚠️ License Change Notice (v13.0)
 
