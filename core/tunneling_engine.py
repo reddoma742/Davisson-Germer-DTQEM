@@ -109,6 +109,7 @@ class TunnelingEngine(LindbladSolver):
         P = np.zeros(num_points)
         V = np.zeros(num_points)
         D = np.zeros(num_points)
+        S = np.zeros(num_points)
         
         for i, t in enumerate(t_arr):
             rho = self.evolve(rho0, t, T)
