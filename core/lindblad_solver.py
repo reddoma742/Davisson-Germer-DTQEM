@@ -88,3 +88,14 @@ class LindbladSolver:
         if trace > 0:
             rho_t /= trace
         return rho_t
+            # زيد هاد الدالة في آخر ملف core/lindblad_solver.py تحت دالة evolve
+    @staticmethod
+    def entropy(rho):
+        """
+        Calculate Von Neumann entropy: S = -Tr(rho * ln(rho))
+        """
+        # حساب القيم الذاتية (Eigenvalues)
+        evals = np.linalg.eigvalsh(rho)
+        # كنختارو غير القيم اللي كبر من الصفر باش نتفاداو خطأ log(0)
+        evals = evals[evals > 1e-15]
+        return -np.sum(evals * np.log(evals))
