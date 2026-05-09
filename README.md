@@ -15,7 +15,7 @@ Starting from version 13.0, DTQEM is released under the **DTQEM Research & Educa
 **Commercial use is not permitted** without explicit written permission.  
 Academic, educational, and non‑commercial research use is free and encouraged.
 
-For commercial licensing inquiries, contact: reddouane.berramdane@example.com
+For commercial licensing inquiries, contact: reddoma@gmail.com
 
 ---
 
