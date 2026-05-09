@@ -10,21 +10,16 @@ class TunnelingEngine(LindbladSolver):
         - dephasing: sqrt(gamma_phi) * sigma_z
         - relaxation: sqrt(gamma_down) * sigma_-
         - excitation: sqrt(gamma_up)   * sigma_+
+        - measurement (Zeno): sqrt(measurement_rate) * P_left
     """
     def __init__(self, Delta_eV=0.001, gamma_phi0=0.0, gamma_relax0=0.0, measurement_rate=0.0):
-        """
-        Parameters:
-        -----------
-        Delta_eV : float
-            Tunnel splitting in eV (e.g., 0.001 = 1 meV)
-        gamma_phi0 : float
-            Pure dephasing rate at T=0 (1/s)
-        gamma_relax0 : float
-            Relaxation rate at T=0 (1/s)
-        """
+        # استدعاء LindbladSolver باش نجيبو الدوال ديالو (بحال entropy)
+        super().__init__() 
+        
         self.Delta_J = Delta_eV * eV   # convert to Joules
         self.gamma_phi0 = gamma_phi0
         self.gamma_relax0 = gamma_relax0
+        self.measurement_rate = measurement_rate # تسجيل القيمة باش نخدمو بيها
         
         # Pauli matrices for single qubit
         self.sx = np.array([[0, 1], [1, 0]], dtype=complex)
@@ -40,9 +35,6 @@ class TunnelingEngine(LindbladSolver):
     def jump_operators(self, T):
         """
         Build list of Lindblad jump operators and their effective rates.
-        Returns:
-            Ls : list of 2x2 arrays
-            rates : dict with 'gamma_phi', 'gamma_down', 'gamma_up'
         """
         # Thermal occupation of the environment
         n_th = self.thermal_occupation(self.Delta_J, T)
@@ -58,7 +50,14 @@ class TunnelingEngine(LindbladSolver):
             Ls.append(np.sqrt(gamma_down) * self.sm)
         if gamma_up > 0:
             Ls.append(np.sqrt(gamma_up) * self.sp)
-        rates = {'gamma_phi': gamma_phi, 'gamma_down': gamma_down, 'gamma_up': gamma_up}
+            
+        # إضافة تأثير زينو (القياس المستمر)
+        if self.measurement_rate > 0:
+            # إسقاط على البئر الأيسر: P_left = [[1, 0], [0, 0]]
+            L_meas = np.sqrt(self.measurement_rate) * np.array([[1, 0], [0, 0]], dtype=complex)
+            Ls.append(L_meas)
+            
+        rates = {'gamma_phi': gamma_phi, 'gamma_down': gamma_down, 'gamma_up': gamma_up, 'meas_rate': self.measurement_rate}
         return Ls, rates
     
     def build_liouvillian(self, T):
@@ -68,37 +67,13 @@ class TunnelingEngine(LindbladSolver):
         return super().build_liouvillian(H, Ls)
     
     def evolve(self, rho0, t_obs, T):
-        """
-        Evolve density matrix from initial state rho0 for time t_obs at temperature T.
-        """
+        """Evolve density matrix."""
         L = self.build_liouvillian(T)
         return super().evolve(rho0, t_obs, L)
     
     def tunneling_dynamics(self, T, t_max, num_points=500, initial='left'):
         """
-        Simulate P_right(t), V(t), D(t) from t=0 to t_max.
-        
-        Parameters:
-        -----------
-        T : float
-            Temperature (K)
-        t_max : float
-            Maximum time (seconds)
-        num_points : int
-            Number of time points
-        initial : str ('left' or 'right')
-            Initial well
-        
-        Returns:
-        --------
-        t_arr : np.ndarray (num_points)
-            Time array (seconds)
-        P_right : np.ndarray
-            Probability to be in right well
-        V : np.ndarray
-            Visibility = 2|rho01|
-        D : np.ndarray
-            Distinguishability = |rho00 - rho11|
+        Simulate P_right(t), V(t), D(t), S(t).
         """
         if initial == 'left':
             rho0 = np.array([[1, 0], [0, 0]], dtype=complex)
@@ -116,34 +91,33 @@ class TunnelingEngine(LindbladSolver):
             P[i] = np.real(rho[1, 1])
             V[i] = 2.0 * np.abs(rho[0, 1])    
             D[i] = np.abs(rho[0, 0] - rho[1, 1])
+            # دالة الإنتروبيا خدامة دابا حيت زدنا super().__init__
             S[i] = self.entropy(rho)
             
         return t_arr, P, V, D, S
-    
+
+    def entanglement_lifetime(self, T):
+        """Estimate lifetime from rates."""
+        Ls, rates = self.jump_operators(T)
+        total_rate = rates['gamma_phi'] + rates['gamma_down'] + rates['gamma_up'] + self.measurement_rate
+        return 1.0 / total_rate if total_rate > 0 else np.inf
+
     def first_tunneling_time(self, t_arr, P, thresh=0.5):
         """First time P(t) >= thresh."""
         idx = np.where(P >= thresh)[0]
         return t_arr[idx[0]] if len(idx) > 0 else np.nan
-    
+
     def effective_gamma_phi(self, t_arr, V):
-        """
-        Estimate effective dephasing rate from exponential decay of V(t).
-        Assumes V(t) ~ V0 * exp(-gamma_eff * t).
-        """
+        """Estimate effective dephasing rate."""
         mask = V > 0.1
-        if np.sum(mask) < 2:
-            return 0.0
+        if np.sum(mask) < 2: return 0.0
         logV = np.log(V[mask])
         t_masked = t_arr[mask]
         coeffs = np.polyfit(t_masked, logV, 1)
-        gamma_eff = -coeffs[0]
-        return max(gamma_eff, 0.0)
-    
+        return max(-coeffs[0], 0.0)
+
     @staticmethod
     def isolated_P_right(t, Delta_eV):
-        """
-        Analytical solution for isolated system (no Lindblad).
-        P_right(t) = sin^2( Delta * t / (2 hbar) )
-        """
+        """Analytical solution."""
         omega = Delta_eV * eV / hbar
         return np.sin(omega * t / 2)**2
