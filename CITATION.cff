@@ -3,13 +3,12 @@ message: "If you use this software, the analytical balance equation, or any part
 authors:
   - family-names: "Berramdane"
     given-names: "Reddouane"
-    orcid: ""   # optional, add if you have one
     affiliation: "Independent Researcher"
     city: "Oujda"
     country: "MA"
 title: "DTQEM v13.0 – Dual-Time Quantum Entanglement Model: Davisson–Germer, Tunneling, Schottky Effect, and the Balance Condition V = D"
-version: 13.0.0
-doi: "10.5281/zenodo.20043754"
+version: 13.0.
+doi: "10.5281/zenodo.20090038"
 date-released: 2026-05-09
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
@@ -31,11 +30,11 @@ abstract: >
   (2) quantum tunneling in a double well with thermal relaxation and pure dephasing;
   (3) Schottky effect (field‑enhanced thermionic emission).
   An exact analytical balance condition V = D is derived for pure dephasing:
-  γφ₀·t_obs = 2 ln(tan θ), θ > 45°.
+  gamma_phi_0 * t_obs = 2 * ln(tan(theta)), for theta > 45 degrees.
   All Lindblad simulations use Liouvillian exponentiation (expm) reaching machine precision (errors < 1e-12).
   The code is open source with interactive GUIs, unit tests, and full documentation.
-license: "DTQEM Research & Educational License (see LICENSE file)"
-acknowledgment: >
+license: "DTQEM Research & Educational License"
+acknowledgments: >
   This work was developed and refined by Redouane Berramdane.
   The author acknowledges the use of AI assistants (Gemini, DeepSeek, Claude, and Perplexity)
   for code optimisation, documentation assistance, language polishing, and conceptual discussions.
