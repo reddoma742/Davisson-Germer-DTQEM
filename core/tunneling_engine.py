@@ -118,7 +118,7 @@ class TunnelingEngine(LindbladSolver):
             D[i] = np.abs(rho[0, 0] - rho[1, 1])
             S[i] = self.entropy(rho)
             
-        return t_arr, P, V, D
+        return t_arr, P, V, D, S
     
     def first_tunneling_time(self, t_arr, P, thresh=0.5):
         """First time P(t) >= thresh."""
