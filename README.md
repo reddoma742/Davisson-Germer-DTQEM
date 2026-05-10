@@ -4,47 +4,39 @@
 
 [![License: DTQEM Research & Educational](https://img.shields.io/badge/License-DTQEM%20Research%20%26%20Educational-blue)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20090038.svg)](https://doi.org/10.5281/zenodo.20090038)
 
-## ⚠️ License Change Notice (v13.0+)
-
-Starting from version 13.0, DTQEM is released under the **DTQEM Research & Educational License** (see [`LICENSE`](LICENSE)).  
-
-**Commercial use is not permitted** without explicit written permission.  
-Academic, educational, and non‑commercial research use is free and encouraged.
+## ⚠️ License Notice
+DTQEM v14.0 is released under the **DTQEM Research & Educational License**. 
+**Commercial use is strictly prohibited** without prior written authorization. 
+Academic and non-commercial research use is encouraged.
 
 ---
 
-This repository provides a full numerical framework for simulating **open quantum systems** under the **Time‑Sovereignty** hypothesis.
-
 ## 🔬 Core Applications
+This framework simulates open quantum systems under the **Time-Sovereignty** hypothesis:
+- **Davisson–Germer Experiment:** Numerical validation of electron diffraction.
+- **Quantum Tunneling:** Analysis of the Zeno effect and entropy stability at $\ln 2$.
+- **Schottky Effect:** Modeling thermionic emission via internal resonance.
 
-- **Davisson–Germer experiment** → `examples/davisson_germer/`
-- **Quantum tunneling** with Zeno effect and entropy → `examples/tunneling/`
-- **Schottky effect** (thermionic emission) → `examples/schottky/`
+## ⚖️ Analytical Breakthroughs (v14.0)
 
-## ⚖️ New Analytical Results (v14.0)
+1. **Wave-Particle Balance Condition:**
+   $$\gamma_{\phi0}\,t_{obs} = 2\ln(\tan\theta), \quad \theta > 45^\circ$$
 
-1.  **Wave‑particle balance (pure dephasing)**  
-    \(\boxed{\gamma_{\phi0}\,t_{\text{obs}} = 2\ln(\tan\theta)},\qquad \theta>45^\circ\)
+2. **Resonance Collapse Time:**
+   $$t_{collapse} = -\frac{\ln\varepsilon}{2\gamma}$$
 
-2.  **Resonance collapse from |+⟩**  
-    \(\boxed{t_{\text{collapse}} = -\frac{\ln\varepsilon}{2\gamma}}\) or \(\boxed{\gamma\,t_{\text{collapse}} = -\frac{\ln\varepsilon}{2}}\)
-
-## 🧪 Experimental Codes (Hypothetical / Exploratory)
-
-- `experiments/balance_condition.py` – interactive verification of `V=D`
-- `experiments/tunneling_apparent_time.py` – test for negative time (result: none found)
-- `experiments/blp_measure.py` – Markovianity test (BLP = 0)
+## 🧪 Experimental & Validation Labs
+- `experiments/balance_condition.py`: Interactive verification of the $V=D$ threshold.
+- `experiments/tunneling_apparent_time.py`: Numerical study on apparent tunneling time (Confirmed Zeno-dominant behavior; no negative time observed in current dephasing limit).
+- `experiments/blp_measure.py`: Verification of Markovian dynamics (BLP = 0).
 
 ## 📚 Documentation
+- **White Paper:** [`docs/WHITEPAPER_v14.0.md`](docs/WHITEPAPER_v14.0.md)
+- **Conceptual Philosophy:** [`docs/PEER_DISCUSSION.md`](docs/PEER_DISCUSSION.md)
 
-- Full white paper: [`docs/WHITEPAPER_v14.0.md`](docs/WHITEPAPER_v14.0.md)
-- Peer discussion notes: [`docs/PEER_DISCUSSION.md`](docs/PEER_DISCUSSION.md)
-
-## 🚀 Getting Started
-
+## 🚀 Installation & Usage
 ```bash
-git clone https://github.com/reddoma742/Davisson-Germer-DTQEM.git
+git clone [https://github.com/reddoma742/Davisson-Germer-DTQEM.git](https://github.com/reddoma742/Davisson-Germer-DTQEM.git)
 cd Davisson-Germer-DTQEM
 pip install -r requirements.txt
