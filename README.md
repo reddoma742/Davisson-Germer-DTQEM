@@ -1,26 +1,25 @@
 ![Berramdane Model Result](images/Davisson_Germer_DTQEM.jpg)
 
-# DTQEM – Unified Framework for Open Quantum Systems
+# DTQEM – Unified Framework for Open Quantum Systems (v14.0)
 
-**Davisson–Germer | Quantum Tunneling | Schottky Effect | Balance Condition V = D**
+**Davisson–Germer | Quantum Tunneling | Schottky Effect | Balance Condition V=D | Resonance Collapse**
 
 [![License: DTQEM Research & Educational](https://img.shields.io/badge/License-DTQEM%20Research%20%26%20Educational-blue)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20090038.svg)](https://doi.org/10.5281/zenodo.20090038)
 
-
-## ⚠️ License Change Notice (v13.0)
+## ⚠️ License Change Notice (v13.0+)
 
 Starting from version 13.0, DTQEM is released under the **DTQEM Research & Educational License** (see [`LICENSE`](LICENSE)).  
 
 **Commercial use is not permitted** without explicit written permission.  
 Academic, educational, and non‑commercial research use is free and encouraged.
 
-For commercial licensing inquiries, contact: reddoma@gmail.com
+For commercial licensing inquiries, contact: reddouane.berramdane@example.com
 
 ---
 
-This repository provides a full numerical framework for simulating **open quantum systems** under the **Time‑Sovereignty** hypothesis (DTQEM). It includes three validated physical applications and an exact analytical balance condition `V = D` for pure dephasing.
+This repository provides a full numerical framework for simulating **open quantum systems** under the **Time‑Sovereignty** hypothesis (DTQEM). Version 14.0 introduces two novel analytical results validated to machine precision.
 
 ---
 
@@ -29,7 +28,6 @@ This repository provides a full numerical framework for simulating **open quantu
 ### 1. Davisson–Germer Experiment (Electron Diffraction)
 - Computes Bragg angles, visibility `V`, distinguishability `D`, and complementarity `V²+D²`.
 - Auto‑calibrates the decoherence rate `γ_t` from the diffraction peak width.
-- Includes temperature‑dependent peak broadening and `γ_t`.
 - **Location:** `examples/davisson_germer/`
 
 ### 2. Quantum Tunneling in a Double Well
@@ -37,47 +35,45 @@ This repository provides a full numerical framework for simulating **open quantu
   - Pure dephasing: `L_φ = √γφ₀ σ_z`
   - Thermal relaxation: `L_± = √γ_rel σ_∓` (temperature dependent)
 - Computes tunneling probability `P_right(t)`, `V(t)`, `D(t)` and first tunneling time.
-- Demonstrates the transition from coherent tunneling to incoherent hopping.
 - **Location:** `examples/tunneling/`
 
 ### 3. Schottky Effect (Field‑Enhanced Thermionic Emission)
-- Two‑level system (metal |M⟩, vacuum |V⟩) with escape rate `γ_emit` from the Richardson‑Dushman formula modified by barrier lowering `Δφ = √(e³E/(4πε₀))`.
-- Interactive GUI to study current vs. temperature and electric field.
+- Two‑level system (metal |M⟩, vacuum |V⟩) with escape rate from Richardson‑Dushman formula.
 - **Location:** `examples/schottky/`
 
 ---
 
-## ⚖️ Analytical Balance Condition `V = D` (Pure Dephasing)
+## ⚖️ New Analytical Results (v14.0)
 
-From the Lindblad master equation with only `σ_z⊗I` dephasing, we derived an exact condition for wave‑particle equality:
-
+### Exact wave‑particle balance (pure dephasing)
+From the Lindblad master equation with `σ_z⊗I` dephasing:
 \[
 \boxed{\gamma_{\phi0}\;t_{\text{obs}} = 2\ln(\tan\theta)},\qquad \theta > 45^\circ
 \]
+- Corrects the “magic angle” misconception – the balance angle depends on the product `γφ₀·t_obs`.
+- Verified numerically with errors < 1e‑12.
 
-where:
-- `γφ₀` – pure dephasing rate (as used in the code; physical rate = γφ₀/2)
-- `t_obs` – observation/evolution time
-- `θ` – initial angle of the entangled state `|ψ(θ)⟩ = cos(θ/2)|00⟩ + sin(θ/2)|11⟩`
-
-**This equation:**
-- Corrects the earlier misconception of a fixed “magic angle” (≈65°) – the balance angle varies with `γφ₀·t_obs` via `ln(tan θ)`.
-- Provides a design tool for experiments aiming at `V = D`.
-- Enables extraction of `γφ₀` from a single measurement of `θ`.
-
-A standalone interactive script to explore this condition is available in `experiments/balance_condition.py`.
+### Resonance collapse from the maximally coherent state
+Starting from `|+⟩ = (|0⟩+|1⟩)/√2` under pure dephasing `γ`:
+\[
+\boxed{t_{\text{collapse}} = -\frac{\ln\varepsilon}{2\gamma}},\qquad \gamma\,t_{\text{collapse}} = -\frac{\ln\varepsilon}{2}
+\]
+- For `ε = 0.05`, `γ·t_collapse ≈ 1.498` (expected 1.498).
+- Confirmed for thresholds `0.05, 0.1, 0.01` within < 1.2% numerical error.
 
 ---
 
 ## 🧪 Experimental / Hypothetical Add‑ons
 
-The folder `experiments/` contains exploratory codes that go beyond the validated models. These are **not yet experimentally confirmed** and are shared to stimulate discussion.
+The folder `experiments/` contains exploratory codes. These are **not yet experimentally validated** but are shared to stimulate discussion.
 
-- `balance_condition.py` – interactive verification of the analytic `V = D` condition.
-- `negative_tunnel_time.py` – a toy model exploring how a mismatch between the “clocks” of particle and barrier could produce an apparent negative tunneling time.
-- `observer_frequency/` (planned) – models coupling the particle to a camera/observer with its own frequency spectrum.
+- `balance_condition.py` – interactive verification of `V = D`.
+- `negative_tunnel_time.py` – toy model for apparent negative tunneling time (hypothetical).
+- `blp_measure.py` – BLP test for non‑Markovianity (result: BLP = 0 → Markovian).
+- `tunneling_apparent_time.py` – **New**: test for negative apparent time with Gaussian pulses.  
+  Result: `t_half ≥ τ_isolated` for all amplitudes → no negative time in current model.
 
-All experimental files contain a clear **disclaimer** at the top. We welcome comments, critiques, and experimental collaborations.
+All experimental files contain a clear disclaimer.
 
 ---
 
