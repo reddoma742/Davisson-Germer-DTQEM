@@ -2,12 +2,12 @@ cff-version: 1.2.0
 message: "If you use this software, the analytical balance equation, the resonance collapse relation, or any part of DTQEM, please cite it as below."
 authors:
   - family-names: "Berramdane"
-    given-names: "Reddouane"
+    given-names: "Redouane"
     affiliation: "Independent Researcher"
     city: "Oujda"
     country: "MA"
 title: "DTQEM v14.0 – Dual‑Time Quantum Entanglement Model: Wave‑Particle Balance, Resonance Collapse, Zeno Effect, and Entropy"
-version: 14.0
+version: "14.0"
 date-released: 2026-05-11
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
@@ -17,11 +17,8 @@ keywords:
   - "Lindblad master equation"
   - "Quantum tunneling"
   - "Schottky effect"
-  - "Dephasing"
-  - "Complementarity"
   - "Quantum Zeno effect"
   - "Entropy"
-  - "Markovianity"
   - "Open quantum systems"
   - "Dual-time quantum entanglement"
 abstract: >
@@ -35,11 +32,9 @@ abstract: >
   Validated applications include:
   Davisson–Germer diffraction, quantum tunneling (Zeno effect, entropy ln 2), and Schottky emission.
   All Lindblad simulations use Liouvillian exponentiation (expm) reaching machine precision (errors < 1e-12).
-  BLP measure = 0 confirms Markovianity. Limitations are documented (Gouanère experiment, no negative time).
   The code is open source with interactive GUIs, unit tests, and full documentation.
-license: "DTQEM Research & Educational License (non‑commercial, academic use free)"
-acknowledgment: >
-  This work was developed and refined by Reddouane Berramdane.
+license: "DTQEM Research & Educational License"
+acknowledgments: >
+  This work was developed and refined by Redouane Berramdane.
   The author acknowledges the use of AI assistants (Gemini, DeepSeek, Claude, and Perplexity)
   for code optimisation, documentation assistance, language polishing, and conceptual discussions.
-  All intellectual contributions remain the sole responsibility of the human author.
