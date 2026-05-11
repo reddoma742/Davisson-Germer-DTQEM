@@ -1,13 +1,13 @@
 cff-version: 1.2.0
-message: "If you use this software, the analytical balance equation, or any part of DTQEM, please cite it as below."
+message: "If you use this software, the analytical balance equation, the resonance collapse relation, or any part of DTQEM, please cite it as below."
 authors:
   - family-names: "Berramdane"
     given-names: "Reddouane"
     affiliation: "Independent Researcher"
     city: "Oujda"
     country: "MA"
-title: "DTQEM v14.0 – Dual-Time Quantum Entanglement Model: Davisson–Germer, Tunneling, Schottky Effect, and the Balance Condition V = D"
-version: "14.0"
+title: "DTQEM v14.0 – Dual‑Time Quantum Entanglement Model: Wave‑Particle Balance, Resonance Collapse, Zeno Effect, and Entropy"
+version: 14.0
 date-released: 2026-05-11
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
@@ -19,22 +19,27 @@ keywords:
   - "Schottky effect"
   - "Dephasing"
   - "Complementarity"
+  - "Quantum Zeno effect"
+  - "Entropy"
+  - "Markovianity"
   - "Open quantum systems"
   - "Dual-time quantum entanglement"
 abstract: >
   DTQEM (Dual‑Time Quantum Entanglement Model) provides a numerical and analytical framework
   for simulating open quantum systems under the Time‑Sovereignty hypothesis.
-  It includes three validated applications:
-  (1) Davisson–Germer electron diffraction (visibility V, distinguishability D, complementarity V²+D²);
-  (2) quantum tunneling in a double well with thermal relaxation and pure dephasing;
-  (3) Schottky effect (field‑enhanced thermionic emission).
-  An exact analytical balance condition V = D is derived for pure dephasing:
-  gamma_phi_0 * t_obs = 2 * ln(tan(theta)), for theta > 45 degrees.
+  Version 14.0 adds two exact analytical results:
+  (1) Wave‑particle balance condition for pure dephasing:
+      γφ₀·t_obs = 2 ln(tan θ), θ > 45°.
+  (2) Resonance collapse from the maximally coherent state |+⟩:
+      t_collapse = -ln(ε)/(2γ)  or  γ·t_collapse = -ln(ε)/2.
+  Validated applications include:
+  Davisson–Germer diffraction, quantum tunneling (Zeno effect, entropy ln 2), and Schottky emission.
   All Lindblad simulations use Liouvillian exponentiation (expm) reaching machine precision (errors < 1e-12).
+  BLP measure = 0 confirms Markovianity. Limitations are documented (Gouanère experiment, no negative time).
   The code is open source with interactive GUIs, unit tests, and full documentation.
-license: "DTQEM Research & Educational License"
-acknowledgments: >
-  This work was developed and refined by Redouane Berramdane.
+license: "DTQEM Research & Educational License (non‑commercial, academic use free)"
+acknowledgment: >
+  This work was developed and refined by Reddouane Berramdane.
   The author acknowledges the use of AI assistants (Gemini, DeepSeek, Claude, and Perplexity)
   for code optimisation, documentation assistance, language polishing, and conceptual discussions.
   All intellectual contributions remain the sole responsibility of the human author.
