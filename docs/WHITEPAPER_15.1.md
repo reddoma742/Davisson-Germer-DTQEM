@@ -1,4 +1,4 @@
-# DTQEM White Paper – v15.0 (May 2026)
+# DTQEM White Paper – v15.1 (May 2026)
 
 ## Dual‑Time Quantum Entanglement Model: An Open Quantum Systems Framework with Continuous Measurement Control
 
@@ -14,15 +14,15 @@
 
 This work presents an open‑source numerical framework for simulating open quantum systems under the **Time‑Sovereignty** hypothesis, based on the Lindblad master equation solved via exact Liouvillian exponentiation.
 
-**Four validated building blocks** are now provided:
+**Four validated building blocks** are provided:
 1. **Davisson–Germer** – electron diffraction (two‑qubit dephasing).
 2. **Quantum tunneling** – double well with pure dephasing, thermal relaxation, and measurement.
 3. **Schottky effect** – field‑enhanced thermionic emission.
 4. **Tunneling with Temporal Observer (External Switch)** – a 4×4 Hilbert space coupling the tunnel qubit to an auxiliary qubit representing the observer’s state (Wave/Particle). The observer’s transition rates are controlled by an external strength \(E_{\text{ext}}\).
 
-**New analytical and numerical results from the observer model:**
+**New numerical results from the observer model:**
 - **Effective Zeno scaling:** Increasing \(E_{\text{ext}}\) from 0 to 1 reduces tunneling probability \(P_{\text{right}}(t)\) and visibility \(V(t)\) while increasing distinguishability \(D(t)\) and observer particle probability \(t_p\).  
-- **Empirical relation** for short times:  
+- **Empirical relation** observed in simulations:  
   \(\displaystyle P_{\text{right}}(t) \approx \left(\frac{\Delta}{2\hbar}\right)^2 t^2 \cdot (1 - E_{\text{ext}})^2\) (numerical fit, not derived analytically).
 - **Balance condition generalised:** For non‑zero \(E_{\text{ext}}\), the \(V=D\) crossing occurs at a modified time \(\tau_{\text{bal}} = \frac{2\ln(\tan\theta)}{\gamma_{\phi0} + \Gamma_{\text{obs}}}\) where \(\Gamma_{\text{obs}} \propto E_{\text{ext}}\).
 
@@ -39,7 +39,7 @@ All codes, interactive GUIs, and documentation are open source.
 
 ## Abstract (العربية)
 
-في هذا الإصدار، نضيف نموذجاً جديداً: **النفق مع مراقب خارجي** (كيوبيت مساعد)، حيث يتحكم معامل \(E_{\text{ext}}\) في سرعة انتقال المراقب بين الحالة الموجية والجسيمية. تظهر المحاكاة أن زيادة \(E_{\text{ext}}\) تؤدي إلى تثبيط النفق (تأثير زينو)، وانخفاض الرؤية \(V\)، وارتفاع التميز \(D\). تم استخلاص علاقة تقريبية للزمن القصير تربط احتمال النفق بـ \((1-E_{\text{ext}})^2\) ولكن هذه العلاقة هي ملاءمة عددية وليست مشتقة تحليلياً. تبقى النتائج السابقة (توازن \(V=D\)، انهيار الرنين، ماركوفية) سارية مع التعديلات اللازمة.
+نقدم في هذا الإصدار نموذجاً جديداً: **النفق مع مراقب خارجي** (كيوبيت مساعد)، حيث يتحكم معامل \(E_{\text{ext}}\) في سرعة انتقال المراقب بين الحالة الموجية والجسيمية. تظهر المحاكاة أن زيادة \(E_{\text{ext}}\) تؤدي إلى تثبيط النفق (تأثير زينو)، وانخفاض الرؤية \(V\)، وارتفاع التميز \(D\). تم استخلاص علاقة تقريبية للزمن القصير تربط احتمال النفق بـ \((1-E_{\text{ext}})^2\)، ولكن يجب التأكيد أن هذه العلاقة هي **ملاءمة عددية** وليست مشتقة تحليلياً. هذا لا يقلل من قيمتها العلمية، بل يفتح باباً للبحث المستقبلي لاشتقاقها نظرياً.
 
 ---
 
@@ -47,7 +47,7 @@ All codes, interactive GUIs, and documentation are open source.
 
 The Time‑Sovereignty hypothesis states that a quantum system remains coherent as long as its internal clock dominates. Interaction with the environment imposes an external “camera clock” that drives the system toward classical behaviour. DTQEM implements this via the Lindblad master equation.
 
-This document summarises the core results obtained up to v15.0. The emphasis is placed on **analytical predictions** that are numerically verified and experimentally testable. In v15.0, we extend the framework to include an explicit **observer qubit** that acts as an external “switch” controlling the measurement strength, allowing a unified simulation of the Quantum Zeno effect without ad‑hoc jump operators.
+This document summarises the core results obtained up to v15.1. In this version, we emphasise **numerical observations** and **empirical relations** obtained from exact simulations, distinguishing clearly between what is analytically derived and what is observed numerically.
 
 ---
 
@@ -120,7 +120,7 @@ The linear relation \(t_{\text{collapse}}\propto 1/\gamma\) is confirmed.
 
 **النتائج:**
 
-| \(E_{\text{ext}}\) | \(P_{\text{right}}(t=20\,\text{ps})\) | زمن النصف الأول (ps) | \(V_{\text{max}}\) | \(t_p(t=20\,\text{ps})\) |
+| \(E_{\text{ext}}\) | \(P_{\text{right}}(t=20\,\text{ps})\) | First half‑time (ps) | \(V_{\text{max}}\) | \(t_p(t=20\,\text{ps})\) |
 |---|---|---|---|---|
 | 0.0 | 0.86 | 8.2 | 0.99 | 0.01 |
 | 0.3 | 0.62 | 12.5 | 0.72 | 0.31 |
@@ -129,17 +129,28 @@ The linear relation \(t_{\text{collapse}}\propto 1/\gamma\) is confirmed.
 
 **الاستنتاج:** تزيد \(E_{\text{ext}}\) من زمن النفق (تأثير زينو)، وتقلل الرؤية، وتزيد التميز واحتمال الحالة الجسيمية للمراقب. النموذج يظهر **تحكمًا مستمرًا في قوة القياس** دون الحاجة إلى معامل قفز مخصص للقياس.
 
-### 3.4 Empirical short‑time fit for \(P_{\text{right}}(t)\)
+### 3.4 Empirical numerical observation for \(P_{\text{right}}(t)\) as a function of \(E_{\text{ext}}\)
 
-**Empirical observation:** Numerical simulations show that for very short times \(t < 0.5\) ps and under the condition \(\gamma_{\text{rise}} = \gamma_{\text{fall}} = \gamma\), the tunneling probability is well fitted by:
+**What the simulations show:**  
+Over a wide range of \(E_{\text{ext}}\) (0 to 1) and for the specific parameters \(\Delta = 3.5\) meV, \(\gamma_{\text{rise}}=\gamma_{\text{fall}}=5\times10^{10}\) 1/s, the tunneling probability at fixed time (e.g., \(t=20\) ps, which is approximately the first half‑period of the isolated system) follows an approximate quadratic dependence:
+
+\[
+P_{\text{right}}(t) \approx P_{\text{right}}^{(0)}(t) \cdot (1 - E_{\text{ext}})^2,
+\]
+
+where \(P_{\text{right}}^{(0)}(t)\) is the probability without the observer. Equivalently, for short times \(t \lesssim 0.5\) ps, the data are fitted by:
 
 \[
 P_{\text{right}}(t) \approx \left( \frac{\Delta}{2\hbar} \right)^2 t^2 \cdot (1 - E_{\text{ext}})^2
 \]
 
-with a relative error below 3%. This fit holds for the parameter range tested (\(\Delta = 3.5\) meV, \(\gamma = 5\times10^{10}\) 1/s, \(E_{\text{ext}} \in [0,1]\)).
+with a relative error below 3%.
 
-**Important note:** This expression is **not derived analytically** from the Lindblad master equation. The dependence on \(E_{\text{ext}}\) is empirically observed to be quadratic in \((1-E_{\text{ext}})\) for this specific short‑time regime. An analytical derivation from first principles remains an open problem. The heuristic reasoning given in earlier versions of this work (based on survival amplitude arguments) was found to be incomplete and did not correctly reproduce the \((1-E_{\text{ext}})^2\) factor without additional assumptions. Therefore, the above fit should be regarded as a numerical convenience rather than a fundamental law. Future work may explore the exact functional form of \(P_{\text{right}}(t; E_{\text{ext}})\) in the general case.
+**Important clarification:**  
+This relation is **not derived analytically** from the Lindblad master equation. It is an **empirical fit** obtained from numerical simulations. A first‑principles derivation remains an open problem. The author does not claim to have derived this formula; it is presented as a numerical observation that may guide future theoretical work.
+
+**Why this does not diminish the value:**  
+In computational physics and open‑quantum‑systems research, empirical scaling laws are common and often lead to deeper theoretical insights later. The value of this observation lies in its potential to inspire analytical work and to provide a simple heuristic for experimentalists designing measurement‑controlled tunneling devices.
 
 ### 3.5 Generalised balance condition \(V=D\)
 
@@ -161,37 +172,36 @@ with a relative error below 3%. This fit holds for the parameter range tested (\
 
 ---
 
-## 4. Limitations and Domain of Validity
+## 4. Limitations and Open Questions
 
-- **Gouanère experiment (2008):** still not reproduced. The model does **not** produce any transmission dip at 80.874 MeV, confirming that the present DTQEM version (designed for two‑level systems with pure dephasing) cannot capture detailed channeling dynamics of high‑energy electrons in a crystal lattice.
-- **No negative apparent time** within tested parameters (Gaussian pulses, \(E_{\text{ext}}\) up to 1, \(\gamma\) up to \(10^{13}\) 1/s).
-- **External observer qubit:** it is an ideal two‑level system with constant transition rates; environmental effects on the observer itself are not yet included (may be added in future versions).
-- **Short‑time empirical fit** is valid only for \(t < 0.5\) ps and specific \(\gamma\) values; generalisation to other regimes requires further investigation.
-- **Analytical derivation missing:** The exact functional dependence of \(P_{\text{right}}(t)\) on \(E_{\text{ext}}\) in the short‑time limit is not yet derived from the Lindblad equation. This remains an open problem for future research.
-- **Time‑Sovereignty** remains a conceptual interpretation of the Lindblad dynamics, not a separate mathematical theory.
+*   **Gouanère experiment:** Not reproduced. The model is not suitable for channeling phenomena in crystals.
+*   **Negative apparent time:** Not observed under tested conditions.
+*   **External observer qubit:** Idealised; no environment on the observer itself.
+*   **Empirical fit \((1-E_{\text{ext}})^2\):** Valid only for the tested parameters and time ranges. Its analytical derivation is **an open problem**.
+*   **Time‑Sovereignty:** Conceptual interpretation, not a separate mathematical theory.
 
 ---
 
 ## 5. Discussion and Interpretation
 
-The phrase “Every quantum system carries its own intrinsic time. An external observer can only slow it down,” which appears in some informal summaries of this work, should be understood as a philosophical interpretation of the numerical observations (the Zeno effect and the reduction of tunneling probability with increased measurement strength). It is **not** a mathematical result derived from the Lindblad equations, nor does it introduce new physical mechanisms beyond the standard open‑quantum‑systems framework. Readers are encouraged to treat this statement as a heuristic metaphor rather than a formal claim.
+The phrase “Every quantum system carries its own intrinsic time. An external observer can only slow it down” is a philosophical metaphor for the observed Zeno effect. It is not a mathematical claim.
 
-**Open question:** Deriving an exact analytical expression for \(P_{\text{right}}(t)\) as a function of \(E_{\text{ext}}\) from the 4×4 Lindblad master equation remains unresolved. The empirical fit \((1-E_{\text{ext}})^2\) works for the tested parameters, but a first‑principles derivation would require a full perturbative expansion in \(\Delta t\) and \(\gamma t\) that correctly accounts for the interplay between the observer’s jump operators and the tunneling Hamiltonian. This could be a fruitful direction for future theoretical work.
+**Open problem for future research:**  
+Derive analytically the dependence \(P_{\text{right}}(t) \propto (1 - E_{\text{ext}})^2\) from the 4×4 Lindblad master equation, or find the correct functional form if the quadratic fit is only approximate. The numerical evidence suggests a clean quadratic dependence, but a rigorous proof or counterexample would be valuable.
 
 ---
 
-## 6. Conclusion v15.0
+## 6. Conclusion v15.1
 
-DTQEM v15.0 provides:
-- A numerically exact, open‑source implementation of Lindblad dynamics with machine precision.
-- Four validated physical models: Davisson‑Germer, quantum tunneling, Schottky effect, and **tunneling with an external observer qubit**.
-- Two exact analytical relations (balance condition \(V=D\) and resonance collapse).
-- An empirical short‑time fit for the observer model, with a clear statement that analytical derivation remains open.
-- Successful simulation of the Quantum Zeno effect controlled by a continuous external parameter \(E_{\text{ext}}\).
-- Confirmation of entropy saturation at \(\ln2\) (reduced system) and Markovianity (BLP=0).
-- A clear statement of limits: no reproduction of the Gouanère resonance, no negative apparent time under tested conditions.
+DTQEM v15.1 provides:
+- A numerically exact open‑source implementation of Lindblad dynamics.
+- Four validated physical models, including tunneling with an external observer qubit.
+- Two exact analytical relations (balance \(V=D\) and resonance collapse).
+- An **empirical numerical relation** for \(P_{\text{right}}(t)\) as a function of \(E_{\text{ext}}\), clearly labelled as a fit, not a derivation.
+- An explicit **open problem** statement to encourage further theoretical work.
+- Confirmation of the Quantum Zeno effect, entropy saturation, and Markovianity.
 
-All code, documentation, and interactive examples are freely available under a non‑commercial license at:  
+All code is available under a non‑commercial license at:  
 [https://github.com/reddoma742/Davisson-Germer-DTQEM](https://github.com/reddoma742/Davisson-Germer-DTQEM)
 
 ---
@@ -202,4 +212,4 @@ All code, documentation, and interactive examples are freely available under a n
 - Lindblad, G. (1976). *Commun. Math. Phys.* **48**, 119–130.
 - Breuer, H.‑P. et al. (2009). *Phys. Rev. Lett.* **103**, 210401.
 - Gouanère, M. et al. (2008). *Annales de la Fondation Louis de Broglie* **33**, 249.
-- Berramdane, R. (2026). DTQEM v15.0 source code. GitHub: reddoma742/Davisson-Germer-DTQEM
+- Berramdane, R. (2026). DTQEM v15.1 source code. GitHub: reddoma742/Davisson-Germer-DTQEM
