@@ -18,7 +18,7 @@ This framework simulates open quantum systems under the **Time-Sovereignty** hyp
 - **Quantum Tunneling:** Analysis of the Zeno effect and entropy stability at $\ln 2$.
 - **Schottky Effect:** Modeling thermionic emission via internal resonance.
 
-## ⚖️ Analytical Breakthroughs (v14.0)
+## ⚖️ Analytical Breakthroughs (v15.1)
 
 1. **Wave-Particle Balance Condition:**
    $$\gamma_{\phi0}\,t_{obs} = 2\ln(\tan\theta), \quad \theta > 45^\circ$$
