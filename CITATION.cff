@@ -1,35 +1,19 @@
 cff-version: 1.2.0
-message: "If you use this software, the analytical balance equation, the resonance collapse relation, or any part of DTQEM, please cite it as below."
+message: "If you use this software, please cite it as below."
 authors:
   - family-names: "Berramdane"
     given-names: "Reddouane"
     affiliation: "Independent Researcher"
     city: "Oujda"
     country: "MA"
-title: "DTQEM v14.0.1 – Dual‑Time Quantum Entanglement Model: Wave‑Particle Balance, Resonance Collapse, Zeno Effect, and Entropy"
+title: "DTQEM v14.0.1 – Dual‑Time Quantum Entanglement Model"
 version: "14.0.1"
 date-released: 2026-05-11
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 keywords:
   - "Quantum mechanics"
-  - "Wave-particle duality"
-  - "Lindblad master equation"
-  - "Quantum tunneling"
-  - "Schottky effect"
-  - "Quantum Zeno effect"
   - "Entropy"
-  - "Open quantum systems"
-  - "Dual-time quantum entanglement"
-abstract: >
-  DTQEM (Dual‑Time Quantum Entanglement Model) provides a numerical and analytical framework
-  for simulating open quantum systems under the Time‑Sovereignty hypothesis.
-  Version 14.0.1 implements exact analytical results for wave‑particle balance
-  (γφ₀·t_obs = 2 ln(tan θ)) and resonance collapse (t_collapse = -ln(ε)/2γ).
-  The code is open source with interactive GUIs, unit tests, and full documentation.
+  - "Lindblad equation"
+abstract: "DTQEM provides a numerical framework for simulating open quantum systems. Version 14.0.1 implements exact analytical results for wave-particle balance and resonance collapse. Detailed equations are provided in the documentation and white paper."
 license: "DTQEM Research & Educational License"
-acknowledgments: >
-  This work was developed and refined by Reddouane Berramdane.
-  The author acknowledges the use of AI assistants (Gemini, DeepSeek, Claude, and Perplexity)
-  for code optimisation and documentation assistance. All intellectual contributions 
-  remain the sole responsibility of the human author.
