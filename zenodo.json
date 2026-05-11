@@ -1,42 +1,20 @@
 {
-  "title": "DTQEM: Unified Framework for Open Quantum Systems",
-  "description": "This framework simulates open quantum systems (Lindblad equation) under the Time-Sovereignty hypothesis. It includes numerical validations for the Davisson-Germer experiment, quantum tunneling (Zeno effect), and the resonance collapse model (V = D).",
+  "title": "DTQEM v15.1 - Continuous Measurement Control of Quantum Tunneling: Zeno Effect and Empirical Fit",
+  "description": "Numerical framework for open quantum systems simulating the Zeno effect and time-sovereignty hypothesis.",
   "creators": [
     {
       "name": "Berramdane, Reddouane",
-      "affiliation": "DTQEM Project",
-      "orcid": "0000-0000-0000-0000"
+      "affiliation": "DTQEM Project"
     }
   ],
   "contributors": [
-    {
-      "name": "Gemini",
-      "type": "Other",
-      "note": "AI-assisted tool for code development and manuscript preparation."
-    },
-    {
-      "name": "DeepSeek",
-      "type": "Other",
-      "note": "AI-assisted tool for code development and manuscript preparation."
-    },
-    {
-      "name": "Claude",
-      "type": "Other",
-      "note": "AI-assisted tool for code development and manuscript preparation."
-    }
+    { "name": "Gemini", "type": "Other" },
+    { "name": "DeepSeek", "type": "Other" },
+    { "name": "Claude", "type": "Other" }
   ],
-  "license": "DTQEM Research & Educational License (non-commercial, academic use free)",
-  "keywords": [
-    "quantum decoherence",
-    "open quantum systems",
-    "Lindblad equation",
-    "quantum tunneling",
-    "Quantum Zeno Effect",
-    "Time-Sovereignty"
-  ],
+  "access_right": "open",
+  "license": "CC-BY-4.0",
   "upload_type": "software",
   "publication_date": "2026-05-11",
-  "version": "v15.1",
-  "language": "eng",
-  "access_right": "open"
+  "version": "v15.1"
 }
