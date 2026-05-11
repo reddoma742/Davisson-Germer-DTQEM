@@ -4,8 +4,6 @@
 
 **Author:** Reddouane Berramdane  
 **AI-assisted tools:** The author used Gemini, Claude, and DeepSeek for code development and manuscript preparation.  
-**DOI:** this version (to be assigned on Zenodo)  
-**Previous DOI:** 10.5281/zenodo.20090038 (v13.0)  
 **License:** DTQEM Research & Educational License (non‑commercial, academic use free)
 
 ---
