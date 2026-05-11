@@ -2,14 +2,13 @@ cff-version: 1.2.0
 message: "If you use this software, the analytical balance equation, or any part of DTQEM, please cite it as below."
 authors:
   - family-names: "Berramdane"
-    given-names: "Redddouane"
+    given-names: "Reddouane"
     affiliation: "Independent Researcher"
     city: "Oujda"
     country: "MA"
-title: "DTQEM v13.0 – Dual-Time Quantum Entanglement Model: Davisson–Germer, Tunneling, Schottky Effect, and the Balance Condition V = D"
-version: 13.0
-doi: "10.5281/zenodo.20090038"
-date-released: 2026-05-09
+title: "DTQEM v14.0 – Dual-Time Quantum Entanglement Model: Davisson–Germer, Tunneling, Schottky Effect, and the Balance Condition V = D"
+version: "14.0"
+date-released: 2026-05-11
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 keywords:
@@ -35,7 +34,7 @@ abstract: >
   The code is open source with interactive GUIs, unit tests, and full documentation.
 license: "DTQEM Research & Educational License"
 acknowledgments: >
-  This work was developed and refined by Redddouane Berramdane.
+  This work was developed and refined by Redouane Berramdane.
   The author acknowledges the use of AI assistants (Gemini, DeepSeek, Claude, and Perplexity)
   for code optimisation, documentation assistance, language polishing, and conceptual discussions.
   All intellectual contributions remain the sole responsibility of the human author.
