@@ -6,8 +6,8 @@ authors:
     affiliation: "Independent Researcher"
     city: "Oujda"
     country: "MA"
-title: "DTQEM v14.0.1 – Dual‑Time Quantum Entanglement Model"
-version: "14.0.1"
+title: "DTQEM v14.0.2 – Dual-Time Quantum Entanglement Model"
+version: "14.0.2"
 date-released: 2026-05-11
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
@@ -15,5 +15,5 @@ keywords:
   - "Quantum mechanics"
   - "Entropy"
   - "Lindblad equation"
-abstract: "DTQEM provides a numerical framework for simulating open quantum systems. Version 14.0.1 implements exact analytical results for wave-particle balance and resonance collapse. Detailed equations are provided in the documentation and white paper."
+abstract: "DTQEM provides a numerical framework for simulating open quantum systems. Version 14.0.2 implements exact analytical results for wave-particle balance and resonance collapse. Detailed equations are provided in the documentation and white paper."
 license: "DTQEM Research & Educational License"
