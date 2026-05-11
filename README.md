@@ -1,4 +1,4 @@
-# DTQEM – Unified Framework for Open Quantum Systems (v14.0)
+# DTQEM – Unified Framework for Open Quantum Systems (v15.1)
 
 **Davisson–Germer | Quantum Tunneling | Schottky Effect | Balance Condition V=D | Resonance Collapse**
 
