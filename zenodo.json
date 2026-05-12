@@ -1,20 +1,49 @@
 {
-  "title": "DTQEM v15.1 - Continuous Measurement Control of Quantum Tunneling: Zeno Effect and Empirical Fit",
-  "description": "Numerical framework for open quantum systems simulating the Zeno effect and time-sovereignty hypothesis.",
+  "title": "DTQEM v16.0 – Synchronized Two‑Times Model (Effective Lindblad Framework)",
+  "description": "DTQEM v16.0 presents a stable 2×2 effective Lindblad model for quantum tunneling under continuous measurement. The observer strength E_ext controls the effective Rabi frequency (ω = ω₀(1−E)) and adds pure dephasing (σ_z Lindblad operator). Numerical simulations reproduce the quantum Zeno freeze (P=0 at E=1), a synchronisation peak at E=0.5, and the quadratic scaling P ∝ (1−E)². The framework unifies wave‑particle duality, Zeno effect, and quantum eraser under the concept of temporal balance (observer time + particle time = 1).",
   "creators": [
     {
       "name": "Berramdane, Reddouane",
-      "affiliation": "DTQEM Project"
+      "affiliation": "Independent Researcher",
+      "orcid": "0000-0000-0000-0000"
     }
   ],
   "contributors": [
-    { "name": "Gemini", "type": "Other" },
-    { "name": "DeepSeek", "type": "Other" },
-    { "name": "Claude", "type": "Other" }
+    {
+      "name": "Gemini",
+      "type": "Other",
+      "note": "AI-assisted tool for code development and manuscript preparation."
+    },
+    {
+      "name": "DeepSeek",
+      "type": "Other",
+      "note": "AI-assisted tool for code development and manuscript preparation."
+    },
+    {
+      "name": "Claude",
+      "type": "Other",
+      "note": "AI-assisted tool for code development and manuscript preparation."
+    }
   ],
   "access_right": "open",
-  "license": "CC-BY-4.0",
+  "license": "DTQEM Research & Educational License",
   "upload_type": "software",
-  "publication_date": "2026-05-11",
-  "version": "v15.1"
+  "publication_date": "2026-05-12",
+  "version": "v16.0",
+  "keywords": [
+    "Quantum mechanics",
+    "Open quantum systems",
+    "Lindblad equation",
+    "Quantum Zeno effect",
+    "Temporal balance",
+    "Effective Hamiltonian",
+    "Dephasing"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.20090038",
+      "relation": "isPreviousVersionOf",
+      "resource_type": "software"
+    }
+  ]
 }
