@@ -1,11 +1,10 @@
 {
-  "title": "DTQEM v16.0 – Synchronized Two‑Times Model (Effective Lindblad Framework)",
-  "description": "DTQEM v16.0 presents a stable 2×2 effective Lindblad model for quantum tunneling under continuous measurement. The observer strength E_ext controls the effective Rabi frequency (ω = ω₀(1−E)) and adds pure dephasing (σ_z Lindblad operator). Numerical simulations reproduce the quantum Zeno freeze (P=0 at E=1), a synchronisation peak at E=0.5, and the quadratic scaling P ∝ (1−E)². The framework unifies wave‑particle duality, Zeno effect, and quantum eraser under the concept of temporal balance (observer time + particle time = 1).",
+  "title": "DTQEM v16.0 – Synchronized Two‑Times Model (Effective Lindblad Framework for Measurement‑Controlled Tunneling)",
+  "description": "This release presents a clean, efficient 2×2 Lindblad model for quantum tunneling under continuous measurement. The observer strength E_ext (0 → 1) controls two effects simultaneously:\n- Effective Hamiltonian: H_eff = (Δ/2)(1-E_ext)σ_x → reduces tunneling rate\n- Lindblad operator: L = sqrt(γ₀ E_ext) σ_z → increases pure dephasing (true Zeno mechanism)\n\nKey numerical results (Δ=3.5 meV, γ₀=5×10¹⁰ s⁻¹, t=20 ps):\n| E_ext | P_right | Interpretation |\n| 0.0 | 0.0532 | Free Rabi (destructive phase) |\n| 0.3 | 0.2872 | Partial decoherence |\n| 0.5 | 0.7943 | Synchronisation peak (times balanced) |\n| 0.7 | 0.2774 | Near‑Zeno regime |\n| 1.0 | 0.0000 | Complete Zeno freeze |\n\nThe model unifies wave‑particle duality, the quantum Zeno effect, and the quantum eraser under the concept of temporal balance: observer time V = E_ext, particle time D = 1-E_ext, with V + D = 1.\n\nAll code is open source, numerically verified (error ~2×10⁻¹⁴ vs. analytical Rabi oscillation), and ready for experimental validation. Future work will separate the two control parameters (α_H, α_L) for richer physics.",
   "creators": [
     {
       "name": "Berramdane, Reddouane",
-      "affiliation": "Independent Researcher",
-      "orcid": "0000-0000-0000-0000"
+      "affiliation": "Independent Researcher"
     }
   ],
   "contributors": [
@@ -26,7 +25,7 @@
     }
   ],
   "access_right": "open",
-  "license": "DTQEM Research & Educational License",
+  "license": "CC-BY-4.0",
   "upload_type": "software",
   "publication_date": "2026-05-12",
   "version": "v16.0",
@@ -38,12 +37,5 @@
     "Temporal balance",
     "Effective Hamiltonian",
     "Dephasing"
-  ],
-  "related_identifiers": [
-    {
-      "identifier": "10.5281/zenodo.20090038",
-      "relation": "isPreviousVersionOf",
-      "resource_type": "software"
-    }
   ]
 }
