@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Berramdane"
+    given-names: "Reddouane"
+    affiliation: "Independent Researcher"
+  - name: "Gemini (AI Assistant)"
+  - name: "DeepSeek (AI Assistant)"
+  - name: "Claude (AI Assistant)"
+title: "DTQEM v16.0 - Synchronized Two-Times Model"
+version: "16.0.0"
+date-released: 2026-05-13
+url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
+license: "MIT"
