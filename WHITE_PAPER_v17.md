@@ -1,7 +1,4 @@
 
----
-
-### 📦 الملف 4: `WHITE_PAPER_v17.md`
 
 ```markdown
 # DTQEM v17.0 – Unified Wave‑Particle Simulator
