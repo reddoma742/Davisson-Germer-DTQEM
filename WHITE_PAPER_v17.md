@@ -5,12 +5,22 @@
 
 ```markdown
 # DTQEM v17.0 – Unified Wave‑Particle Simulator
+---
+AUTHOR AND METADATA
+---
+Author: Reddouane Berramdane
+Affiliation: Independent Researcher, Oujda, Morocco
+AI-Assisted Tools: Gemini, DeepSeek, Claude (Scientific development & documentation)
+License: DTQEM Research & Educational License v1.0 (CC BY-NC 4.0)
 
-**Author:** Reddouane Berramdane  
-**AI‑assisted tools:** Gemini, DeepSeek, Claude (code development, documentation)  
-**License:** Non‑commercial academic license  
-**Previous DOIs:** 10.5281/zenodo.20090038 (v13.0), v16.0 (auto‑archived)  
-**Concept DOI:** (same as repository)
+PROJECT IDENTIFIERS (DOIs)
+Concept DOI: 10.5281/zenodo.20043754 (Permanent - Links to all versions)
+Version 16.0 DOI: 10.5281/zenodo.20159679
+Version 13.0 DOI: 10.5281/zenodo.20090038
+Current Release: Version 17.0 (May 2026) - Unified Wave-Particle Simulator
+---
+
+
 
 ---
 
