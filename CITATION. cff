@@ -7,23 +7,17 @@ authors:
     city: "Oujda"
     country: "MA"
     email: "reddoma@gmail.com"
-title: "DTQEM v17.0 – Unified Wave‑Particle Simulator"
-version: "17.0"
-doi: "10.5281/zenodo.20159679"
-date-released: 2026-05-13
+title: "DTQEM v18.0 – Entanglement under Local Dephasing (Concurrence + Inferred Bell Violation)"
+version: "18.0"
+date-released: 2026-05-14
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 keywords:
-  - "Quantum mechanics"
-  - "Wave-particle duality"
+  - "Quantum entanglement"
+  - "Concurrence"
+  - "Bell inequality"
   - "Lindblad equation"
   - "Quantum Zeno effect"
-  - "Photon simulation"
-  - "DTQEM"
+  - "Local dephasing"
 license: "CC-BY-NC-4.0"
-abstract: >-
-  DTQEM v17.0 provides a numerically exact 2x2 Lindblad model for wave‑particle 
-  duality under measurement. The Hamiltonian is fixed; the observer only adds 
-  pure dephasing via the DTQEM relation (gamma*t_obs = 2 ln(tan theta)). 
-  The model reproduces the quantum Zeno effect and allows recovery of 
-  the natural frequency via FFT. Works for both massive particles and photons.
+abstract: "DTQEM v18.0 simulates the decay of bipartite entanglement under continuous local dephasing (σz⊗I) on one qubit. It computes concurrence and infers CHSH via S=2√2·C. The model demonstrates Zeno-like suppression of quantum correlations with increasing measurement strength E_ext. The code is stable, open‑source, and ready for academic use."
