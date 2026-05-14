@@ -67,10 +67,13 @@ def concurrence(rho):
 conc_vals = [concurrence(r) for r in rhos]
 
 # ============================================================
-# 5. استنتاج CHSH تحليلياً
+# 5. استنتاج CHSH تحليلياً (S = 2√2 * C)
 # ============================================================
-# S = 2√2 * C
 chsh_vals = [2*np.sqrt(2) * c for c in conc_vals]
+
+# تحويل القوائم إلى مصفوفات numpy لتجنب خطأ المقارنة
+chsh_vals = np.array(chsh_vals)
+conc_vals = np.array(conc_vals)
 
 # ============================================================
 # 6. الرسوم البيانية
@@ -97,7 +100,17 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
+# ============================================================
+# 7. طباعة النتائج
+# ============================================================
 print("=== نتائج v18.0 (تبديد محلي على أليس, E_ext=0.5) ===")
 print(f"Concurrence at t=0 : {conc_vals[0]:.6f} (يجب 1)")
 print(f"CHSH inferred at t=0: {chsh_vals[0]:.6f} (يجب ≈2.828)")
-print(f"Time to cross classical bound (S=2): {t_arr[np.argmax(chsh_vals < 2)]*1e12:.1f} ps")
+
+# حساب وقت عبور الحد الكلاسيكي (أول مؤشر يكون S < 2)
+cross_idx = np.argmax(chsh_vals < 2)
+if cross_idx > 0:
+    cross_time = t_arr[cross_idx] * 1e12
+    print(f"Time to cross classical bound (S=2): {cross_time:.1f} ps")
+else:
+    print("CHSH remains above 2 for entire simulation time.")
