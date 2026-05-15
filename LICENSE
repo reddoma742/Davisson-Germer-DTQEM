@@ -1,7 +1,7 @@
 DTQEM RESEARCH & EDUCATIONAL LICENSE
-Version 1.0, May 2026
+Version 2.0, May 2026
 
-Copyright (c) 2026 Al Reddouane BERRAMDANE (Reddouane Berramdane)
+Copyright (c) 2026 Reddouane Berramdane (Al Reddouane BERRAMDANE)
 Project: Dual-Time Quantum Entanglement Model (DTQEM)
 Location: Oujda, Morocco
 Contact: reddoma@gmail.com
@@ -10,9 +10,10 @@ Contact: reddoma@gmail.com
 
 ## 1. Definitions
 
-**1.1 "Software"** means the DTQEM source code, all accompanying files, examples, documentation, and specifically the mathematical relation:
+**1.1 "Software"** means the DTQEM source code, all accompanying files, examples, documentation, and specifically the mathematical relations:
 
-    γφ₀ · t_obs = 2 ln(tan θ)
+    γφ₀ · t_obs = 2 ln(tan θ)   (Wave‑Particle Balance Condition)
+    P(E,t) = ½[1 - e^{-γEt}(cos(ω₀t) + (γE/ω₀) sin(ω₀t))]   (Exact Analytical Solution for a Single Qubit)
 
 and any derivatives thereof, whether in source or object form.
 
@@ -50,7 +51,7 @@ Any person, academic institution, or individual researcher may:
 
 ## 3. Commercial Use – Prohibited Without a Separate License
 
-**3.1** Commercial use of the Software, or any part thereof (including the core equation), is **strictly prohibited** without a separate written license from the copyright holder.
+**3.1** Commercial use of the Software, or any part thereof (including the core equations), is **strictly prohibited** without a separate written license from the copyright holder.
 
 **3.2** Entities wishing to use DTQEM for commercial purposes may contact the author to negotiate a commercial license (which may involve a fee or other conditions).
 
@@ -66,9 +67,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## 5. Attribution and Citation
 
-Any publication, preprint, thesis, or other scientific work that uses the Software or the equation `γφ₀·t_obs = 2 ln(tan θ)` **must** cite:
+Any publication, preprint, thesis, or other scientific work that uses the Software or any of its core equations **must** cite the latest version of DTQEM. Example:
 
-> Berramdane, R. (2026). DTQEM v13.0 – Dual‑Time Quantum Entanglement Model: Simulations of Davisson–Germer, Tunneling, Schottky Effect, and the Balance Condition V = D. Zenodo. https://doi.org/10.5281/zenodo.20043754 (or the DOI of the latest version).
+> Berramdane, R. (2026). DTQEM v20.0 – Two‑qubit entanglement decay under temperature and local dephasing. Zenodo. https://doi.org/10.5281/zenodo.20208753
 
 Failure to provide proper attribution constitutes a breach of this license.
 
