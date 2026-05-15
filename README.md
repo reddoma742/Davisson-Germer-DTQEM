@@ -20,7 +20,7 @@ The probability to find the particle in the right well (or in state `|1⟩`) is:
 \]
 
 This closed‑form solution supersedes earlier empirical fits (e.g. \(P\propto(1-E)^2\)) and provides a rigorous foundation for all DTQEM simulations.  
-👉 [White Paper v19.0](V19_WHITE_PAPER.md)  
+👉 [White Paper v19.0](WHITE_PAPER_V19.md)  
 👉 [Python implementation](V19_analytical_model.py)
 
 ---
