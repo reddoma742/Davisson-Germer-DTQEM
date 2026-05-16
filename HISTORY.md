@@ -1,3 +1,58 @@
+## [v22.0] - 2026-05-16
+### Added
+- **Production-grade self-calibrating inversion** for hydrogen-like atomic spectra (Balmer series: Hα, Hβ, Hγ, Hδ).
+- **Three-stage protocol** to recover temperature \(T\), dephasing coefficient \(\alpha\), and unknown observer strength \(E\) from three sets of FWHM linewidth measurements:
+  1. **Stage 0 – α calibration** from differential data: \(\Delta\Gamma_i = \Gamma_i(E_{\text{cal}}) - \Gamma_i(0) = \alpha\,\omega_{0,i}\,E_{\text{cal}}\) (T‑independent, breaks degeneracy).
+  2. **Stage 1 – T inference** from \(E=0\) data using the calibrated α.
+  3. **Stage 2 – E inference** from \(E_{\text{unk}}\) data with fixed \(T\) and α.
+- **Bootstrap uncertainty quantification** (500–1000 resampling trials) to estimate \(\sigma_T\), \(\sigma_\alpha\), \(\sigma_E\).
+- **Consistency check** for α: computes per‑line α values and flags if \(\sigma/\mu > 0.05\) (instrument drift or data inconsistency).
+- **Convergence guards** on all scalar minimisations: residual tolerance checks and boundary warnings.
+- **Corrected hydrogen mass** \(m_H = m_p + m_e\) (instead of only \(m_p\)).
+- **User‑definable bounds** \(T_{\max}\) and \(E_{\max}\) (removed hard‑coded limits).
+- **Structured output** via `InversionResult` dataclass, with automatic summary printing.
+- **Full warnings integration** using Python’s `warnings` module.
+- **Publication‑quality figure** showing noise robustness with uncertainty bands and a panel for all three parameters.
+
+### Changed
+- Replaced the simple dictionary output of v21.0 with a robust, diagnostic‑rich `InversionResult`.
+- Upgraded noise‑robustness test to include bootstrap‑based error propagation.
+- The forward model now uses the exact hydrogen mass and allows arbitrary upper bounds for \(T\) and \(E\).
+
+### Fixed
+- Degeneracy between Doppler and dephasing broadening that plagued earlier multi‑line inversion attempts (e.g., giving \(T \approx 2262\) K instead of 800 K).
+- Lack of uncertainty estimates – bootstrap now provides realistic error bars.
+
+### Results
+- **Noise‑free inversion**: errors < 0.001 % for all parameters (perfect recovery).
+- **Noise robustness** (200 trials, 1 % noise): median \(\Delta T/T \approx 3.9\) %, median \(\Delta E \approx 0.013\).
+- Per‑line α consistency perfect (\(\sigma/\mu \approx 0\)) for synthetic data.
+- The protocol works for a wide range of true parameters: \(T = 300\ldots 2000\) K, \(\alpha/\alpha_{\text{ref}} = 0.5\ldots 2.0\), \(E = 0.3\ldots 1.0\).
+
+### Code
+- Main script: `dtqem_v22_inversion.py`
+- White paper: `WHITE_PAPER_V22.md`
+- README updated with v22.0 instructions and DOI.
+
+## [v21.0] - 2026-05-16 (intermediate)
+### Added
+- First complete three‑stage inversion protocol for hydrogen Balmer lines.
+- **Stage 0**: calibration of α from \(\Gamma(E_{\text{cal}}) - \Gamma(0)\) (temperature‑independent).
+- **Stage 1**: temperature inference from \(E=0\) data.
+- **Stage 2**: observer strength inference from \(E_{\text{unk}}\) data.
+- Use of log‑squared residuals for all optimisations.
+- Weighted averaging of α over lines with weights \(\omega_{0,i}\) (higher sensitivity for shorter wavelengths).
+
+### Changed
+- Derived the degeneracy‑breaking principle: the differential measurement eliminates \(T\) completely.
+- Replaced the earlier empirical fitting with a rigorous three‑step procedure.
+
+### Fixed
+- The degeneracy that prevented simultaneous recovery of \(T\) and \(E\) from multiple lines (demonstrated by the failure to recover \(T=800\) K in earlier attempts).
+
+### Note
+- This version served as a proof‑of‑concept for the self‑calibrating approach but did not include uncertainty quantification or consistency checks. Those were added in v22.0.
+
 ## [v20.0] - 2026-05-15
 ### Added
 - Two‑qubit entanglement simulation under combined **thermal relaxation (T₁)** and **local pure dephasing**.
