@@ -1,5 +1,5 @@
 DTQEM RESEARCH & EDUCATIONAL LICENSE
-Version 2.0, May 2026
+Version 3.0, May 2026
 
 Copyright (c) 2026 Reddouane Berramdane (Al Reddouane BERRAMDANE)
 Project: Dual-Time Quantum Entanglement Model (DTQEM)
@@ -14,6 +14,7 @@ Contact: reddoma@gmail.com
 
     γφ₀ · t_obs = 2 ln(tan θ)   (Wave‑Particle Balance Condition)
     P(E,t) = ½[1 - e^{-γEt}(cos(ω₀t) + (γE/ω₀) sin(ω₀t))]   (Exact Analytical Solution for a Single Qubit)
+    ΔΓ_i = Γ_i(E_cal) - Γ_i(0) = α·ω₀,i·E_cal   (Self‑Calibrating Inversion for Spectral Lines)
 
 and any derivatives thereof, whether in source or object form.
 
@@ -69,7 +70,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 Any publication, preprint, thesis, or other scientific work that uses the Software or any of its core equations **must** cite the latest version of DTQEM. Example:
 
-> Berramdane, R. (2026). DTQEM v20.0 – Two‑qubit entanglement decay under temperature and local dephasing. Zenodo. https://doi.org/10.5281/zenodo.20208753
+> Berramdane, R. (2026). DTQEM v22.0 – Self‑calibrating spectral inversion for hydrogen‑like atoms. Zenodo. https://doi.org/10.5281/zenodo.20218379
 
 Failure to provide proper attribution constitutes a breach of this license.
 
