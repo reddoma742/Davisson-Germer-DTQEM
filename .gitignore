@@ -1,8 +1,3 @@
-### 3. ملف `LICENSE` (MIT) – نفس الصيغة السابقة.
-
-### 4. ملف `.gitignore` (لـ Python)
-
-```gitignore
 # Byte-compiled / optimized files
 __pycache__/
 *.py[cod]
@@ -23,7 +18,14 @@ ENV/
 # Data files (optional, keep examples but ignore large data)
 *.csv
 *.npy
+*.npz
 
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Logs and outputs
+*.log
+*.out
+*.png
+*.pdf
