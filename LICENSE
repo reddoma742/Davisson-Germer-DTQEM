@@ -1,5 +1,5 @@
 DTQEM RESEARCH & EDUCATIONAL LICENSE
-Version 3.0, May 2026
+Version 3.1, May 2026 (for DTQEM v33.0)
 
 Copyright (c) 2026 Reddouane Berramdane (Al Reddouane BERRAMDANE)
 Project: Dual-Time Quantum Entanglement Model (DTQEM)
@@ -12,9 +12,13 @@ Contact: reddoma@gmail.com
 
 **1.1 "Software"** means the DTQEM source code, all accompanying files, examples, documentation, and specifically the mathematical relations:
 
-    γφ₀ · t_obs = 2 ln(tan θ)   (Wave‑Particle Balance Condition)
+    I(x) = I₀[(1-E)cos²(π d x/(λ L) + φ) + E] · sinc²(π a x/(λ L)) + (B₀ + B₁x)   (Double‑Slit Intensity Model)
+    
+    γφ = γ₀·E   (Pure Dephasing Lindblad Operator)
+    
     P(E,t) = ½[1 - e^{-γEt}(cos(ω₀t) + (γE/ω₀) sin(ω₀t))]   (Exact Analytical Solution for a Single Qubit)
-    ΔΓ_i = Γ_i(E_cal) - Γ_i(0) = α·ω₀,i·E_cal   (Self‑Calibrating Inversion for Spectral Lines)
+    
+    ΔΓ_i = Γ_i(E_cal) - Γ_i(0) = α·ω₀,i·E_cal   (Self‑Calibrating Inversion for Hydrogen‑like Atoms)
 
 and any derivatives thereof, whether in source or object form.
 
@@ -70,7 +74,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 Any publication, preprint, thesis, or other scientific work that uses the Software or any of its core equations **must** cite the latest version of DTQEM. Example:
 
-> Berramdane, R. (2026). DTQEM v22.0 – Self‑calibrating spectral inversion for hydrogen‑like atoms. Zenodo. https://doi.org/10.5281/zenodo.20218379
+> Berramdane, R. (2026). DTQEM v33.0 – Robust double‑slit inversion with linear background and bootstrap uncertainty. Zenodo. [DOI to be assigned]
+
+For earlier versions, please cite the appropriate Zenodo record (e.g., v22.0: https://doi.org/10.5281/zenodo.20218379).
 
 Failure to provide proper attribution constitutes a breach of this license.
 
@@ -85,6 +91,16 @@ Any violation of the terms of this license (including unauthorized commercial us
 ## 7. Governing Law
 
 This license shall be interpreted and enforced in accordance with the laws of Morocco and international copyright treaties.
+
+---
+
+## 8. Additional Provisions for v33.0 (Double‑Slit Inversion)
+
+**8.1** The double‑slit inversion methodology (including the linear background model B₀+B₁x, the use of AICc for model selection, and the bootstrap uncertainty protocol) is an integral part of the Software and is subject to the same license terms.
+
+**8.2** Users are strongly encouraged to report any errors or improvements to the author to benefit the research community.
+
+**8.3** The author reserves the right to publish updated versions under the same or a compatible license.
 
 ---
 
