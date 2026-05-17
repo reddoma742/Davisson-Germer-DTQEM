@@ -1,4 +1,3 @@
-cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
   - family-names: "Berramdane"
@@ -7,20 +6,22 @@ authors:
     city: "Oujda"
     country: "MA"
     email: "reddoma@gmail.com"
-title: "DTQEM v22.0 – Self‑calibrating spectral inversion for hydrogen‑like atoms"
-version: "22.0"
-date-released: 2026-05-16
+title: "DTQEM v33.0 – Robust double‑slit inversion with linear background and bootstrap uncertainty"
+version: "33.0"
+date-released: 2026-05-17
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 keywords:
   - "Quantum mechanics"
-  - "Lindblad equation"
-  - "Spectral inversion"
-  - "Doppler broadening"
-  - "Dephasing"
-  - "Hydrogen Balmer series"
+  - "Double‑slit experiment"
+  - "Young's interference"
+  - "Inverse problem"
   - "Observer strength"
-  - "Temperature measurement"
+  - "Decoherence"
+  - "Pure dephasing"
+  - "Lindblad equation"
   - "Bootstrap uncertainty"
+  - "AICc model selection"
+  - "Linear background"
 license: "CC-BY-NC-4.0"
-abstract: "DTQEM v22.0 presents a three‑stage self‑calibrating inversion protocol for hydrogen‑like atomic spectra. From three sets of FWHM linewidth measurements (at E=0, at a known calibration strength E_cal, and at an unknown observer strength E_unk), the model recovers the gas temperature T, the intrinsic dephasing coefficient α, and the unknown observer strength E. The key innovation is the calibration of α from the difference ΔΓ = Γ(E_cal) − Γ(0) = α ω₀ E_cal, which is independent of T and breaks the degeneracy between Doppler and decoherence broadening. The protocol is validated on synthetic data (error < 0.001% without noise) and shows robust performance with 1% measurement noise (ΔT/T ≈ 3.9%, ΔE ≈ 0.013). Bootstrap resampling provides realistic uncertainty estimates. The code is production‑grade, open‑source, and ready for experimental spectra."
+abstract: "DTQEM v33.0 provides a complete inverse framework for Young's double‑slit experiment. From a single interference pattern, the model extracts three physical parameters: the observer strength E (a quantum measure of measurement‑induced decoherence, 0≤E≤1), the slit separation d, and the peak intensity I₀. The intensity model includes a fixed linear background B₀+B₁x (measured independently with the laser off), an optional phase shift φ, and the single‑slit diffraction envelope. By using AICc for automatic model selection (choosing whether φ is needed) and bootstrap resampling (150‑200 synthetic Poisson samples) to compute 95% confidence intervals, the inversion is both physically faithful and statistically transparent. On synthetic data with 1% Poisson noise, the method recovers d with 0.13% error and E with 4.9% error, while χ²_red ≈ 1 and residuals are white (correlation with x < 0.01). The code is production‑grade, open‑source, and ready for experimental data from real double‑slit setups."
