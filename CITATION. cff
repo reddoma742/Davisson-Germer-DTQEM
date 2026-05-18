@@ -1,3 +1,4 @@
+cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
   - family-names: "Berramdane"
@@ -6,9 +7,9 @@ authors:
     city: "Oujda"
     country: "MA"
     email: "reddoma@gmail.com"
-title: "DTQEM v33.0 – Robust double‑slit inversion with linear background and bootstrap uncertainty"
-version: "33.0"
-date-released: 2026-05-17
+title: "DTQEM v34.2 – Robust double‑slit inversion with multi‑start bootstrap and over 98% success rate"
+version: "34.2"
+date-released: 2026-05-18
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 keywords:
@@ -21,7 +22,9 @@ keywords:
   - "Pure dephasing"
   - "Lindblad equation"
   - "Bootstrap uncertainty"
+  - "Multi‑start bootstrap"
   - "AICc model selection"
   - "Linear background"
 license: "CC-BY-NC-4.0"
-abstract: "DTQEM v33.0 provides a complete inverse framework for Young's double‑slit experiment. From a single interference pattern, the model extracts three physical parameters: the observer strength E (a quantum measure of measurement‑induced decoherence, 0≤E≤1), the slit separation d, and the peak intensity I₀. The intensity model includes a fixed linear background B₀+B₁x (measured independently with the laser off), an optional phase shift φ, and the single‑slit diffraction envelope. By using AICc for automatic model selection (choosing whether φ is needed) and bootstrap resampling (150‑200 synthetic Poisson samples) to compute 95% confidence intervals, the inversion is both physically faithful and statistically transparent. On synthetic data with 1% Poisson noise, the method recovers d with 0.13% error and E with 4.9% error, while χ²_red ≈ 1 and residuals are white (correlation with x < 0.01). The code is production‑grade, open‑source, and ready for experimental data from real double‑slit setups."
+abstract: "DTQEM v34.2 provides a complete, production‑ready inverse framework for Young's double‑slit experiment. From a single interference pattern, the model extracts three physical parameters: the observer strength E (quantum measure of measurement‑induced decoherence, 0<=E<=1), the slit separation d, and the peak intensity I₀. The intensity model includes a fixed linear background B₀+B₁x (measured independently with the laser off), an optional phase shift φ, and the single‑slit diffraction envelope. Using AICc for automatic model selection (choosing whether φ is needed) and a novel multi‑start bootstrap resampling (150‑200 synthetic Poisson samples, 3 local restarts per sample) that achieves over 98% success rate, the inversion provides reliable 95% confidence intervals for I₀, d and E. On synthetic data with 1% Poisson noise, the method recovers d with 0.05% error and E with 1.5% error, χ²_red ≈ 0.99, and residuals are white (correlation with x ≈ -0.025). The code is open‑source, numerically robust, and ready for experimental data from real double‑slit setups."
+comment: "The development of DTQEM v34.2 was assisted by AI tools: Google Gemini, DeepSeek, and Perplexity, used for code optimization, debugging, documentation, and structuring of validation experiments. The author remains solely responsible for the final physical model, scientific conclusions, and any errors."
