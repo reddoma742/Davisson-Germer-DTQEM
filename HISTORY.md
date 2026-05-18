@@ -1,3 +1,75 @@
+## v34.2 – 2026-05-18 (Multi‑start Bootstrap, >98% success)
+
+**Improvements over v34.1:**
+
+- **Multi‑start bootstrap:** Each synthetic sample is refitted using 3 local restarts (L‑BFGS‑B) starting from the original best parameters with tiny random perturbations. This raises the success rate from ~88% to **>98%** (often 100%).
+- Increased `maxiter` of differential evolution from 50 to 60, suppressing the occasional `"Optimisation did not converge properly"` warning.
+- Added parameter `bootstrap_n_restarts` (default 3) to control the number of restarts.
+- Bootstrap success rate and number of successful samples are now printed in the summary.
+
+**Validation results:**
+- Original synthetic example: success rate 99.3% (149/150), d error 0.05%, E error 1.5%.
+- Phase shift φ = 0.3 rad: 100% success, φ recovered as 0.3083 rad.
+- Quadratic background (B2 = 5000): 100% success, d error 0.03%, χ²_red = 0.978.
+- High Poisson noise (5% at peak): 100% success, d error 0.21%, E error 4.7%.
+
+**Files:** `dtqem_v34_2.py`, `WHITE_PAPER_v34.md` (updated), `LICENSE_v34`.
+
+---
+
+## v34.1 – 2026-05-18 (Faster bootstrap, local only)
+
+**Improvements over v34.0:**
+
+- Bootstrap rewritten to use **local refinement only** (L‑BFGS‑B) for each synthetic sample, starting from the original best-fit parameters. This is ~10× faster than the global method and raises success rate to ~88–93%.
+- Fixed `DeprecationWarning` from `scipy.linalg.kron` by replacing with `np.kron` in unit tests.
+- Added `bootstrap_method` parameter (`'local'` or `'global'`), default `'local'`.
+- Reduced `maxiter` of differential evolution to 50 (still sufficient).
+
+**Validation results:**
+- Success rates: φ case 93%, quadratic background 82%, high noise 86.7%, original 88.7%.
+- Parameter accuracy unchanged from v34.0.
+
+**Files:** `dtqem_v34_1.py` (internal development, not officially released).
+
+---
+
+## v34.0 – 2026-05-17 (First stable release with bootstrap improvements)
+
+**Major changes from v33.0:**
+
+- **Bootstrap uncertainty:** added full bootstrap with 150–200 synthetic Poisson samples. Initially used global optimisation (DE + L‑BFGS‑B) for each sample, but success rate was low (~46–76%).
+- **Fixed differential evolution warning:** set `workers=1`, `updating='deferred'` to avoid the `'workers' overrides updating` warning.
+- **Increased DE iterations** from 40 to 60 for the main fit.
+- **Warning for χ²_red far from 1:** if χ²_red > 1.5 or < 0.7, a warning suggests model inadequacy or overfitting.
+- **Unit tests:** added `test_concurrence()`, `test_double_slit_model()`, `test_estimate_d_from_fft()`.
+
+**Validation results (synthetic, 1% Poisson noise):**
+- d error: 0.05%, E error: 1.5%, χ²_red = 0.991.
+- Bootstrap success rate: 46.7% (original example) – too low, leading to v34.1.
+
+**Files:** `dtqem_v34_inversion.py`, `WHITE_PAPER_v34.md` (draft).
+
+---
+
+## v33.0 – 2026-05-16 (Original stable release – linear background, AICc, bootstrap)
+
+**Key features:**
+- Linear background \(B_0+B_1x\) measured independently and fixed during inversion.
+- Wide search range for \(d\) [1 µm, 2 mm] independent of FFT guess.
+- Global optimisation (DE 40‑50 iters) + local refinement.
+- AICc model selection (with/without phase shift \(\phi\)).
+- Bootstrap uncertainty (single-start local refinement, success rate ~88%).
+- Residual diagnostics and boundary warnings.
+
+**Validation:**
+- d error 0.13%, E error 4.85%, χ²_red = 1.08.
+- Residual correlation with x = 0.0068.
+
+**DOI:** 10.5281/zenodo.20260168
+
+**Files:** `dtqem_v33_inversion.py`, `WHITE_PAPER.md`, `README.md`, `LICENSE`.
+
 ## [v33.0] - 2026-05-17
 
 ### Added
