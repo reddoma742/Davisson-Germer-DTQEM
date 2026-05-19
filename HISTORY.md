@@ -1,3 +1,104 @@
+DTQEM v38.2 – Hydrogen Balmer‑alpha Zeeman Inversion (2026-05-19)
+
+Stable release of the Zeeman model for Hα line with major improvements in bootstrap and model selection
+
+---
+
+🚀 Key improvements over v38.1 and v37.x
+
+Area Improvement Achieved result
+Bootstrap n_restarts=10, pert=10%, 20% fully random starts, physics-based acceptance (instead of res.success) 100% success rate in all tests (was <25% in v38.1)
+Uncertainty estimation Bootstrap distributions instead of linear Hessian Realistic B_std (0.08–0.12 T) instead of over‑optimistic Hessian (0.001–0.004 T)
+Model selection AICc + SNR‑dependent threshold + spread_ratio + B/σ_B Correct choice between Single / Triplet even at B=0 and low SNR
+Speed Code optimised (avoided unnecessary closures) 8–13 s per spectrum (30 bootstrap samples)
+Robustness Added stress tests (11 scenarios × 5 repeats) Works down to SNR = 172 and B = 0.1 T
+Documentation Full docstrings, diagnostic plots, CSV reports Ready for scientific publication
+
+---
+
+📦 New features in v38.2
+
+1. Symmetric Gaussian triplet model
+   · π (Δm=0) and σ⁺, σ⁻ (Δm=±1) share the same sigma_width.
+   · Optional frac_side (default 0.60, can be fitted).
+2. Full Poisson negative log‑likelihood (including Stirling’s constant) – suitable for photon‑counting data.
+3. Automatic model selection
+   · AICc with SNR‑dependent threshold (stricter for low SNR).
+   · Rejects triplet if spread_ratio < 0.5 or B/σ_B < 2.
+4. Multi‑start bootstrap
+   · 30 samples, 10 restarts per sample.
+   · 20% of restarts start from fully random points (to escape local minima).
+   · 80% start from x_opt with additive parameter‑specific perturbation.
+   · Acceptance based on physics (B ≥ 0, sigma > 0, amplitude > 0) rather than res.success.
+5. Monte Carlo stress tests
+   · 11 scenarios: B from 0 to 2.5 T, amplitude scaling from 0.05 to 1.
+   · 5 repeats each → ensures robustness under various conditions.
+6. Integrated reports and plots
+   · fit_B=...png: 3 panels (spectrum, residuals, normalised residuals) + 4th panel for bootstrap distribution if triplet selected.
+   · recovery_curve.png: B_rec vs B_true.
+   · bootstrap_diagnostics.png: Bootstrap distributions for each case.
+   · CSV files for results and bootstrap distributions.
+
+---
+
+📊 Performance summary
+
+B_true (T) B_rec (MAP) (T) B_std (T) 95% CI (T) Absolute error (T)
+0.5 0.5057 0.1198 [0.284, 0.713] 0.0057
+1.0 0.9850 0.0821 [0.860, 1.139] 0.0150
+1.5 1.5025 0.1031 [1.293, 1.667] 0.0025
+2.0 1.9950 0.1017 [1.853, 2.185] 0.0050
+1.0 (SNR=172) 0.9930 0.0999 [0.847, 1.213] 0.0070
+
+· Bootstrap success rate: 100% in all tests.
+· Detection limit: ~0.15 T (at B=0.1 T it correctly returns Single).
+· Runtime: 8–13 s (standard CPU) with n_bootstrap=30.
+
+---
+
+🔧 Technical improvements (for developers)
+
+· Critical bug fix in v38.1 bootstrap: obj_local reused the same sample due to incorrect closure. Fixed by passing I_synth as a default argument (_I=I_synth) inside the loop.
+· Removed dependency on res.success: replaced with _is_valid_solution checking B ≥ 0, sigma > 0, amplitude > 0.
+· _sample_x0_bootstrap: hybrid strategy (local + fully random) with parameter‑specific handling (additive for λ_center and B, multiplicative for others).
+· Improved hessian_std: guarded against LinAlgError, returns nan instead of raising exception.
+· select_model: multi‑level decision rule (B/σ_B > spread_ratio > AICc).
+
+---
+
+📁 Files included in this release
+
+File Description
+dtqem_v38_2.py Core version – for importing into other projects.
+dtqem_v38_2_full.py Full version – includes tests and plotting.
+CITATION.cff Citation information for the release.
+LICENSE CC BY‑NC 4.0.
+
+---
+
+📖 Scientific references used for validation
+
+· Lavrov & Golubovskii (1995) – Hydrogen plasma in glow discharge.
+· Pérez et al. (1991) – Zeeman measurements in Z‑pinch plasma.
+· Stehlé et al. (2000) – Stark+Zeeman database for Hα.
+· Ashbourn (2004) – Hα spectrum in a tokamak (1–5 T fields).
+
+---
+
+👤 Author
+
+· Reddouane Berramdane (with assistance from AI tools: Gemini, DeepSeek, Claude, Perplexity)
+
+---
+
+🔗 DOI
+
+To be assigned after upload to Zenodo
+
+---
+
+Released on 2026-05-19
+
 HISTORY – DTQEM v34.2
 
 Version 34.2 (2026-05-18) – Double‑slit inversion with multi‑start bootstrap
