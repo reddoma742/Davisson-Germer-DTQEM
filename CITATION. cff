@@ -1,5 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
+
 authors:
   - family-names: "Berramdane"
     given-names: "Reddouane"
@@ -7,23 +8,70 @@ authors:
     city: "Oujda"
     country: "MA"
     email: "reddoma@gmail.com"
-title: "DTQEM v38.2 – Hydrogen Balmer-alpha Zeeman inversion with multi‑start bootstrap and 100% success rate"
-version: "38.2"
-date-released: 2026-05-19
+
+title: "DTQEM v44.0 – Unified Quantum Decoherence Framework: Double-Slit, Qubit, and Zeeman Systems with Proper-Time Decoherence (D0 Model)"
+
+version: "44.0"
+date-released: 2026-05-22
+
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
+
 keywords:
-  - "Quantum mechanics"
+  - "Quantum decoherence"
+  - "Double-slit experiment"
+  - "Qubit decoherence"
   - "Zeeman effect"
-  - "Hydrogen Balmer-alpha"
-  - "Spectral inversion"
-  - "Magnetic field measurement"
-  - "Triplet model"
-  - "Poisson likelihood"
-  - "Bootstrap uncertainty"
-  - "Multi‑start bootstrap"
-  - "AICc model selection"
-  - "H-alpha line"
-license: "CC-BY-NC-4.0"
-abstract: "DTQEM v38.2 provides a robust and accurate inversion framework for extracting magnetic field strength B from the Zeeman splitting of the hydrogen Balmer‑alpha line (Hα, 656.28 nm). The model assumes a symmetric Gaussian triplet (π, σ⁺, σ⁻) with a fixed branching ratio, linear background subtraction, and Poisson negative log‑likelihood. Inversion uses differential evolution followed by L‑BFGS‑B. AICc with adaptive SNR‑based threshold selects between a single‑peak model (no field) and the triplet. A multi‑start parametric bootstrap (30 samples, 10 restarts, 10% perturbation, 20% fully random starts) achieves 100% success rate in validation tests, providing realistic 95% confidence intervals (e.g., 0.086 T at 1.0 T). The code includes extensive validation (synthetic spectra, stress tests, recovery curves) and publication‑ready diagnostics. Performance: relative error <2% for B ≥ 0.5 T, detection limit ~0.15 T, runtime 8–13 s per spectrum. The software is open‑source, written in pure Python, and suitable for laboratory, solar, and astrophysical applications where only intensity spectra are available."
-comment: "The development of DTQEM v38.2 was assisted by AI tools: Google Gemini, DeepSeek, and Perplexity, used for code optimization, debugging, documentation, and structuring of validation experiments and stress tests. The author remains solely responsible for the final physical model, scientific conclusions, and any errors."
+  - "Proper-time discrepancy"
+  - "Relativistic decoherence"
+  - "Van Cittert-Zernike"
+  - "Lindblad decoherence"
+  - "D0 baseline model"
+  - "Interactive dashboard"
+  - "ipywidgets"
+  - "Dark theme"
+  - "Colab ready"
+
+license: "MIT"
+
+abstract: |
+  DTQEM v44.0 (Decoherence from Time‑scale Quantum Effective Mismatch) introduces a unified framework for quantum decoherence based on proper‑time discrepancy between the particle and the measuring device.
+
+  The core equation (D0 – baseline model) is:
+
+      V_eff = V_source(d) × exp(-γ_φ·τ) × exp(-|Δτ|/τ_c)
+
+  where:
+  - V_source(d) = |sinc(π·src_size·d/(λ·L_src))| (Van Cittert-Zernike)
+  - exp(-γ_φ·τ) (Lindblad environmental decoherence)
+  - exp(-|Δτ|/τ_c) (DTQEM proper-time decoherence hypothesis)
+  - Δτ = τ × (1 - 1/γ), τ = a/v, γ = 1/√(1-β²)
+  - τ_c – the only free parameter
+
+  The framework includes five interactive code modules:
+
+  1. dtqem_double_slit_forward_v44.py – Double-slit interference (forward model)
+  2. dtqem_double_slit_inverse_v44.py – Double-slit parameter extraction (inverse model)
+  3. dtqem_qubit_decoherence_v44.py – Qubit decoherence simulator with Bloch sphere
+  4. dtqem_zeeman_effect_v44.py – Zeeman effect simulator with energy levels
+  5. dtqem_wave_code_v44.py – Core wave functions and propagation
+
+  All modules feature:
+  - ipywidgets interactive sliders (zero overlap with plots)
+  - Dark theme professional interface
+  - Real-time parameter updates
+  - Export to PNG
+  - Reset to defaults
+  - Google Colab / Jupyter compatibility
+
+  This version adopts the D0 baseline (simple exponential decoherence) without additional complexity (no β, no τ_c(γ), no τ_sat). Future extensions are explicitly deferred to later versions.
+
+comment: |
+  The development of DTQEM v44.0 was assisted by AI tools:
+  - Google Gemini – Theoretical discussions, D3 proposal
+  - DeepSeek (深度求索) – Philosophical insights, critical analysis
+  - Claude (Anthropic) – Code writing (V44.0 series)
+
+  Special thanks to "Clore" (anonymous colleague) for mathematical improvement proposals (D1-D6 models).
+
+  The author remains solely responsible for the final physical model, scientific conclusions, and any errors.
