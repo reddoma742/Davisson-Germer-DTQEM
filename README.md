@@ -59,19 +59,41 @@ Real‑time updates All plots update instantly when parameters change
 Export & reset Save figures as PNG, restore default values
 Colab ready Works in Google Colab and Jupyter notebooks
 D0 baseline Simple exponential decoherence (no β, no τ_sat, no τ_c(γ))
-
 ---
 
-📊 The five codes of v44.0
+📊 The codes of v44.0
+
+```
+📁 codes/
+│
+├── 📁 double_slit/
+│   ├── dtqem_double_slit_forward_v44.py      # Forward model (interactive)
+│   ├── dtqem_double_slit_forward_v44.ipynb   # Notebook version
+│   ├── dtqem_double_slit_inverse_v44.py      # Inverse model (parameter extraction)
+│   └── dtqem_double_slit_inverse_v44.ipynb   # Notebook version
+│
+├── 📁 qubit/
+│   ├── dtqem_qubit_decoherence_v44.py        # Qubit decoherence simulator
+│   └── dtqem_qubit_decoherence_v44.ipynb     # Notebook version
+│
+├── 📁 zeeman/
+│   ├── dtqem_zeeman_effect_v44.py            # Zeeman effect simulator
+│   └── dtqem_zeeman_effect_v44.ipynb         # Notebook version
+│
+├── 📁 wave/
+│   └── dtqem_wave_code_v44.py                # Core wave functions
+│
+└── dtqem_all_v44.py                          # Optional: all-in-one collector
+```
 
 # File Description
-1 dtqem_v44_colab.py Double‑slit interference – forward model with Van Cittert‑Zernike + Lindblad + DTQEM
-2 dtqem_inverse_de.py Inverse model – extract τ_c, v, γ_φ from synthetic data using DE + L‑BFGS‑B
-3 dtqem_wave_code.py Wave code – core wave functions and propagation
-4 dtqem_qubit_decoherence_v44.py Qubit decoherence – V_eff(t) = exp(-γ_φ·t) × exp(-
-5 dtqem_zeeman_effect_v44.py Zeeman effect – coherence between Zeeman sub‑levels split by magnetic field B
+1 dtqem_double_slit_forward_v44.py Double‑slit interference – forward model (interactive)
+2 dtqem_double_slit_inverse_v44.py Double‑slit – inverse model (parameter extraction)
+3 dtqem_qubit_decoherence_v44.py Qubit decoherence simulator
+4 dtqem_zeeman_effect_v44.py Zeeman effect simulator
+5 dtqem_wave_code_v44.py Core wave functions and propagation
 
-All five codes share:
+All codes share:
 
 · The same core equation (D0)
 · ipywidgets sliders (outside the figure)
@@ -83,7 +105,7 @@ All five codes share:
 
 🖥️ Interactive dashboards – what you can explore
 
-1. Double‑slit interference (dtqem_v44_colab.py)
+1. Double‑slit interference (dtqem_double_slit_forward_v44.py)
 
 · Adjust slit separation, wavelength, screen distance, source size
 · Change particle velocity, τ_c, γ_φ
@@ -135,24 +157,24 @@ pip install numpy matplotlib ipywidgets scipy
 3. Run any dashboard (in Jupyter or Colab)
 
 ```python
-# For double‑slit
-run dtqem_v44_colab.py
+# For double‑slit forward model
+run codes/double_slit/dtqem_double_slit_forward_v44.py
 
 # For qubit decoherence
-run dtqem_qubit_decoherence_v44.py
+run codes/qubit/dtqem_qubit_decoherence_v44.py
 
 # For Zeeman effect
-run dtqem_zeeman_effect_v44.py
+run codes/zeeman/dtqem_zeeman_effect_v44.py
 ```
 
-Or open the .py file in Google Colab (upload first).
+Or open the .ipynb files directly in Google Colab (upload first).
 
 ---
 
 📌 Version history
 
 Version Focus Key result File
-v44.0 Unified DTQEM framework Double‑slit + Qubit + Zeeman with D0 equation All five codes
+v44.0 Unified DTQEM framework Double‑slit + Qubit + Zeeman with D0 equation All codes in codes/
 v38.2 Hα Zeeman inversion Extract B with 100% bootstrap success dtqem_v38_2.py
 v34.2 Double‑slit inversion Observer strength E, slit separation d dtqem_v34_2.py
 v22.0 Self‑calibrating spectral inversion Recover T, α, E from Balmer linewidths dtqem_v22_inversion.py
@@ -172,7 +194,7 @@ Core Contributors (AI Assistants):
 
 · Gemini (Google) – Theoretical discussions, D3 proposal
 · DeepSeek (深度求索) – Philosophical insights, critical analysis
-· Claude (Anthropic) – Code writing (V44.0, V44.0 Qubit, V44.0 Zeeman)
+· Claude (Anthropic) – Code writing (V44.0 series)
 
 Special Thanks:
 
@@ -191,11 +213,11 @@ This project is licensed under the MIT License – see the LICENSE file for deta
 If you use DTQEM in your research, please cite:
 
 ```bibtex
-@software{berramdane2026dtqem,
+@software{berramdane2025dtqem,
   title = {DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy},
   author = {Berramdane, Reddouane},
   contributors = {Gemini, DeepSeek, Claude},
-  year = {2026},
+  year = {2025},
   month = {05},
   version = {44.0},
   publisher = {GitHub},
