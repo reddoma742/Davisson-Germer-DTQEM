@@ -1,127 +1,104 @@
-DTQEM RESEARCH & EDUCATIONAL LICENSE
+# DTQEM RESEARCH & EDUCATIONAL LICENSE
 
-Version 4.0, May 2026 (for DTQEM v38.2)
+**Version 44.0, May 2026 (for DTQEM v44.0 Unified Framework)**
 
-Copyright (c) 2026 Reddouane Berramdane (Al Reddouane BERRAMDANE)
-Project: Dual-Time Quantum Entanglement Model (DTQEM)
-Location: Oujda, Morocco
-Contact: reddoma@gmail.com
-
----
-
-1. Definitions
-
-1.1 "Software" means the DTQEM source code, all accompanying files, examples, documentation, and specifically the mathematical relations:
-
-· Zeeman Triplet Model for Hydrogen Balmer‑alpha (v38.2):
-    I(λ) = I₀·G(λ, λ₀, σ) + I₀·f·G(λ, λ₀+Δλ, σ) + I₀·f·G(λ, λ₀-Δλ, σ) + B(λ)
-    where Δλ = (λ₀²/c)·(μ_B/h)·g_eff·|B|, with g_eff = 1.0,
-    and B(λ) is a linear background (measured independently or subtracted).
-
-· Single‑Peak Gaussian Model (for field‑free case):
-    I(λ) = I₀·G(λ, λ₀, σ) + B(λ)
-
-· Poisson Negative Log‑Likelihood (complete, including Stirling’s term):
-    NLL = Σ [ μ_i - y_i·log(μ_i) + log(y_i!) ]
-
-· Multi‑start Bootstrap Protocol (v38.2):
-    For each bootstrap sample, 10 local restarts are performed (20% fully random, 80% local perturbation around the best fit), achieving a success rate of 100% under standard test conditions.
-
-· Model Selection via AICc with adaptive SNR‑based threshold and physical rejection criteria (spread_ratio < 0.5 or B/σ_B < 2).
-
-All derivatives of these equations, whether in source or object form, and the accompanying code (including dtqem_v38_2.py, test scripts, examples, and documentation) are covered by this license.
-
-1.2 "Commercial Use" means any use of the Software that is intended for or directed toward commercial advantage or monetary compensation, including but not limited to:
-
-· Incorporating the Software into a product or service sold for a fee.
-· Using the Software to improve a commercial product or service.
-· Providing the Software as a service (SaaS) for a fee.
-· Selling licenses or subscriptions related to the Software.
-· Using the Software for internal business operations that generate revenue (e.g., proprietary simulations that yield commercial results).
-
-1.3 "Academic, Educational, or Research Use" means any use of the Software that is:
-
-· Within a non‑profit educational institution (university, school, training course without commercial purpose).
-· For scientific research (theses, papers, non‑commercial funded projects).
-· For personal, non‑commercial development or open‑source collaboration without monetary gain.
+**Copyright (c) 2026 Reddouane Berramdane (Al Reddouane BERRAMDANE)**  
+**Project: Dual-Time Quantum Entanglement Model (DTQEM)**  
+**Location: Oujda, Morocco**  
+**Contact: reddoma@gmail.com**
 
 ---
 
-2. Permitted Uses (Free of Charge)
+## 1. Definitions
+
+### 1.1 "Software"
+means the DTQEM source code v44.0, all accompanying files, examples, documentation, and specifically the **core equation (D0)** :
+
+\[
+V_{\text{eff}} = V_{\text{source}}(d) \times e^{-\gamma_\phi \tau} \times e^{-|\Delta\tau|/\tau_c}
+\]
+
+where:
+- \(V_{\text{source}}(d) = |\text{sinc}(\pi \cdot \text{src\_size} \cdot d / (\lambda \cdot L_{\text{src}}))|\) (Van Cittert-Zernike)
+- \(e^{-\gamma_\phi \tau}\) (Lindblad environmental decoherence)
+- \(e^{-|\Delta\tau|/\tau_c}\) (DTQEM proper-time decoherence hypothesis)
+- \(\Delta\tau = \tau \times (1 - 1/\gamma)\), \(\tau = a/v\), \(\gamma = 1/\sqrt{1-v^2/c^2}\)
+- \(\tau_c\) – the only free parameter
+
+The Software includes the following five code modules (v44.0):
+
+| # | File | Description |
+|---|------|-------------|
+| 1 | `dtqem_double_slit_forward_v44.py` | Double-slit interference – forward model (interactive) |
+| 2 | `dtqem_double_slit_inverse_v44.py` | Double-slit – inverse model (parameter extraction) |
+| 3 | `dtqem_qubit_decoherence_v44.py` | Qubit decoherence simulator |
+| 4 | `dtqem_zeeman_effect_v44.py` | Zeeman effect simulator |
+| 5 | `dtqem_wave_code_v44.py` | Core wave functions and propagation |
+
+All derivatives of these equations, whether in source or object form, and the accompanying code, test scripts, examples, and documentation are covered by this license.
+
+### 1.2 "Commercial Use"
+means any use of the Software that is intended for or directed toward commercial advantage or monetary compensation, including but not limited to:
+- Incorporating the Software into a product or service sold for a fee.
+- Using the Software to improve a commercial product or service.
+- Providing the Software as a service (SaaS) for a fee.
+- Selling licenses or subscriptions related to the Software.
+- Using the Software for internal business operations that generate revenue (e.g., proprietary simulations that yield commercial results).
+
+### 1.3 "Academic, Educational, or Research Use"
+means any use of the Software that is:
+- Within a non-profit educational institution (university, school, training course without commercial purpose).
+- For scientific research (theses, papers, non-commercial funded projects).
+- For personal, non-commercial development or open-source collaboration without monetary gain.
+
+---
+
+## 2. Permitted Uses (Free of Charge)
 
 Any person, academic institution, or individual researcher may:
 
-· Download, run, study, modify, and redistribute copies of the Software, provided that:
-  a) This license and the copyright notice are retained in all copies or substantial portions.
-  b) Any modified version includes a clear notice stating that it is based on DTQEM v38.2 and lists the changes made.
-  c) No names of the contributors (including the author) are used to endorse or promote derived products without explicit written permission.
+- **Download, run, study, modify, and redistribute copies** of the Software, provided that:
+  - a) This license and the copyright notice are retained in all copies or substantial portions.
+  - b) Any modified version includes a clear notice stating that it is based on DTQEM v44.0 and lists the changes made.
+  - c) No names of the contributors (including the author) are used to endorse or promote derived products without explicit written permission.
 
-· Use the Software for academic, educational, or research purposes as defined above.
-· Publish results obtained with the Software, provided that proper attribution is given (see Section 5).
+- **Use the Software** for academic, educational, or research purposes as defined above.
 
----
-
-3. Commercial Use – Prohibited Without a Separate License
-
-3.1 Commercial use of the Software, or any part thereof (including the core equations and the bootstrap protocol), is strictly prohibited without a separate written license from the copyright holder.
-
-3.2 Entities wishing to use DTQEM for commercial purposes may contact the author to negotiate a commercial license (which may involve a fee or other conditions).
-
-3.3 Any unauthorized commercial use automatically terminates this license and may be subject to legal action.
+- **Publish results** obtained with the Software, provided that proper attribution is given (see Section 5).
 
 ---
 
-4. No Warranty
+## 3. Commercial Use – Prohibited Without a Separate License
+
+### 3.1
+Commercial use of the Software, or any part thereof (including the core equation D0 and any of the five code modules), is strictly prohibited without a separate written license from the copyright holder.
+
+### 3.2
+Entities wishing to use DTQEM for commercial purposes may contact the author to negotiate a commercial license (which may involve a fee or other conditions).
+
+### 3.3
+Any unauthorized commercial use automatically terminates this license and may be subject to legal action.
+
+---
+
+## 4. No Warranty
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHOR OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ---
 
-5. Attribution and Citation
+## 5. Attribution and Citation
 
 Any publication, preprint, thesis, or other scientific work that uses the Software or any of its core equations must cite the latest version of DTQEM. Example:
 
-Berramdane, R. (2026). DTQEM v38.2 – Hydrogen Balmer‑alpha Zeeman inversion with multi‑start bootstrap and 100% success rate. Zenodo. [DOI to be assigned]
-
-For earlier versions, please cite the appropriate Zenodo record (e.g., v34.2: https://doi.org/10.5281/zenodo.20260168, v22.0: https://doi.org/10.5281/zenodo.20218379).
-
-Failure to provide proper attribution constitutes a breach of this license.
-
----
-
-6. Termination
-
-Any violation of the terms of this license (including unauthorized commercial use) automatically terminates all rights granted hereunder. Sections 4, 5, and 6 shall survive termination.
-
----
-
-7. Governing Law
-
-This license shall be interpreted and enforced in accordance with the laws of Morocco and international copyright treaties.
-
----
-
-8. Additional Provisions for v38.2 (Zeeman Inversion for Hα)
-
-8.1 The Zeeman inversion methodology (including the triplet Gaussian model, Poisson likelihood, AICc‑based model selection, and the multi‑start bootstrap protocol with 10 restarts, 10% perturbation, and 20% fully random starts) is an integral part of the Software and is subject to the same license terms.
-
-8.2 Users are strongly encouraged to report any errors or improvements to the author to benefit the research community.
-
-8.3 The author reserves the right to publish updated versions under the same or a compatible license.
-
-8.4 Key improvements in v38.2 compared to v34.2 (as reflected in this license):
-
-· Bootstrap success rate raised from ~98% to 100% (under standard test conditions).
-· Increased n_restarts to 10, added 20% fully random starts to escape local minima.
-· Introduced physics‑based acceptance criterion (B ≥ 0, sigma > 0, amplitude > 0) instead of relying on scipy’s success flag.
-· Added automatic model selection using AICc with SNR‑dependent threshold and physical rejections (spread_ratio < 0.5 or B/σ_B < 2).
-· Full support for Hydrogen Balmer‑alpha (Hα) line analysis.
-
----
-
-BY USING, COPYING, OR DISTRIBUTING THE SOFTWARE, YOU ACCEPT ALL TERMS OF THIS LICENSE.
-For commercial licensing inquiries, contact: reddoma@gmail.com
-
----
-
-This license is based on the Creative Commons Attribution‑NonCommercial 4.0 International license but adapted to include specific terms for the DTQEM framework and its v38.2 enhancements.
+```bibtex
+@software{berramdane2025dtqem,
+  title = {DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy},
+  author = {Berramdane, Reddouane},
+  contributors = {Gemini, DeepSeek, Claude},
+  year = {2025},
+  month = {05},
+  version = {44.0},
+  publisher = {GitHub},
+  url = {https://github.com/reddoma742/Davisson-Germer-DTQEM.git}
+}
