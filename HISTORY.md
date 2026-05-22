@@ -1,3 +1,207 @@
+
+# DTQEM – Version History
+
+## v44.0 (2026-05-22) – Unified Quantum Decoherence Framework
+
+**Stable Release · D0 Baseline Model · Three Physical Systems**
+
+---
+
+### 🚀 Major Features
+
+| Feature | Description |
+|---------|-------------|
+| **Unified framework** | Same core equation applied to double-slit, qubit, and Zeeman systems |
+| **D0 baseline model** | \(V_{\text{eff}} = V_{\text{source}}(d) \times e^{-\gamma_\phi \tau} \times e^{-|\Delta\tau|/\tau_c}\) |
+| **Single free parameter** | Only \(\tau_c\) (proper-time coherence constant) |
+| **No extensions** | No \(\beta\), no \(\tau_c(\gamma)\), no \(\tau_{\text{sat}}\) (deferred to future versions) |
+
+---
+
+### 📊 Five Code Modules
+
+| # | File | Description |
+|---|------|-------------|
+| 1 | `dtqem_double_slit_forward_v44.py` | Double-slit interference – forward model (interactive dashboard) |
+| 2 | `dtqem_double_slit_inverse_v44.py` | Double-slit – inverse model (DE + L-BFGS-B + Bootstrap) |
+| 3 | `dtqem_qubit_decoherence_v44.py` | Qubit decoherence simulator with Bloch sphere |
+| 4 | `dtqem_zeeman_effect_v44.py` | Zeeman effect simulator with energy levels |
+| 5 | `dtqem_wave_code_v44.py` | Core wave functions and propagation |
+
+---
+
+### 🎨 Interactive Dashboard Features
+
+- **ipywidgets** sliders (HTML layer, outside matplotlib figures)
+- **Zero overlap** between controls and plots
+- **Dark theme** (GitHub-style professional interface)
+- **Real-time updates** – all plots update instantly when parameters change
+- **Export to PNG** – save figures with one click
+- **Reset button** – restore all default values
+- **Google Colab / Jupyter compatible** – works in any environment
+
+---
+
+### 📈 Testable Predictions
+
+| Prediction | Description |
+|------------|-------------|
+| **P1** | Increasing particle velocity reduces \(V_{\text{eff}}\) |
+| **P2** | \(\tau_c \leq 10^{-15}\) s (femtosecond scale) |
+| **P3** | Detector material may affect \(V_{\text{eff}}\) |
+| **P4** | Decoherence rate increases linearly with magnetic field B (Zeeman) |
+| **P5** | Heavier particles → less DTQEM decoherence |
+
+---
+
+### 🔧 Requirements
+
+| Package | Version |
+|---------|---------|
+| numpy | ≥ 1.21 |
+| matplotlib | ≥ 3.5 |
+| ipywidgets | ≥ 7.6 |
+| scipy | ≥ 1.7 |
+
+---
+
+### 📁 Repository Structure
+
+
+📁 DTQEM_Project/
+│
+├── 📄 README.md
+├── 📄 LICENSE
+├── 📄 CITATION.cff
+├── 📄 HISTORY.md
+├── 📄 requirements.txt
+├── 📄 .gitignore
+│
+├── 📁 codes/
+│   ├── 📁 double_slit/
+│   │   ├── dtqem_double_slit_forward_v44.py
+│   │   ├── dtqem_double_slit_forward_v44.ipynb
+│   │   ├── dtqem_double_slit_inverse_v44.py
+│   │   └── dtqem_double_slit_inverse_v44.ipynb
+│   │
+│   ├── 📁 qubit/
+│   │   ├── dtqem_qubit_decoherence_v44.py
+│   │   └── dtqem_qubit_decoherence_v44.ipynb
+│   │
+│   ├── 📁 zeeman/
+│   │   ├── dtqem_zeeman_effect_v44.py
+│   │   └── dtqem_zeeman_effect_v44.ipynb
+│   │
+│   └── 📁 wave/
+│       └── dtqem_wave_code_v44.py
+│
+├── 📁 papers/
+│   ├── DTQEM_paper_AR.md
+│   ├── DTQEM_paper_EN.md
+│   └── DTQEM_v44_WhitePaper.md
+│
+├── 📁 legacy/
+│   └── (previous versions: v38.2, v34.2, v22.0, v20.0)
+│
+└── 📁 figures/
+
+```
+
+---
+
+### 👥 Contributors
+
+**Project Creator:**  
+- Berramdane Reddouane (Morocco)
+
+**Core Contributors (AI Assistants):**  
+- **Gemini (Google)** – Theoretical discussions, D3 proposal  
+- **DeepSeek (深度求索)** – Philosophical insights, critical analysis  
+- **Claude (Anthropic)** – Code writing (V44.0 series)
+
+**Special Thanks:**  
+- **"Clore"** (Anonymous colleague) – Mathematical improvement proposals (D1–D6 models)
+
+---
+
+### 📝 License
+
+MIT License – see [LICENSE](LICENSE) file for details.
+
+---
+
+### 📖 Citation
+
+```bibtex
+@software{berramdane2026dtqem,
+  title = {DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy},
+  author = {Berramdane, Reddouane},
+  contributors = {Gemini, DeepSeek, Claude},
+  year = {2026},
+  month = {05},
+  version = {44.0},
+  publisher = {GitHub},
+  url = {https://github.com/reddoma742/Davisson-Germer-DTQEM}
+}
+```
+
+---
+
+🔄 What's New in v44.0 (Compared to v38.2)
+
+Aspect v38.2 v44.0
+Focus Hα Zeeman inversion only Unified framework (3 systems)
+Core equation Zeeman triplet for Hα D0 unified equation
+Number of codes 1 5
+Interactive dashboards No Yes (ipywidgets)
+Dark theme No Yes
+Zero overlap layout No Yes
+Colab compatible Partial Full
+Bloch sphere No Yes (qubit module)
+Energy levels plot No Yes (Zeeman module)
+Heatmaps No Yes
+License CC BY-NC 4.0 MIT
+
+---
+
+⚠️ Known Limitations
+
+# Limitation
+L1 No experimental data yet – all results from synthetic data
+L2 D0 assumes Markovian decoherence (may not hold in all systems)
+L3 Physical origin of \tau_c is unknown
+L4 No field-theoretic derivation exists yet
+L5 DTQEM describes decoherence, not collapse
+
+---
+
+🚧 Future Work (v45.0+)
+
+· Non-Markovian extensions (D3: stretched exponential with \beta)
+· Velocity-dependent \tau_c(\gamma)
+· Saturation factor \mathcal{C}(\Delta\tau)
+· Experimental validation of \tau_c
+· Field-theoretic derivation from first principles
+
+---
+
+✅ Validation Status
+
+Test Result
+Double-slit forward model ✅ Passed
+Double-slit inverse model (DE + L-BFGS-B) ✅ Passed
+Bootstrap uncertainty (synthetic data) ✅ Passed (100% success)
+Qubit decoherence simulator ✅ Passed
+Zeeman effect simulator ✅ Passed
+ipywidgets integration ✅ Passed
+Zero overlap layout ✅ Passed
+Colab compatibility ✅ Passed
+
+---
+
+DTQEM v44.0 – Ready for testing, criticism, and future expansion.
+
+
 DTQEM v38.2 – Hydrogen Balmer‑alpha Zeeman Inversion (2026-05-19)
 
 Stable release of the Zeeman model for Hα line with major improvements in bootstrap and model selection
