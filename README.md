@@ -1,4 +1,4 @@
-```markdown
+
 # DTQEM v44.0 – Unified Quantum Decoherence Framework
 
 **A unified framework for quantum decoherence based on proper‑time discrepancy (DTQEM) – with interactive dashboards for double‑slit, qubit, and Zeeman systems.**
