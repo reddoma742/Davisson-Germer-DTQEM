@@ -213,11 +213,11 @@ This project is licensed under the MIT License – see the LICENSE file for deta
 If you use DTQEM in your research, please cite:
 
 ```bibtex
-@software{berramdane2025dtqem,
+@software{berramdane2026dtqem,
   title = {DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy},
   author = {Berramdane, Reddouane},
   contributors = {Gemini, DeepSeek, Claude},
-  year = {2025},
+  year = {2026},
   month = {05},
   version = {44.0},
   publisher = {GitHub},
