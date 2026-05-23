@@ -1,31 +1,25 @@
-# Byte-compiled / optimized files
+# Python
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
 *.so
 
 # Virtual environments
 venv/
 env/
-ENV/
+.env
 
-# IDE files
+# Outputs
+output/
+*.png
+*.csv
+*.json
+
+# IDE
 .vscode/
 .idea/
+*.swp
 
-# Jupyter notebook checkpoints
-.ipynb_checkpoints/
-
-# Data files (optional, keep examples but ignore large data)
-*.csv
-*.npy
-*.npz
-
-# OS metadata
+# OS
 .DS_Store
 Thumbs.db
-
-# Logs and outputs
-*.log
-*.out
-*.png
-*.pdf
