@@ -1,3 +1,99 @@
+# DTQEM – Version History
+
+## v46.0 (2026-05-24) – Mach-Zehnder Interferometer (Stable Release)
+
+**Major release:** First stable implementation of DTQEM for a Mach-Zehnder interferometer.
+
+### Core Features
+- **Proper‑time mismatch**: Δτ = |L₁/(v₁γ₁) − L₂/(v₂γ₂)|
+- **Effective environmental time**: T_eff = (τ₁ + τ₂)/2
+- **Total visibility**: V_eff = exp(-γ_φ · T_eff) × exp(-|Δτ| / τ_c)
+
+### Code Modules
+| File | Description |
+|------|-------------|
+| `dtqem_mach_zehnder_v46.py` | Core model with 6 sanity checks and plotting utilities |
+| `c70_benchmark.py` | Experimental benchmark against C70 interferometry data |
+| `dtqem_mass_effect_demo_v3.py` | Experimental demo of mass-dependent τ_c (P9) |
+
+### Sanity Checks (all passed)
+1. Δτ = 0 for identical arms (L1=L2, v1=v2)
+2. Δτ > 0 when L1=L2 but v1≠v2 (MZ-P1)
+3. V_eff ∈ [0,1] for random parameters
+4. Symmetric arms → V_eff = exp(-γ_φ·L/v)
+5. When γ_φ = 0, V_eff peaks at v1 = v2 (isolated DTQEM)
+6. T_eff symmetric under arm exchange
+
+### New Predictions (MZ‑P1 to MZ‑P4)
+| Prediction | Description |
+|------------|-------------|
+| **MZ-P1** | L1 = L2 but v1 ≠ v2 → Δτ ≠ 0 → V_eff < 1 |
+| **MZ-P2** | Δτ ≈ τ_c → coherence collapse threshold |
+| **MZ-P3** | Proper time differs even at equal lab times |
+| **MZ-P4** | Ridge at β₁ = β₂ in coherence surface |
+
+### Experimental Extensions
+- `dtqem_mass_effect_demo_v3.py`: explores τ_c ∝ 1/m^β / γ^α (P9)
+- `c70_benchmark.py`: compares mass-dependent model with C70 data (RMSE, R²)
+
+---
+
+## v44.0 (2026-05-22) – Unified Quantum Decoherence Framework
+
+**First unified release:** Core D0 model applied to three physical systems.
+
+### Core Equation
+V_eff = V_source(d) × exp(-γ_φ·τ) × exp(-|Δτ|/τ_c)
+
+### Code Modules (5 codes)
+| File | Description |
+|------|-------------|
+| `dtqem_double_slit_forward_v44.py` | Double‑slit forward model (interactive) |
+| `dtqem_double_slit_inverse_v44.py` | Inverse model (DE + L‑BFGS‑B + Bootstrap) |
+| `dtqem_qubit_decoherence_v44.py` | Qubit decoherence simulator |
+| `dtqem_zeeman_effect_v44.py` | Zeeman effect simulator |
+| `dtqem_wave_code_v44.py` | Core wave functions and propagation |
+
+### Predictions (P1–P5)
+| Prediction | Description |
+|------------|-------------|
+| **P1** | Increasing velocity reduces V_eff |
+| **P2** | τ_c ≤ 10⁻¹⁵ s (femtosecond scale) |
+| **P3** | Detector material may affect V_eff |
+| **P4** | Decoherence rate scales linearly with B (Zeeman) |
+| **P5** | Heavier particles → less decoherence (if τ_c ∝ 1/m) |
+
+### Zenodo DOI
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20349674.svg)](https://doi.org/10.5281/zenodo.20349674)
+
+---
+
+## Earlier Versions (Legacy)
+
+| Version | Focus | Key Result |
+|---------|-------|------------|
+| v38.2 | Hα Zeeman inversion | Extract B with 100% bootstrap success |
+| v34.2 | Double‑slit inversion | Observer strength E, slit separation d |
+| v22.0 | Self‑calibrating spectral inversion | Recover T, α, E from Balmer linewidths |
+
+*These versions are archived in the `legacy/` folder.*
+
+---
+
+## Roadmap
+
+| Version | Focus | Status |
+|---------|-------|--------|
+| **v44.0** | Unified D0 framework | ✅ Released (Zenodo) |
+| **v46.0** | Mach‑Zehnder interferometer | ✅ Stable |
+| **v46.x** | Experimental: mass‑dependent τ_c (P9) | 🔬 In progress |
+| **v47.0** | Inverse fitting on experimental data | ⏳ Planned |
+| **v48.0** | Non‑Markovian extensions (D3) | ⏳ Future |
+
+---
+
+**End of history.**
+
 
 # DTQEM – Version History
 
