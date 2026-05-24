@@ -1,12 +1,12 @@
 # DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy
 
-**White Paper — Version 47.0 (Improved Draft)**
+**White Paper — Version 47.1 (Final Draft — Ready for Submission)**
 
 **Author: Berramdane Reddouane (Morocco)**  
 **Date: May 2026**  
 
 **Repository: https://github.com/reddoma742/Davisson-Germer-DTQEM**  
-**DOI: 10.5281/zenodo.20349674** (v44.0) | *DOI for v47.0 to be assigned*
+**DOI: 10.5281/zenodo.20349674** (v44.0) | *DOI for v47.1 to be assigned*
 
 ---
 
@@ -118,29 +118,9 @@ These relations are **not assumed** in the baseline D0 model, but provide **test
 
 ---
 
-## 4. Energy Condensation Interpretation (Extension)
+## 4. Experimental Predictions
 
-Beyond decoherence, DTQEM admits an alternative interpretation (exploratory, not part of D0):
-
-> *Quantum states correspond to distributed energy configurations. Measurement induces a transition toward a localized energy state, observed as a classical particle with definite mass and position.*
-
-In this view:
-- **Wave state** → distributed energy (no definite position)
-- **Measurement** → energy localization (“condensation”)
-- **Classical particle** → stable localized energy profile
-
-This interpretation is consistent with:
-- \(E = mc^2\) (Einstein)
-- Higgs mechanism (mass generation for elementary particles)
-- QCD binding energy (99% of hadron mass)
-
-This section is **interpretative** and does not modify the baseline D0 model.
-
----
-
-## 5. Experimental Predictions
-
-### 5.1 Core Predictions (D0 – Testable)
+### 4.1 Core Predictions (D0 – Testable)
 
 | Prediction | Description | Status |
 |------------|-------------|--------|
@@ -150,7 +130,7 @@ This section is **interpretative** and does not modify the baseline D0 model.
 | **P4** | Decoherence rate scales linearly with \(B\) (Zeeman) | ✅ Testable |
 | **P5** | Heavier particles → less DTQEM decoherence (if \(\tau_c\) constant) | ✅ Testable |
 
-### 5.2 Mach-Zehnder Specific Predictions (MZ-P1 to MZ-P4)
+### 4.2 Mach-Zehnder Specific Predictions (MZ-P1 to MZ-P4)
 
 | Prediction | Description | Status |
 |------------|-------------|--------|
@@ -159,7 +139,7 @@ This section is **interpretative** and does not modify the baseline D0 model.
 | **MZ-P3** | Proper time differs even when lab times are equal | ✅ Testable |
 | **MZ-P4** | The coherence surface \(V_{\text{eff}}(\beta_1, \beta_2)\) has a ridge at \(\beta_1 = \beta_2\) | ✅ Testable |
 
-### 5.3 Experimental Extension (Not part of D0)
+### 4.3 Experimental Extension (Not part of D0)
 
 **Mass-dependent hypothesis (P9 – exploratory):**
 
@@ -171,9 +151,9 @@ This extension predicts that heavier particles lose coherence faster. It is impl
 
 ---
 
-## 6. Software Implementation
+## 5. Software Implementation
 
-### 6.1 Core Code Modules (v44.0 / v46.0)
+### 5.1 Core Code Modules (v44.0 / v46.0)
 
 | # | File | Description |
 |---|------|-------------|
@@ -184,7 +164,7 @@ This extension predicts that heavier particles lose coherence faster. It is impl
 | 5 | `dtqem_zeeman_effect_v44.py` | Zeeman effect simulator |
 | 6 | `dtqem_wave_code_v44.py` | Core wave functions |
 
-### 6.2 Experimental Demos (v46.0 extensions)
+### 5.2 Experimental Demos (v46.0 extensions)
 
 | # | File | Description |
 |---|------|-------------|
@@ -192,7 +172,7 @@ This extension predicts that heavier particles lose coherence faster. It is impl
 | 8 | `c70_benchmark.py` | Benchmark against C70 interferometry data |
 | 9 | `fit_mass_model_to_data.py` | Inverse fitting for mass-dependent model |
 
-### 6.3 Sanity Checks (Mach-Zehnder)
+### 5.3 Sanity Checks (Mach-Zehnder)
 
 | # | Check | Result |
 |---|-------|--------|
@@ -205,7 +185,7 @@ This extension predicts that heavier particles lose coherence faster. It is impl
 
 ---
 
-## 7. Limitations and Open Questions
+## 6. Limitations and Open Questions
 
 | # | Limitation | Description |
 |---|------------|-------------|
@@ -213,11 +193,10 @@ This extension predicts that heavier particles lose coherence faster. It is impl
 | L2 | D0 is Markovian | Non-Markovian extensions (D3-D6) are proposed but not yet tested |
 | L3 | Physical origin of \(\tau_c\) unknown | May depend on particle species, detector material, or temperature |
 | L4 | No field-theoretic derivation | DTQEM is a phenomenological model; a QFT derivation does not yet exist |
-| L5 | Energy condensation interpretation | Speculative; not required for the baseline D0 model |
 
 ---
 
-## 8. Position Within Physics
+## 7. Position Within Physics
 
 DTQEM:
 - ✅ Is compatible with standard quantum mechanics
@@ -231,7 +210,7 @@ It does **not** replace:
 
 ---
 
-## 9. Roadmap
+## 8. Roadmap
 
 | Phase | Status | Description |
 |-------|--------|-------------|
@@ -243,26 +222,26 @@ It does **not** replace:
 
 ---
 
-## 10. How to Cite This Work
+## 9. How to Cite This Work
 
 ### Plain Text
 
-Berramdane, R. (2026). *DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy* (Version 47.0). GitHub.  
+Berramdane, R. (2026). *DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy* (Version 47.1). GitHub.  
 https://github.com/reddoma742/Davisson-Germer-DTQEM
 
-### BibTeX (v47.0)
+### BibTeX
 
 ```bibtex
 @software{berramdane2026dtqem_v47,
   title = {DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy},
   author = {Berramdane, Reddouane},
-  contributors = {Gemini, DeepSeek, Claude},
   year = {2026},
   month = {05},
-  version = {47.0},
+  version = {47.1},
   publisher = {GitHub},
   url = {https://github.com/reddoma742/Davisson-Germer-DTQEM.git}
 }
+
 @software{berramdane2025dtqem_v44,
   title = {DTQEM v44.0: Unified Quantum Decoherence Framework},
   author = {Berramdane, Reddouane},
@@ -272,11 +251,18 @@ https://github.com/reddoma742/Davisson-Germer-DTQEM
   publisher = {Zenodo},
   doi = {10.5281/zenodo.20349674}
 }
+
+10. Acknowledgments
+
+The author acknowledges the use of AI language models (Gemini, DeepSeek, Claude) for coding assistance, manuscript formatting, and preliminary discussions. These tools were used under the author's supervision, and the author remains solely responsible for the final physical model, scientific conclusions, and any errors.
+
+Special thanks to "Clore" (anonymous colleague) for mathematical improvement proposals (D1-D6 models).
+
 ---
 
 11. Conclusion
 
-DTQEM v47.0 presents a coherent, self-consistent, and falsifiable physical hypothesis:
+DTQEM v47.1 presents a coherent, self-consistent, and falsifiable physical hypothesis:
 
 Quantum decoherence has a relativistic component. When a quantum particle moves relative to its measuring apparatus, the proper-time discrepancy \Delta\tau destroys phase coherence at a rate determined by \tau_c.
 
@@ -294,11 +280,35 @@ The Mach-Zehnder implementation, with its six sanity checks and new predictions,
 
 From proper time to decoherence. From decoherence to a new understanding of the quantum world.
 
-— DTQEM Team, May 2026
+— Reddouane Berramdane, May 2026
 
 ---
 
-References (Suggested)
+Appendix A: Energy Condensation Interpretation (Philosophical Extension)
+
+This appendix is interpretative and does not modify the baseline D0 model.
+
+Beyond decoherence, DTQEM admits an alternative interpretation:
+
+Quantum states correspond to distributed energy configurations. Measurement induces a transition toward a localized energy state, observed as a classical particle with definite mass and position.
+
+In this view:
+
+· Wave state → distributed energy (no definite position)
+· Measurement → energy localization (“condensation”)
+· Classical particle → stable localized energy profile
+
+This interpretation is consistent with:
+
+· E = mc^2 (Einstein)
+· Higgs mechanism (mass generation for elementary particles)
+· QCD binding energy (99% of hadron mass)
+
+This section is speculative and not required for the baseline D0 model. It is included to illustrate a possible deeper philosophical foundation for DTQEM.
+
+---
+
+References
 
 1. Pikovski, I., Zych, M., Costa, F., & Brukner, Č. (2015). Time-dilation decoherence. Nature Physics, 11(8), 668-672.
 2. Zych, M., Costa, F., Pikovski, I., & Brukner, Č. (2011). Quantum interferometry with time dilation. Nature Communications, 2, 505.
@@ -306,6 +316,6 @@ References (Suggested)
 
 ---
 
-END OF WHITE PAPER — DTQEM v47.0 — May 2026
+END OF WHITE PAPER — DTQEM v47.1 — May 2026
 
 ```
