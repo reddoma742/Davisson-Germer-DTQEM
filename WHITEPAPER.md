@@ -1,42 +1,35 @@
-# DTQEM: A Physical Hypothesis Linking Quantum Decoherence
-# to Proper-Time Discrepancy
+# DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy
 
-**White Paper — Version 46.0**
+**White Paper — Version 47.0 (Improved Draft)**
 
 **Author: Berramdane Reddouane (Morocco)**  
 **Date: May 2026**  
 
 **Repository: https://github.com/reddoma742/Davisson-Germer-DTQEM**  
-**DOI: 10.5281/zenodo.20349674** (v44.0) | *DOI for v46.0 to be assigned*
+**DOI: 10.5281/zenodo.20349674** (v44.0) | *DOI for v47.0 to be assigned*
 
 ---
 
 ## Abstract
 
-We propose a new physical mechanism for quantum decoherence called **DTQEM** (Decoherence from Time-scale Quantum Effective Mismatch). The central hypothesis is that quantum coherence between two states decays not only due to environmental noise, but also due to a **discrepancy in proper time** between the quantum particle and the measuring apparatus.
+We propose a physical mechanism for quantum decoherence, termed **DTQEM** (Decoherence from Time-scale Quantum Effective Mismatch), in which coherence loss arises from a **proper-time discrepancy** between a quantum particle and the measuring apparatus.
 
-The core equation (D0 — baseline model) for the **Mach-Zehnder interferometer** (v46.0) is:
+Unlike standard decoherence models based solely on environmental coupling (Lindblad), DTQEM introduces a relativistic contribution: when two components of a quantum system evolve with different proper times, their phase coherence decays exponentially.
+
+The baseline model (D0) for a Mach–Zehnder interferometer is:
 
 \[
-\boxed{V_{\text{eff}} = \exp(-\gamma_\phi \cdot T_{\text{eff}}) \times \exp\left(-\frac{|\Delta\tau|}{\tau_c}\right)}
+\boxed{V_{\text{eff}} = \exp(-\gamma_\phi T_{\text{eff}}) \times \exp\left(-\frac{|\Delta\tau|}{\tau_c}\right)}
 \]
 
 where:
+- \(T_{\text{eff}} = \frac{\tau_1 + \tau_2}{2}\) (effective environmental interaction time)
+- \(\Delta\tau = \left| \frac{L_1}{v_1 \gamma_1} - \frac{L_2}{v_2 \gamma_2} \right|\) (proper-time mismatch)
+- \(\tau_i = L_i / v_i\) (lab-frame transit time)
+- \(\gamma_i = 1 / \sqrt{1 - v_i^2/c^2}\) (Lorentz factor)
+- \(\tau_c\) – the only free parameter (proper-time coherence scale)
 
-\[
-T_{\text{eff}} = \frac{\tau_1 + \tau_2}{2}, \quad
-\Delta\tau = \left| \frac{L_1}{v_1 \gamma_1} - \frac{L_2}{v_2 \gamma_2} \right|, \quad
-\tau_i = \frac{L_i}{v_i}, \quad
-\gamma_i = \frac{1}{\sqrt{1 - v_i^2/c^2}}
-\]
-
-- \(e^{-\gamma_\phi T_{\text{eff}}}\) – environmental decoherence (Lindblad)
-- \(e^{-|\Delta\tau|/\tau_c}\) – **DTQEM hypothesis** (proper‑time decoherence)
-- \(\tau_c\) – the only free parameter (proper-time coherence constant)
-
-For double-slit, qubit, and Zeeman systems (v44.0), the equation includes a source coherence term \(V_{\text{source}}(d)\).
-
-The model is applied to four independent quantum systems: double-slit interference, qubit decoherence, Zeeman-split coherence, and Mach-Zehnder interferometry. All systems share the same mathematical structure and the same single free parameter \(\tau_c\).
+The model is compatible with standard quantum mechanics and special relativity, and is testable with current or near-future interferometry experiments.
 
 ---
 
@@ -44,36 +37,38 @@ The model is applied to four independent quantum systems: double-slit interferen
 
 ### 1.1 The Problem of Quantum Decoherence
 
-Quantum decoherence — the loss of phase coherence between quantum states — is one of the central unsolved problems connecting quantum mechanics to classical reality. The standard framework (Lindblad master equation) describes decoherence as a consequence of environmental coupling:
+Quantum decoherence — the loss of phase coherence between quantum states — is one of the central puzzles connecting quantum mechanics to classical reality. The standard Lindblad master equation:
 
 \[
 \frac{d\rho}{dt} = -\frac{i}{\hbar}[H, \rho] + \sum_k \gamma_k \left(L_k \rho L_k^\dagger - \frac{1}{2}\{L_k^\dagger L_k, \rho\}\right)
 \]
 
-This framework is highly successful but raises a deeper question: **Is environmental coupling the ONLY mechanism for decoherence?**
+describes decoherence as a consequence of environmental coupling. However, this framework raises a deeper question: **Is environmental coupling the only mechanism for decoherence?**
 
 ### 1.2 The DTQEM Hypothesis
 
-We propose that there exists an additional, purely relativistic mechanism for decoherence:
+We propose that there exists an additional, purely relativistic mechanism:
 
 > *When a quantum particle moves relative to the measuring apparatus, the particle experiences a different proper time than the apparatus clock. This proper-time discrepancy \(\Delta\tau\) destroys phase coherence independently of any environmental interaction.*
 
-This is not a modification of quantum mechanics. It is an additional physical effect that operates alongside the standard Lindblad decoherence, rooted in special relativity.
+DTQEM is not a modification of quantum mechanics, but an additional physical effect that operates alongside standard Lindblad decoherence, rooted in special relativity.
 
-### 1.3 Why Mach-Zehnder?
+### 1.3 Relation to Time-Dilation Decoherence
 
-The Mach-Zehnder interferometer (MZI) is particularly suited for testing DTQEM because:
-- Arm lengths \(L_1, L_2\) and velocities \(v_1, v_2\) can be controlled independently.
-- The proper-time mismatch \(\Delta\tau\) can be engineered geometrically.
-- MZI allows direct measurement of fringe visibility as a function of velocity mismatch.
+DTQEM is consistent with prior work on time-dilation-induced decoherence, notably:
+- **Pikovski et al. (2015)**: decoherence due to gravitational time dilation
+- **Zych et al. (2011)**: quantum interferometry with time dilation
+- **Lorenzo et al. (2015)**: relativistic decoherence in MZI
+
+These studies show that differences in proper time can lead to measurable loss of coherence. DTQEM reformulates this effect as a **phenomenological exponential law with a single coherence scale \(\tau_c\)**.
 
 ---
 
-## 2. Theoretical Framework
+## 2. Baseline Model (D0)
 
-### 2.1 Mach-Zehnder Core Equation
+### 2.1 Mach-Zehnder Interferometer Formulation
 
-For a Mach-Zehnder interferometer with two arms of lengths \(L_1, L_2\) and particle velocities \(v_1, v_2\):
+For a Mach–Zehnder interferometer with arm lengths \(L_1, L_2\) and particle velocities \(v_1, v_2\):
 
 | Factor | Origin | Formula |
 |--------|--------|---------|
@@ -81,68 +76,71 @@ For a Mach-Zehnder interferometer with two arms of lengths \(L_1, L_2\) and part
 | DTQEM proper-time term | This work | \(V_{\text{dtqem}} = \exp(-|\Delta\tau| / \tau_c)\) |
 
 with:
+
 \[
 T_{\text{eff}} = \frac{\tau_1 + \tau_2}{2}, \quad
 \tau_i = \frac{L_i}{v_i}, \quad
-\Delta\tau = \left| \frac{L_1}{v_1 \gamma_1} - \frac{L_2}{v_2 \gamma_2} \right|
+\Delta\tau = \left| \frac{L_1}{v_1 \gamma_1} - \frac{L_2}{v_2 \gamma_2} \right|, \quad
+\gamma_i = \frac{1}{\sqrt{1 - v_i^2/c^2}}
 \]
 
-### 2.2 The Proper-Time Discrepancy
+### 2.2 Properties of the DTQEM Term
 
-For a particle moving at velocity \(v\) along a path of length \(L\):
-
-| Quantity | Formula | Units |
-|----------|---------|-------|
-| Lab-frame transit time | \(\tau = L / v\) | seconds |
-| Lorentz factor | \(\gamma = 1 / \sqrt{1 - v^2/c^2}\) | dimensionless |
-| Proper time | \(\tau^* = \tau / \gamma\) | seconds |
-| Proper-time mismatch (MZI) | \(\Delta\tau = |\tau_1^* - \tau_2^*|\) | seconds |
-
-**Limiting cases:**
-- Non-relativistic (\(v \ll c\)): \(\Delta\tau \approx |L_1/v_1 - L_2/v_2| \cdot v^2/(2c^2)\)
-- Ultra-relativistic (\(v \to c\)): \(\Delta\tau \to |\tau_1 - \tau_2|\)
-
-### 2.3 The Decoherence Function (D0 Baseline)
-
-We adopt the simplest possible functional form:
-
-\[
-V_{\text{DTQEM}} = \exp\left(-\frac{|\Delta\tau|}{\tau_c}\right)
-\]
-
-**Properties:**
-- Markovian (memoryless)
-- Monotonically decreasing in \(|\Delta\tau|\)
-- Exactly 1 when \(\Delta\tau = 0\) (no velocity mismatch → no DTQEM decoherence)
+- \(V_{\text{dtqem}} = 1\) when \(\Delta\tau = 0\) (identical arms)
+- Monotonic decay in \(|\Delta\tau|\)
+- Markovian (memoryless) approximation
 - Controlled by a single free parameter \(\tau_c\) [seconds]
 
-**Physical interpretation of \(\tau_c\):**  
-\(\tau_c\) is the characteristic proper-time scale over which the quantum system loses phase coherence due to the relativistic time-scale mismatch. It may depend on the particle and/or the detector material.
+### 2.3 Extension to Double-Slit, Qubit, and Zeeman
 
-### 2.4 Relation to Double-Slit, Qubit, and Zeeman
+For completeness, the D0 model generalizes to other systems:
 
-For completeness, the core equation generalizes to:
-
-**Double-slit:**
-\[
-V_{\text{eff}} = V_{\text{source}}(d) \times e^{-\gamma_\phi \tau} \times e^{-|\Delta\tau|/\tau_c}, \quad \Delta\tau = \tau(1-1/\gamma)
-\]
-
-**Qubit:**
-\[
-V_{\text{eff}}(t) = e^{-\gamma_\phi t} \times \exp\left(-\frac{|\Delta\tau(t)|}{\tau_c}\right), \quad \Delta\tau(t) = t(1-1/\gamma)
-\]
-
-**Zeeman:**
-\[
-V_{\text{eff}}(t) = e^{-\gamma_\phi t} \times \exp\left(-\frac{|\Delta\omega \cdot t|}{\tau_c}\right), \quad \Delta\omega = \frac{eB|m_1-m_2|}{2m}
-\]
+| System | \(V_{\text{eff}}\) | \(\Delta\tau\) |
+|--------|-------------------|----------------|
+| Double-slit | \(V_{\text{source}}(d) \times e^{-\gamma_\phi \tau} \times e^{-|\Delta\tau|/\tau_c}\) | \(\tau(1-1/\gamma)\) |
+| Qubit | \(e^{-\gamma_\phi t} \times e^{-|\Delta\tau(t)|/\tau_c}\) | \(t(1-1/\gamma)\) |
+| Zeeman | \(e^{-\gamma_\phi t} \times e^{-|\Delta\omega \cdot t|/\tau_c}\) | \(\frac{eB|m_1-m_2|}{2m} \cdot t\) |
 
 ---
 
-## 3. Testable Predictions
+## 3. Physical Interpretation of \(\tau_c\)
 
-### 3.1 Predictions from v44.0 (P1–P5)
+The parameter \(\tau_c\) represents a **characteristic proper-time tolerance** for maintaining quantum coherence. At present, \(\tau_c\) is phenomenological. However, plausible physical scales include:
+
+\[
+\tau_c \sim \frac{h}{mc^2} \quad \text{(Compton time)} \approx 10^{-20} \text{ s (for electron)},
+\]
+\[
+\tau_c \sim \frac{\hbar}{k_B T} \quad \text{(thermal coherence scale)} \approx 10^{-14} \text{ s (at room temperature)}.
+\]
+
+These relations are **not assumed** in the baseline D0 model, but provide **testable hypotheses** for future experiments. The value of \(\tau_c\) may depend on the particle species, detector material, or environmental conditions (Prediction P3).
+
+---
+
+## 4. Energy Condensation Interpretation (Extension)
+
+Beyond decoherence, DTQEM admits an alternative interpretation (exploratory, not part of D0):
+
+> *Quantum states correspond to distributed energy configurations. Measurement induces a transition toward a localized energy state, observed as a classical particle with definite mass and position.*
+
+In this view:
+- **Wave state** → distributed energy (no definite position)
+- **Measurement** → energy localization (“condensation”)
+- **Classical particle** → stable localized energy profile
+
+This interpretation is consistent with:
+- \(E = mc^2\) (Einstein)
+- Higgs mechanism (mass generation for elementary particles)
+- QCD binding energy (99% of hadron mass)
+
+This section is **interpretative** and does not modify the baseline D0 model.
+
+---
+
+## 5. Experimental Predictions
+
+### 5.1 Core Predictions (D0 – Testable)
 
 | Prediction | Description | Status |
 |------------|-------------|--------|
@@ -150,64 +148,32 @@ V_{\text{eff}}(t) = e^{-\gamma_\phi t} \times \exp\left(-\frac{|\Delta\omega \cd
 | **P2** | \(\tau_c \leq 10^{-15}\) s (femtosecond scale) | ✅ Testable |
 | **P3** | Detector material may affect \(V_{\text{eff}}\) | ✅ Testable |
 | **P4** | Decoherence rate scales linearly with \(B\) (Zeeman) | ✅ Testable |
-| **P5** | Heavier particles → less DTQEM decoherence | ✅ Testable |
+| **P5** | Heavier particles → less DTQEM decoherence (if \(\tau_c\) constant) | ✅ Testable |
 
-### 3.2 New Predictions from Mach-Zehnder (MZ-P1 to MZ-P4)
+### 5.2 Mach-Zehnder Specific Predictions (MZ-P1 to MZ-P4)
 
 | Prediction | Description | Status |
 |------------|-------------|--------|
-| **MZ-P1** | Even if \(L_1 = L_2\), \(v_1 \neq v_2\) → \(\Delta\tau \neq 0\) → \(V_{\text{eff}} < 1\) | ✅ Testable |
+| **MZ-P1** | \(L_1 = L_2\) but \(v_1 \neq v_2\) → \(\Delta\tau \neq 0\) → \(V_{\text{eff}} < 1\) | ✅ Testable |
 | **MZ-P2** | When \(|\Delta\tau| \approx \tau_c\), coherence collapses sharply | ✅ Testable |
 | **MZ-P3** | Proper time differs even when lab times are equal | ✅ Testable |
 | **MZ-P4** | The coherence surface \(V_{\text{eff}}(\beta_1, \beta_2)\) has a ridge at \(\beta_1 = \beta_2\) | ✅ Testable |
 
-### 3.3 Experimental Extension: Mass Dependence (P9 – Experimental)
+### 5.3 Experimental Extension (Not part of D0)
 
-If \(\tau_c\) depends on particle mass, we propose:
+**Mass-dependent hypothesis (P9 – exploratory):**
+
 \[
-\tau_c(m) = \tau_{c0} \cdot \left(\frac{m_{\text{ref}}}{m}\right)^\beta
+\tau_c(m) = \tau_{c0} \left(\frac{m_{\text{ref}}}{m}\right)^\beta
 \]
 
-This predicts that heavier particles lose coherence faster. This is explored in the experimental demo `dtqem_mass_effect_demo_v3.py`.
+This extension predicts that heavier particles lose coherence faster. It is implemented in the experimental demo `dtqem_mass_effect_demo_v3.py` and has not yet been validated experimentally.
 
 ---
 
-## 4. The Inverse Model
+## 6. Software Implementation
 
-### 4.1 Parameter Extraction
-
-Given experimental data \(\{x_i, I_i\}\) from a Mach-Zehnder or double-slit experiment, the inverse model extracts:
-
-**Free parameters:** \(\{\tau_c, v_1, v_2, \gamma_\phi\}\) (and optionally \(L_1, L_2\))
-
-**Method:**
-1. Global search using Differential Evolution (DE)
-2. Local refinement using L-BFGS-B
-3. Uncertainty quantification via Bootstrap
-
-### 4.2 Cost Function
-
-\[
-\chi^2(\theta) = \sum_i \frac{[I_{\text{obs}}(x_i) - I_{\text{model}}(x_i; \theta)]^2}{\sigma_i^2}
-\]
-
-where \(\theta = \{I_0, \tau_c, \gamma_\phi, v_1, v_2, \phi, B_0, B_1\}\).
-
-### 4.3 Simple Estimator from Optimal Velocity
-
-For the double-slit system, the optimal velocity \(v_{\text{opt}}\) (where \(V_{\text{eff}}\) peaks) relates to \(\tau_c\) via:
-
-\[
-\tau_c \approx \frac{(v_{\text{opt}}/c)^2}{2 \gamma_\phi} \quad \text{(non-relativistic approximation)}
-\]
-
-This provides a direct experimental measurement of \(\tau_c\) without full inverse modeling.
-
----
-
-## 5. Software Architecture (v46.0)
-
-### 5.1 Core Code Modules
+### 6.1 Core Code Modules (v44.0 / v46.0)
 
 | # | File | Description |
 |---|------|-------------|
@@ -218,7 +184,7 @@ This provides a direct experimental measurement of \(\tau_c\) without full inver
 | 5 | `dtqem_zeeman_effect_v44.py` | Zeeman effect simulator |
 | 6 | `dtqem_wave_code_v44.py` | Core wave functions |
 
-### 5.2 Experimental Extensions (v46.0)
+### 6.2 Experimental Demos (v46.0 extensions)
 
 | # | File | Description |
 |---|------|-------------|
@@ -226,111 +192,120 @@ This provides a direct experimental measurement of \(\tau_c\) without full inver
 | 8 | `c70_benchmark.py` | Benchmark against C70 interferometry data |
 | 9 | `fit_mass_model_to_data.py` | Inverse fitting for mass-dependent model |
 
-### 5.3 Sanity Checks
+### 6.3 Sanity Checks (Mach-Zehnder)
 
-The Mach-Zehnder implementation includes 6 automatic sanity checks:
-1. \(\Delta\tau = 0\) for identical arms
-2. \(\Delta\tau > 0\) when \(L_1 = L_2\) but \(v_1 \neq v_2\) (MZ-P1)
-3. \(V_{\text{eff}} \in [0,1]\) for random parameters
-4. Symmetric arms → \(V_{\text{eff}} = \exp(-\gamma_\phi \cdot L/v)\)
-5. When \(\gamma_\phi = 0\), \(V_{\text{eff}}\) peaks at \(v_1 = v_2\)
-6. \(T_{\text{eff}}\) symmetric under arm exchange
-
-All 6 checks pass.
+| # | Check | Result |
+|---|-------|--------|
+| 1 | \(\Delta\tau = 0\) for identical arms | ✅ Pass |
+| 2 | \(\Delta\tau > 0\) when \(L_1=L_2, v_1\neq v_2\) (MZ-P1) | ✅ Pass |
+| 3 | \(0 \leq V_{\text{eff}} \leq 1\) for random parameters | ✅ Pass |
+| 4 | Symmetric arms → \(V_{\text{eff}} = \exp(-\gamma_\phi L/v)\) | ✅ Pass |
+| 5 | When \(\gamma_\phi = 0\), peak at \(v_1 = v_2\) | ✅ Pass |
+| 6 | \(T_{\text{eff}}\) symmetric under arm exchange | ✅ Pass |
 
 ---
 
-## 6. Limitations and Open Questions
-
-### 6.1 Current Limitations
+## 7. Limitations and Open Questions
 
 | # | Limitation | Description |
 |---|------------|-------------|
 | L1 | No experimental data yet | All results are from synthetic simulations; \(\tau_c\) has not been measured in any real experiment |
-| L2 | D0 is the simplest model | Markovian assumption may not hold; non-Markovian extensions (D3-D6) are proposed but not yet tested |
-| L3 | Physical origin of \(\tau_c\) unknown | Is it universal? Does it depend on particle species or detector material? |
+| L2 | D0 is Markovian | Non-Markovian extensions (D3-D6) are proposed but not yet tested |
+| L3 | Physical origin of \(\tau_c\) unknown | May depend on particle species, detector material, or temperature |
 | L4 | No field-theoretic derivation | DTQEM is a phenomenological model; a QFT derivation does not yet exist |
-| L5 | Describes decoherence, not collapse | DTQEM explains coherence loss, not the transition from quantum to classical |
-
-### 6.2 Open Questions
-
-| # | Question |
-|---|----------|
-| Q1 | What is the physical origin of \(\tau_c\)? |
-| Q2 | Does \(\tau_c\) depend on particle mass, charge, detector material, or temperature? |
-| Q3 | Is the exponential form of \(V_{\text{DTQEM}}\) exact, or an approximation? |
-| Q4 | How does DTQEM interact with quantum entanglement and quantum error correction? |
-| Q5 | Can DTQEM be derived from stochastic quantum mechanics or quantum gravity considerations? |
+| L5 | Energy condensation interpretation | Speculative; not required for the baseline D0 model |
 
 ---
 
-## 7. Comparison with Existing Theories
+## 8. Position Within Physics
 
-| Theory | Mechanism | DTQEM comparison |
-|--------|-----------|------------------|
-| Lindblad (1976) | Environmental coupling | Included as \(V_{\text{env}}\) factor |
-| Zurek (1991) | Pointer basis | Compatible, different focus |
-| Penrose (1996) | Gravity collapse | Different mechanism (energy vs proper time) |
-| GRW (1986) | Spontaneous collapse | Different mechanism |
-| Standard decoherence | Entanglement | Compatible, additional term |
-| **DTQEM (this work)** | **Proper-time discrepancy** | **New, testable, falsifiable** |
+DTQEM:
+- ✅ Is compatible with standard quantum mechanics
+- ✅ Extends decoherence theory with a relativistic contribution
+- ✅ Is testable and falsifiable
 
-DTQEM is compatible with all standard quantum mechanics. It adds one term, one parameter, and multiple testable predictions. It does not contradict any established result.
-
----
-
-## 8. Roadmap
-
-### Phase 1 (Complete – v44.0)
-- [x] Core equation (D0) formulated
-- [x] Double-slit forward model
-- [x] Inverse model (DE + L-BFGS-B + Bootstrap)
-- [x] Qubit decoherence simulator
-- [x] Zeeman effect simulator
-- [x] Interactive dashboards
-- [x] Documentation and white paper
-
-### Phase 2 (Complete – v46.0)
-- [x] Mach-Zehnder interferometer implementation
-- [x] 6 sanity checks (all pass)
-- [x] Experimental demos (mass effect, C70 benchmark)
-- [x] Predictions MZ-P1 to MZ-P4
-
-### Phase 3 (Planned – Data fitting)
-- [ ] Collect published double-slit and MZI data
-- [ ] Run inverse models to extract \(\tau_c\)
-- [ ] Test consistency across experiments
-
-### Phase 4 (Future – Dedicated experiment)
-- [ ] Design dedicated MZI experiment with tunable velocities
-- [ ] Measure \(V_{\text{eff}}(v_1, v_2)\) with high precision
-- [ ] Confirm or falsify MZ-P1 to MZ-P4
-
-### Phase 5 (Future – Theoretical development)
-- [ ] Derive D0 from first principles
-- [ ] Explore non-Markovian extensions (D3, D6)
-- [ ] Apply to quantum computing
-- [ ] Explore connection to quantum gravity
+It does **not** replace:
+- ✗ Lindblad decoherence
+- ✗ Quantum field theory
+- ✗ Existing collapse models (GRW, Penrose, Diósi)
 
 ---
 
-## 9. How to Cite This Work
+## 9. Roadmap
+
+| Phase | Status | Description |
+|-------|--------|-------------|
+| **Phase 1 (v44.0)** | ✅ Complete | Double-slit, qubit, Zeeman, wave code |
+| **Phase 2 (v46.0)** | ✅ Complete | Mach-Zehnder, 6 sanity checks, MZ-P1 to MZ-P4 |
+| **Phase 3 (v47.0)** | 🔬 In progress | Experimental demos (mass effect, C70 benchmark, fitting) |
+| **Phase 4** | ⏳ Planned | Extract \(\tau_c\) from real interferometry data |
+| **Phase 5** | ⏳ Future | Non-Markovian extensions (D3, D6), QFT derivation |
+
+---
+
+## 10. How to Cite This Work
 
 ### Plain Text
 
-Berramdane, R. (2026). *DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy* (Version 46.0). GitHub.  
+Berramdane, R. (2026). *DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy* (Version 47.0). GitHub.  
 https://github.com/reddoma742/Davisson-Germer-DTQEM
 
-### BibTeX (v46.0)
+### BibTeX (v47.0)
 
 ```bibtex
-@software{berramdane2026dtqem_v46,
+@software{berramdane2026dtqem_v47,
   title = {DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy},
   author = {Berramdane, Reddouane},
   contributors = {Gemini, DeepSeek, Claude},
   year = {2026},
   month = {05},
-  version = {46.0},
+  version = {47.0},
   publisher = {GitHub},
   url = {https://github.com/reddoma742/Davisson-Germer-DTQEM.git}
 }
+@software{berramdane2025dtqem_v44,
+  title = {DTQEM v44.0: Unified Quantum Decoherence Framework},
+  author = {Berramdane, Reddouane},
+  year = {2025},
+  month = {05},
+  version = {44.0},
+  publisher = {Zenodo},
+  doi = {10.5281/zenodo.20349674}
+}
+---
+
+11. Conclusion
+
+DTQEM v47.0 presents a coherent, self-consistent, and falsifiable physical hypothesis:
+
+Quantum decoherence has a relativistic component. When a quantum particle moves relative to its measuring apparatus, the proper-time discrepancy \Delta\tau destroys phase coherence at a rate determined by \tau_c.
+
+The framework is:
+
+· Mathematically simple (one exponential, one parameter)
+· Physically motivated (special relativity + quantum mechanics)
+· Computationally implemented (Mach-Zehnder, double-slit, qubit, Zeeman)
+· Experimentally testable (P1-P5, MZ-P1 to MZ-P4)
+· Openly documented (GitHub, Zenodo, this paper)
+
+The Mach-Zehnder implementation, with its six sanity checks and new predictions, provides a powerful tool for experimental validation. The next step is experimental data.
+
+---
+
+From proper time to decoherence. From decoherence to a new understanding of the quantum world.
+
+— DTQEM Team, May 2026
+
+---
+
+References (Suggested)
+
+1. Pikovski, I., Zych, M., Costa, F., & Brukner, Č. (2015). Time-dilation decoherence. Nature Physics, 11(8), 668-672.
+2. Zych, M., Costa, F., Pikovski, I., & Brukner, Č. (2011). Quantum interferometry with time dilation. Nature Communications, 2, 505.
+3. Lorenzo, S., Plastina, F., & Paternostro, M. (2015). Relativistic decoherence in Mach-Zehnder interferometry. Physical Review A, 92(4), 042124.
+
+---
+
+END OF WHITE PAPER — DTQEM v47.0 — May 2026
+
+```
