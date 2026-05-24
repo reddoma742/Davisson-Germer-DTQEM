@@ -231,7 +231,6 @@ https://github.com/reddoma742/Davisson-Germer-DTQEM
 
 ### BibTeX
 
-```bibtex
 @software{berramdane2026dtqem_v47,
   title = {DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy},
   author = {Berramdane, Reddouane},
@@ -318,4 +317,3 @@ References
 
 END OF WHITE PAPER — DTQEM v47.1 — May 2026
 
-```
