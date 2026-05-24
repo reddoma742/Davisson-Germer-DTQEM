@@ -32,7 +32,7 @@ Outputs:
 
 Author : DTQEM Team — Berramdane Reddouane
 AI Contribution: Claude (Anthropic) — coding, optimization, and documentation
-Version: 3.0 (experimental)
+Version: 3.1 (bugfix)
 Date: 2026-05-24
 License: MIT
 """
@@ -84,14 +84,17 @@ def V_env(T_eff: float, gamma_phi: float) -> float:
     return np.exp(-gamma_phi * T_eff)
 
 
-def V_dtqem(delta_tau: float, tau_c: float) -> float:
-    """DTQEM decoherence: V_dtqem = exp(-|Δτ| / τ_c)."""
-    return np.exp(-delta_tau / max(tau_c, 1e-300))
+def V_dtqem(delta_tau: float, tau_c: np.ndarray) -> np.ndarray:
+    """
+    DTQEM decoherence: V_dtqem = exp(-|Δτ| / τ_c).
+    Works with both scalar and array inputs.
+    """
+    return np.exp(-delta_tau / np.maximum(tau_c, 1e-300))
 
 
 def V_eff_MZ(L1: float, v1: float, L2: float, v2: float,
              gamma_phi: float, tau_c: float) -> float:
-    """Total coherence: V_eff = V_env × V_dtqem."""
+    """Total coherence: V_eff = V_env × V_dtqem (scalar version)."""
     T_eff = T_eff_fn(L1, v1, L2, v2)
     dt = delta_tau_MZ(L1, v1, L2, v2)
     return V_env(T_eff, gamma_phi) * V_dtqem(dt, tau_c)
@@ -101,11 +104,11 @@ def V_eff_MZ(L1: float, v1: float, L2: float, v2: float,
 # Mass-Dependent τ_c Model (Experimental)
 # ============================================================================
 
-def tau_c_mass_dependent(mass: float, tau_c0: float,
+def tau_c_mass_dependent(mass: np.ndarray, tau_c0: float,
                          gamma_ref: float,
                          alpha: float = 1.0,
                          beta: float = 1.0,
-                         m_ref: float = 1.0) -> float:
+                         m_ref: float = 1.0) -> np.ndarray:
     """
     Mass-dependent coherence time (experimental).
 
@@ -113,7 +116,7 @@ def tau_c_mass_dependent(mass: float, tau_c0: float,
         τ_c(m) = τ_c0 * (m_ref / m)**β / (γ_ref**α)
 
     Args:
-        mass: Particle mass [kg].
+        mass: Particle mass [kg] (can be array).
         tau_c0: Base coherence time at m = m_ref, γ = 1.
         gamma_ref: Lorentz factor at reference velocity.
         alpha: Exponent for γ (velocity sensitivity).
@@ -121,8 +124,9 @@ def tau_c_mass_dependent(mass: float, tau_c0: float,
         m_ref: Reference mass [kg] (default 1 kg).
 
     Returns:
-        Effective τ_c [s].
+        Effective τ_c [s] (same shape as mass).
     """
+    mass = np.asarray(mass, dtype=float)
     return tau_c0 * (m_ref / mass) ** beta / (gamma_ref ** alpha)
 
 
@@ -155,6 +159,10 @@ def main():
     T_eff_val = T_eff_fn(L1, v1, L2, v2)
     V_env_val = V_env(T_eff_val, gamma_phi)
 
+    print(f"Δτ_MZ = {delta_tau_val:.3e} s")
+    print(f"V_env = {V_env_val:.6f}")
+    print(f"γ_ref = {gamma_ref:.6f}")
+
     # ========================================================================
     # Mass Sweep
     # ========================================================================
@@ -181,8 +189,9 @@ def main():
 
     rows = []
     for name, m in particle_data:
-        tc = tau_c_mass_dependent(m, tau_c0, gamma_ref, alpha=alpha, beta=beta, m_ref=m_ref)
-        vdt = V_dtqem(delta_tau_val, tc)
+        tc = tau_c_mass_dependent(np.array([m]), tau_c0, gamma_ref,
+                                  alpha=alpha, beta=beta, m_ref=m_ref)[0]
+        vdt = V_dtqem(delta_tau_val, np.array([tc]))[0]
         vef = V_env_val * vdt
         rows.append([name, m, tc, vdt, vef, np.log10(tc)])
 
@@ -241,7 +250,7 @@ def main():
     # Panel 4: Bar chart for selected particles
     labels = [r[0] for r in rows]
     veff_mass_pts = [r[4] for r in rows]
-    veff_null_pts = [V_env_val * V_dtqem(delta_tau_val, tau_c0)] * len(rows)
+    veff_null_pts = [V_env_val * V_dtqem(delta_tau_val, np.array([tau_c0]))[0]] * len(rows)
     x = np.arange(len(labels))
     width = 0.36
     ax4.bar(x - width/2, veff_mass_pts, width, color='#58a6ff', label='Mass model')
@@ -279,7 +288,7 @@ def main():
     # Console Summary
     # ========================================================================
     print('=' * 72)
-    print('DTQEM Mass Effect Demo — v3 (Experimental)')
+    print('DTQEM Mass Effect Demo — v3.1 (Experimental, Bugfix)')
     print('=' * 72)
     print(f'α (velocity exponent) = {alpha}')
     print(f'β (mass exponent) = {beta}')
