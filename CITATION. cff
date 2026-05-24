@@ -9,21 +9,23 @@ authors:
     country: "MA"
     email: "reddoma@gmail.com"
 
-title: "DTQEM v44.0 – Unified Quantum Decoherence Framework: Double-Slit, Qubit, and Zeeman Systems with Proper-Time Decoherence (D0 Model)"
+title: "DTQEM v46.0 – Mach-Zehnder Interferometer and Unified Quantum Decoherence Framework: Double-Slit, Qubit, Zeeman, and Mach-Zehnder Systems with Proper-Time Decoherence (D0 Model)"
 
-version: "44.0"
-date-released: 2026-05-22
+version: "46.0"
+date-released: 2026-05-24
 
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 
 keywords:
   - "Quantum decoherence"
+  - "Mach-Zehnder interferometer"
   - "Double-slit experiment"
   - "Qubit decoherence"
   - "Zeeman effect"
   - "Proper-time discrepancy"
   - "Relativistic decoherence"
+  - "Optimal velocity"
   - "Van Cittert-Zernike"
   - "Lindblad decoherence"
   - "D0 baseline model"
@@ -31,32 +33,49 @@ keywords:
   - "ipywidgets"
   - "Dark theme"
   - "Colab ready"
+  - "Mass-dependent decoherence"
+  - "C70 benchmark"
 
 license: "MIT"
 
 abstract: |
-  DTQEM v44.0 (Decoherence from Time‑scale Quantum Effective Mismatch) introduces a unified framework for quantum decoherence based on proper‑time discrepancy between the particle and the measuring device.
+  DTQEM v46.0 (Decoherence from Time‑scale Quantum Effective Mismatch) introduces a unified framework for quantum decoherence based on proper‑time discrepancy between the particle and the measuring device, now extended to the Mach-Zehnder interferometer.
 
-  The core equation (D0 – baseline model) is:
+  The core equation (D0 – baseline model) for the Mach-Zehnder system is:
 
-      V_eff = V_source(d) × exp(-γ_φ·τ) × exp(-|Δτ|/τ_c)
+      V_eff = exp(-γ_φ · T_eff) × exp(-|Δτ| / τ_c)
 
   where:
-  - V_source(d) = |sinc(π·src_size·d/(λ·L_src))| (Van Cittert-Zernike)
-  - exp(-γ_φ·τ) (Lindblad environmental decoherence)
-  - exp(-|Δτ|/τ_c) (DTQEM proper-time decoherence hypothesis)
-  - Δτ = τ × (1 - 1/γ), τ = a/v, γ = 1/√(1-β²)
+  - T_eff = (τ₁ + τ₂)/2 (effective environmental time)
+  - Δτ = |L₁/(v₁γ₁) − L₂/(v₂γ₂)| (proper-time mismatch)
+  - τ_i = L_i / v_i (lab-frame transit time)
+  - γ_i = 1/√(1-β_i²) (Lorentz factor)
   - τ_c – the only free parameter
 
-  The framework includes five interactive code modules:
+  For double-slit, qubit, and Zeeman systems, the equation includes a source coherence term V_source(d).
 
-  1. dtqem_double_slit_forward_v44.py – Double-slit interference (forward model)
-  2. dtqem_double_slit_inverse_v44.py – Double-slit parameter extraction (inverse model)
-  3. dtqem_qubit_decoherence_v44.py – Qubit decoherence simulator with Bloch sphere
-  4. dtqem_zeeman_effect_v44.py – Zeeman effect simulator with energy levels
-  5. dtqem_wave_code_v44.py – Core wave functions and propagation
+  The framework includes six core interactive code modules (v44.0/v46.0) and three experimental demos:
 
-  All modules feature:
+  Core modules:
+  1. dtqem_mach_zehnder_v46.py – Mach-Zehnder interferometer (stable, 6 sanity checks)
+  2. dtqem_double_slit_forward_v44.py – Double-slit interference (forward model)
+  3. dtqem_double_slit_inverse_v44.py – Double-slit parameter extraction (inverse model)
+  4. dtqem_qubit_decoherence_v44.py – Qubit decoherence simulator with Bloch sphere
+  5. dtqem_zeeman_effect_v44.py – Zeeman effect simulator with energy levels
+  6. dtqem_wave_code_v44.py – Core wave functions and propagation
+
+  Experimental demos (v46.0 extensions):
+  7. dtqem_mass_effect_demo_v3.py – Mass-dependent τ_c (P9)
+  8. c70_benchmark.py – Benchmark against C70 interferometry data
+  9. fit_mass_model_to_data.py – Inverse fitting for mass-dependent model
+
+  New predictions (MZ-P1 to MZ-P4):
+  - MZ-P1: L₁=L₂, v₁≠v₂ → V_eff < 1
+  - MZ-P2: |Δτ| ≈ τ_c → collapse threshold
+  - MZ-P3: Proper time differs at equal lab times
+  - MZ-P4: Ridge at β₁ = β₂ in coherence surface
+
+  All core modules feature:
   - ipywidgets interactive sliders (zero overlap with plots)
   - Dark theme professional interface
   - Real-time parameter updates
@@ -64,13 +83,13 @@ abstract: |
   - Reset to defaults
   - Google Colab / Jupyter compatibility
 
-  This version adopts the D0 baseline (simple exponential decoherence) without additional complexity (no β, no τ_c(γ), no τ_sat). Future extensions are explicitly deferred to later versions.
+  The Mach-Zehnder implementation includes 6 automatic sanity checks (all pass). This version adopts the D0 baseline (simple exponential decoherence) without additional complexity (no β, no τ_c(γ), no τ_sat). Experimental extensions are clearly marked as such.
 
 comment: |
-  The development of DTQEM v44.0 was assisted by AI tools:
+  The development of DTQEM v46.0 was assisted by AI tools:
   - Google Gemini – Theoretical discussions, D3 proposal
   - DeepSeek (深度求索) – Philosophical insights, critical analysis
-  - Claude (Anthropic) – Code writing (V44.0 series)
+  - Claude (Anthropic) – Code writing (V44.0, V46.0, experimental demos)
 
   Special thanks to "Clore" (anonymous colleague) for mathematical improvement proposals (D1-D6 models).
 
