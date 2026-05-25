@@ -1,3 +1,11 @@
+
+# DTQEM – HISTORY
+
+## v63.0 – 2026-05-25 (Current Release)
+
+**Model**: Phenomenological scaling law for decoherence time `τ_c`
+
+
 # DTQEM – Version History
 
 ## v46.0 (2026-05-24) – Mach-Zehnder Interferometer (Stable Release)
