@@ -1,6 +1,6 @@
- # DTQEM RESEARCH & EDUCATIONAL LICENSE
+# DTQEM RESEARCH & EDUCATIONAL LICENSE
 
-**Version 46.0, May 2026 (for DTQEM v46.0 – Mach-Zehnder Release)**
+**Version 63.0, May 2026 (for DTQEM v63.0 – Phenomenological Scaling Model Release)**
 
 **Copyright (c) 2026 Reddouane Berramdane (Al Reddouane BERRAMDANE)**  
 **Project: Dual-Time Quantum Entanglement Model (DTQEM)**  
@@ -12,31 +12,33 @@
 ## 1. Definitions
 
 ### 1.1 "Software"
-means the DTQEM source code v46.0, all accompanying files, examples, documentation, and specifically the **core equation (D0)** as applied to the Mach-Zehnder interferometer:
+means the DTQEM source code v63.0, all accompanying files, examples, documentation, and specifically the **phenomenological scaling model**:
+
+\[
+\tau_c = \frac{\tau_{c0}}{m^{\beta} \cdot (v/c)^{\delta} \cdot (1 + \zeta N)}
+\]
+
+with calibrated values:
+- τ_c0 = 9.8 × 10⁻²⁷ s (environment-dependent reference time)
+- β = 0.44 (mass exponent, ≈ 1/2)
+- δ = 0.33 (velocity exponent, ≈ 1/3)
+- ζ = 0.005 (per-atom internal complexity)
+
+The Software includes the D0 baseline equation for visibility:
 
 \[
 V_{\text{eff}} = \exp(-\gamma_\phi \cdot T_{\text{eff}}) \times \exp\left(-\frac{|\Delta\tau|}{\tau_c}\right)
 \]
 
-where:
-- \(T_{\text{eff}} = \frac{\tau_1 + \tau_2}{2}\) (effective environmental interaction time)
-- \(\Delta\tau = \left| \frac{L_1}{v_1 \gamma_1} - \frac{L_2}{v_2 \gamma_2} \right|\) (proper-time mismatch)
-- \(\tau_i = L_i / v_i\) (lab-frame transit time)
-- \(\gamma_i = 1 / \sqrt{1 - v_i^2/c^2}\) (Lorentz factor)
-- \(\tau_c\) – the only free parameter (proper-time coherence constant)
-
-The Software includes the following code modules (v46.0 and v44.0):
+The Software includes the following code modules:
 
 | # | File | Version | Description |
 |---|------|---------|-------------|
-| 1 | `dtqem_mach_zehnder_v46.py` | v46.0 | Mach-Zehnder interferometer (stable) |
-| 2 | `dtqem_double_slit_forward_v44.py` | v44.0 | Double-slit forward model |
-| 3 | `dtqem_double_slit_inverse_v44.py` | v44.0 | Double-slit inverse model |
-| 4 | `dtqem_qubit_decoherence_v44.py` | v44.0 | Qubit decoherence simulator |
-| 5 | `dtqem_zeeman_effect_v44.py` | v44.0 | Zeeman effect simulator |
-| 6 | `dtqem_wave_code_v44.py` | v44.0 | Core wave functions |
-| 7 | `c70_benchmark.py` | experimental | Benchmark against C70 data |
-| 8 | `dtqem_mass_effect_demo_v3.py` | experimental | Mass-dependent τ_c demo (P9) |
+| 1 | `DTQEM_v63.0.py` | v63.0 | Main code: model, inverse extraction, CSV support |
+| 2 | `HISTORY_v63.md` | v63.0 | Version history |
+| 3 | `CITATION.cff` | v63.0 | Citation metadata |
+| 4 | `README.md` | v63.0 | Documentation |
+| 5 | `LICENSE` | v63.0 | This license |
 
 All derivatives of these equations, whether in source or object form, and the accompanying code, test scripts, examples, and documentation are covered by this license.
 
@@ -62,7 +64,7 @@ Any person, academic institution, or individual researcher may:
 
 - **Download, run, study, modify, and redistribute copies** of the Software, provided that:
   - a) This license and the copyright notice are retained in all copies or substantial portions.
-  - b) Any modified version includes a clear notice stating that it is based on DTQEM v46.0 (or earlier) and lists the changes made.
+  - b) Any modified version includes a clear notice stating that it is based on DTQEM v63.0 (or earlier) and lists the changes made.
   - c) No names of the contributors (including the author) are used to endorse or promote derived products without explicit written permission.
 
 - **Use the Software** for academic, educational, or research purposes as defined above.
@@ -74,7 +76,7 @@ Any person, academic institution, or individual researcher may:
 ## 3. Commercial Use – Prohibited Without a Separate License
 
 ### 3.1
-Commercial use of the Software, or any part thereof (including the core equation D0 and any of the code modules), is strictly prohibited without a separate written license from the copyright holder.
+Commercial use of the Software, or any part thereof (including the phenomenological scaling model, D0 equation, and any of the code modules), is strictly prohibited without a separate written license from the copyright holder.
 
 ### 3.2
 Entities wishing to use DTQEM for commercial purposes may contact the author to negotiate a commercial license (which may involve a fee or other conditions).
@@ -95,13 +97,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Any publication, preprint, thesis, or other scientific work that uses the Software or any of its core equations must cite the latest version of DTQEM. Example:
 
 ```bibtex
-@software{berramdane2026dtqem,
-  title = {DTQEM: A Physical Hypothesis Linking Quantum Decoherence to Proper-Time Discrepancy},
+@software{berramdane2026dtqem_v63,
+  title = {DTQEM v63.0: Phenomenological Scaling Model for Decoherence Time τ_c},
   author = {Berramdane, Reddouane},
-  contributors = {Gemini, DeepSeek, Claude},
+  contributors = {Gemini, DeepSeek, Claude, Max, Kiwi},
   year = {2026},
   month = {05},
-  version = {46.0},
+  version = {63.0},
   publisher = {GitHub},
   url = {https://github.com/reddoma742/Davisson-Germer-DTQEM.git}
 }
