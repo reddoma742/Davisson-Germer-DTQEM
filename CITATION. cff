@@ -9,10 +9,10 @@ authors:
     country: "MA"
     email: "reddoma@gmail.com"
 
-title: "DTQEM v46.0 – Mach-Zehnder Interferometer and Unified Quantum Decoherence Framework: Double-Slit, Qubit, Zeeman, and Mach-Zehnder Systems with Proper-Time Decoherence (D0 Model)"
+title: "DTQEM v63.0 – Phenomenological Scaling Model for Decoherence Time τ_c"
 
-version: "46.0"
-date-released: 2026-05-24
+version: "63.0"
+date-released: 2026-05-25
 
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
@@ -20,77 +20,66 @@ repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 keywords:
   - "Quantum decoherence"
   - "Mach-Zehnder interferometer"
-  - "Double-slit experiment"
-  - "Qubit decoherence"
-  - "Zeeman effect"
   - "Proper-time discrepancy"
   - "Relativistic decoherence"
-  - "Optimal velocity"
-  - "Van Cittert-Zernike"
-  - "Lindblad decoherence"
-  - "D0 baseline model"
-  - "Interactive dashboard"
-  - "ipywidgets"
-  - "Dark theme"
-  - "Colab ready"
+  - "Phenomenological scaling model"
   - "Mass-dependent decoherence"
+  - "Velocity-dependent decoherence"
+  - "Internal complexity"
+  - "Logarithmic slope method"
+  - "Pikovski mechanism"
+  - "Van der Waals scattering"
+  - "D0 baseline model"
+  - "C60 benchmark"
   - "C70 benchmark"
+  - "Interactive dashboard"
+  - "Colab ready"
 
 license: "MIT"
 
 abstract: |
-  DTQEM v46.0 (Decoherence from Time‑scale Quantum Effective Mismatch) introduces a unified framework for quantum decoherence based on proper‑time discrepancy between the particle and the measuring device, now extended to the Mach-Zehnder interferometer.
+  DTQEM v63.0 (Decoherence from Time‑scale Quantum Effective Mismatch) presents a phenomenological scaling model for the decoherence time τ_c, calibrated on synthetic interferometry data.
 
-  The core equation (D0 – baseline model) for the Mach-Zehnder system is:
+  Core phenomenological model:
+      τ_c = τ_c0 / [ m^β · (v/c)^δ · (1 + ζ N) ]
 
+  Calibrated values (from v62.3 synthetic data):
+  - τ_c0 = 9.8e-27 s (environment‑dependent, not universal)
+  - β = 0.44 (≈ 1/2, consistent with Pikovski internal energy fluctuations)
+  - δ = 0.33 (≈ 1/3, consistent with van der Waals transport cross section)
+  - ζ = 0.005 (per‑atom internal complexity, from quantum freezing of vibrational modes)
+
+  The inverse problem (extracting τ_c from visibility measurements) is solved via the logarithmic slope method:
+      Measure V_eff at multiple Δτ → linear fit of ln(V) vs |Δτ| → τ_c = -1/slope
+  This method is stable and avoids the single‑point inversion instability.
+
+  Key experimental predictions for model validation:
+  1. Mass scaling: τ_c ∝ m^{-0.44} (testable with C60, C70, C84)
+  2. Velocity scaling: τ_c ∝ v^{-0.33} (testable by varying particle speed)
+  3. Pressure dependence (CRITICAL TEST):
+     - If τ_c independent of P → intrinsic mechanism (Pikovski-like)
+     - If τ_c ∝ 1/P → environmental decoherence (Joos-Zeh)
+  4. Temperature dependence: Pikovski predicts τ_c ∝ 1/T
+
+  The D0 baseline equation remains:
       V_eff = exp(-γ_φ · T_eff) × exp(-|Δτ| / τ_c)
 
-  where:
-  - T_eff = (τ₁ + τ₂)/2 (effective environmental time)
-  - Δτ = |L₁/(v₁γ₁) − L₂/(v₂γ₂)| (proper-time mismatch)
-  - τ_i = L_i / v_i (lab-frame transit time)
-  - γ_i = 1/√(1-β_i²) (Lorentz factor)
-  - τ_c – the only free parameter
+  This version includes:
+  - PhenomenologicalModel class with calibrated parameters
+  - extract_tau_c_from_scan() for stable inverse extraction
+  - Synthetic data generator for testing
+  - CSV support for real experimental data
+  - Experimental prediction printout
+  - Comparison with Pikovski theoretical estimate
 
-  For double-slit, qubit, and Zeeman systems, the equation includes a source coherence term V_source(d).
-
-  The framework includes six core interactive code modules (v44.0/v46.0) and three experimental demos:
-
-  Core modules:
-  1. dtqem_mach_zehnder_v46.py – Mach-Zehnder interferometer (stable, 6 sanity checks)
-  2. dtqem_double_slit_forward_v44.py – Double-slit interference (forward model)
-  3. dtqem_double_slit_inverse_v44.py – Double-slit parameter extraction (inverse model)
-  4. dtqem_qubit_decoherence_v44.py – Qubit decoherence simulator with Bloch sphere
-  5. dtqem_zeeman_effect_v44.py – Zeeman effect simulator with energy levels
-  6. dtqem_wave_code_v44.py – Core wave functions and propagation
-
-  Experimental demos (v46.0 extensions):
-  7. dtqem_mass_effect_demo_v3.py – Mass-dependent τ_c (P9)
-  8. c70_benchmark.py – Benchmark against C70 interferometry data
-  9. fit_mass_model_to_data.py – Inverse fitting for mass-dependent model
-
-  New predictions (MZ-P1 to MZ-P4):
-  - MZ-P1: L₁=L₂, v₁≠v₂ → V_eff < 1
-  - MZ-P2: |Δτ| ≈ τ_c → collapse threshold
-  - MZ-P3: Proper time differs at equal lab times
-  - MZ-P4: Ridge at β₁ = β₂ in coherence surface
-
-  All core modules feature:
-  - ipywidgets interactive sliders (zero overlap with plots)
-  - Dark theme professional interface
-  - Real-time parameter updates
-  - Export to PNG
-  - Reset to defaults
-  - Google Colab / Jupyter compatibility
-
-  The Mach-Zehnder implementation includes 6 automatic sanity checks (all pass). This version adopts the D0 baseline (simple exponential decoherence) without additional complexity (no β, no τ_c(γ), no τ_sat). Experimental extensions are clearly marked as such.
+  All code is Python 3.8+ and runs in Google Colab / Jupyter.
 
 comment: |
-  The development of DTQEM v46.0 was assisted by AI tools:
-  - Google Gemini – Theoretical discussions, D3 proposal
-  - DeepSeek (深度求索) – Philosophical insights, critical analysis
-  - Claude (Anthropic) – Code writing (V44.0, V46.0, experimental demos)
+  The development of DTQEM v63.0 was assisted by AI tools:
+  - Google Gemini – Theoretical discussions, decoherence mechanisms
+  - DeepSeek (深度求索) – Critical analysis, philosophical insights
+  - Claude (Anthropic) – Code writing, theoretical derivations, experimental design
 
-  Special thanks to "Clore" (anonymous colleague) for mathematical improvement proposals (D1-D6 models).
+  Special thanks to "Max" and "Kiwi" for theoretical derivations of β=1/2, δ=1/3, and ζ≈0.005 from Pikovski and van der Waals mechanisms.
 
   The author remains solely responsible for the final physical model, scientific conclusions, and any errors.
