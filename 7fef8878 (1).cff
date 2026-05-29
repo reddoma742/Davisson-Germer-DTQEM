@@ -1,0 +1,75 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+
+authors:
+  - family-names: "Berramdane"
+    given-names: "Reddouane"
+    affiliation: "Independent Researcher"
+    city: "Oujda"
+    country: "MA"
+    email: "reddoma@gmail.com"
+
+title: "DTQEM v17.0-C: Final Coherence Model for Path-Interference Experiments"
+
+version: "17.0-C"
+date-released: 2026-05-29
+
+url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
+repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
+
+keywords:
+  - "Quantum coherence"
+  - "Path interference"
+  - "Double-slit"
+  - "Visibility"
+  - "Phenomenological model"
+  - "Coherence factor"
+  - "Thermal decoherence"
+  - "Which-path information"
+  - "Exponential decay"
+  - "AICc"
+  - "LOOCV"
+  - "Zenodo-ready"
+  - "Python"
+  - "Colab ready"
+
+license: "MIT"
+
+abstract: |
+  DTQEM v17.0-C is a phenomenological exponential model for the coherence factor C
+  in path-interference experiments. The model was calibrated on 8 experimental points
+  and selected as the final baseline because it provides a strong balance between
+  predictive accuracy and parsimony.
+
+  Core model:
+      C = C0 * exp(-a_path * I_path - a_temp * max(0, T_env - T_ref) / T_ref)
+
+  Calibrated values:
+  - C0 = 0.3675
+  - a_path = 1.6968
+  - a_temp = 0.8055
+  - T_ref = 300 K
+
+  Validation metrics:
+  - In-sample R² = 0.9679
+  - In-sample RMSE = 0.0202
+  - LOOCV R² = 0.9356
+  - LOOCV RMSE = 0.0286
+
+  The model treats coherence and visibility as equivalent in this experimental setting.
+  It is a compact baseline intended for reproducible use, archival release, and future
+  extension if new data justify additional complexity.
+
+  The public API includes:
+  - coherence(I_path, T_env)
+  - a vectorized NumPy implementation
+  - a simple self-test reproducing representative values
+
+comment: |
+  Development of DTQEM v17.0-C was assisted by AI tools:
+  - DeepSeek – critical analysis and theory discussion
+  - Claude (Anthropic) – code writing and derivations
+  - Perplexity AI – model selection methodology and scientific discussion
+
+  The author remains solely responsible for the final scientific interpretation,
+  the calibrated parameters, and any errors.
