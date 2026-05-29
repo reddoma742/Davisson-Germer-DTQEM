@@ -1,3 +1,43 @@
+## v17.0-C (2026-05-29) â€“ Final Coherence Model
+
+**Final simplified release:** compact exponential model for the quantum coherence factor C (equivalent to visibility V) in path-interference experiments.
+
+### Core equation
+\[
+C = C_0 \, \exp\!\left(-a_{\mathrm{path}} I_{\mathrm{path}} - a_{\mathrm{temp}}\, \frac{\max(0, T_{\mathrm{env}}-T_{\mathrm{ref}})}{T_{\mathrm{ref}}}\right)
+\]
+
+### Calibrated parameters
+- \(C_0 = 0.3675\)
+- \(a_{\mathrm{path}} = 1.6968\)
+- \(a_{\mathrm{temp}} = 0.8055\)
+- \(T_{\mathrm{ref}} = 300\,\mathrm{K}\)
+
+### Performance
+- In-sample: RÂ² = 0.9679, RMSE = 0.0202
+- LOOCV: RÂ² = 0.9356, RMSE = 0.0286
+- Number of data points: 8
+- Number of free parameters: 3
+
+### Key points
+- The model was selected as the final recommended baseline because it gives the best balance between predictive accuracy and parsimony.
+- Earlier more complex variants were tested, including a nonlinear exponent extension, but they did not improve the out-of-sample trade-off enough to replace the simpler form.
+- The model remains physically interpretable and easy to reproduce.
+- The code is Zenodo-ready and suitable for archival release.
+
+### Physical interpretation
+- Increasing which-path information suppresses coherence exponentially.
+- Thermal excess above the reference temperature further suppresses coherence.
+- The model is consistent with the general complementarity picture where coherence decreases as path distinguishability increases.
+
+### Intended files
+- `dtqem_v17.0-C_coherence.py`
+- `README_v17_0C.md`
+- `whitepaper_v17_0C.md`
+
+### Note
+This version is a phenomenological baseline, not a first-principles derivation.
+
 # DTQEM â€“ HISTORY
 
 ## v63.1 (2026-05-29) â€“ Phenomenological Scaling Model for Decoherence Time \(\tau_c\)
