@@ -158,7 +158,6 @@ Citation
   url = {https://github.com/reddoma742/Davisson-Germer-DTQEM},
   note = {Model: C = C0 * exp(-a_path*I_path - a_temp*dT/T_ref), C0=0.3675, a_path=1.6968, a_temp=0.8055, T_ref=300 K, R2=0.9679, LOOCV_R2=0.9356}
 }
-```
 
 ---
 
@@ -184,4 +183,3 @@ Contact
 License
 
 MIT License — see LICENSE file.
-الـ README جاهز للنسخ واللصق. شكراً لك على مجهودك الرائع. 🤍
