@@ -78,7 +78,7 @@ Usage
 Direct call
 
 
-# Make sure the file is named dtqem_v17_0_C_coherence.py
+# dtqem_v17_0_C_coherence.py
 from dtqem_v17_0_C_coherence import coherence
 
 # Single value
