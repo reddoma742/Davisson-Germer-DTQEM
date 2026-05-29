@@ -78,8 +78,8 @@ Usage
 Direct call
 
 
-# dtqem_v17_0_C_coherence.py
-from dtqem_v17_0_C_coherence import coherence
+# dtqem_v17.0-C_coherence.py
+from dtqem_v17.0-C_coherence import coherence
 
 # Single value
 C = coherence(I_path=0.5, T_env=400)
@@ -94,7 +94,7 @@ print(C_values)
 Run self-test
 
 
-python dtqem_v17_0_C_coherence.py
+python dtqem_v17.0-C_coherence.py
 
 Expected output:
 
@@ -129,7 +129,7 @@ Together, these two mechanisms explain 96.8% of the variance in the calibration 
 Repository structure
 
 DTQEM_Project/
-├── dtqem_v17_0_C_coherence.py   <- Main model file (this version)
+├── dtqem_v17.0-C_coherence.py   <- Main model file (this version)
 ├── README.md
 ├── LICENSE
 ├── CITATION.cff
