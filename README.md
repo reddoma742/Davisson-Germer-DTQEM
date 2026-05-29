@@ -24,7 +24,7 @@ The `-C` suffix distinguishes this version from earlier experimental variants an
 
 ## Core Model
 
-```
+
 
 C = C0 * exp( -a_path * I_path - a_temp * max(0, T_env - T_ref) / T_ref )
 
