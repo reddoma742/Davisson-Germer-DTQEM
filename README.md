@@ -1,3 +1,19 @@
+# DTQEM – Dual Model Archive
+
+This archive contains two independent phenomenological models developed within the DTQEM project:
+
+## 📦 Version 63.0 – Decoherence Time Model
+- **Output:** τ_c (decoherence time)
+- **Equation:** τ_c = τ_c0 / [m^β·(v/c)^δ·(1+ζN)]
+- **Status:** Working model, synthetic calibration
+
+## 📦 Version 17.0-C – Coherence Factor Model (Final Recommended)
+- **Output:** C (coherence factor, 0 to 1)
+- **Equation:** C = 0.3675 × exp(-1.6968·I_path - 0.8055·ΔT/300)
+- **Status:** Final baseline, validated with LOOCV (R²=0.9679)
+
+For details, see the respective subfolders and the White Paper.
+
 
 # DTQEM v17.0-C — Final Coherence Model
 
