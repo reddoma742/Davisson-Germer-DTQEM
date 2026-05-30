@@ -32,8 +32,8 @@ C = C_0 \, \exp\!\left(-a_{\mathrm{path}} I_{\mathrm{path}} - a_{\mathrm{temp}}\
 
 ### Intended files
 - `dtqem_v17.0-C_coherence.py`
-- `README_v17_0C.md`
-- `whitepaper_v17_0C.md`
+- `README_v17.0-C.md`
+- `whitepaper_v17.0-C.md`
 
 ### Note
 This version is a phenomenological baseline, not a first-principles derivation.
