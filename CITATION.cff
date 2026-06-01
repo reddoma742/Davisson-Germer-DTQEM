@@ -1,75 +1,70 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
+message: "If you use this software or the associated models, please cite it as below."
 
 authors:
-  - family-names: "Berramdane"
-    given-names: "Reddouane"
-    affiliation: "Independent Researcher"
-    city: "Oujda"
-    country: "MA"
-    email: "reddoma@gmail.com"
+  - family-names: Berramdane
+    given-names: Reddouane
+    affiliation: Independent Researcher
+    city: Oujda
+    country: MA
+    email: reddoma@gmail.com
+    orcid: ""
 
-title: "DTQEM v17.0-C: Final Coherence Model for Path-Interference Experiments"
+title: "DTQEM: Dual-Threshold Quantum Decoherence Models – v18.0-C (Joint-Bath) and Unified Framework"
 
-version: "17.0-C"
-date-released: 2026-05-29
+version: "1.0"
+date-released: 2026-06-01
 
+doi: "10.5281/zenodo.20460770"
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
 
-keywords:
-  - "Quantum coherence"
-  - "Path interference"
-  - "Double-slit"
-  - "Visibility"
-  - "Phenomenological model"
-  - "Coherence factor"
-  - "Thermal decoherence"
-  - "Which-path information"
-  - "Exponential decay"
-  - "AICc"
-  - "LOOCV"
-  - "Zenodo-ready"
-  - "Python"
-  - "Colab ready"
-
-license: "MIT"
-
 abstract: |
-  DTQEM v17.0-C is a phenomenological exponential model for the coherence factor C
-  in path-interference experiments. The model was calibrated on 8 experimental points
-  and selected as the final baseline because it provides a strong balance between
-  predictive accuracy and parsimony.
+  DTQEM provides a family of calibrated, first‑principles‑derived models
+  for quantum decoherence in path‑interference and massive‑particle interferometry.
 
-  Core model:
-      C = C0 * exp(-a_path * I_path - a_temp * max(0, T_env - T_ref) / T_ref)
+  The **v18.0‑C** model introduces a joint‑bath crossover term `c`:
+      C = C₀·exp(-a·I - b·ΔT/T_ref - c·I·ΔT/T_ref)
+  with calibrated values (C₀=0.3675, a=1.6968, b=0.8055, c=0.5000, T_ref=300K).
+  Performance: R²=0.9982, LOOCV R²=0.9814, RMSE=0.0045.
 
-  Calibrated values:
-  - C0 = 0.3675
-  - a_path = 1.6968
-  - a_temp = 0.8055
-  - T_ref = 300 K
+  The **v63.x** models calculate decoherence time τ_c from particle properties:
+      τ_c = τ_c0 / [ (m/m_u)^β·(v/c)^δ·(1+ζN) ]
+  with derived exponents β=0.44 (Debye‑Pikovski), δ=1/3 (van der Waals),
+  ζ=0.005 (symmetry suppression).
 
-  Validation metrics:
-  - In-sample R² = 0.9679
-  - In-sample RMSE = 0.0202
-  - LOOCV R² = 0.9356
-  - LOOCV RMSE = 0.0286
+  The **Unified DTQEM** model combines both frameworks into a single equation
+  linking particle structure (m, v, N) with environmental conditions (I, T).
 
-  The model treats coherence and visibility as equivalent in this experimental setting.
-  It is a compact baseline intended for reproducible use, archival release, and future
-  extension if new data justify additional complexity.
+  Key statistical result: AICc threshold N ≥ 36 required to detect joint‑bath coupling.
 
-  The public API includes:
-  - coherence(I_path, T_env)
-  - a vectorized NumPy implementation
-  - a simple self-test reproducing representative values
+keywords:
+  - quantum decoherence
+  - path interference
+  - joint-bath crossover
+  - coherence time scaling
+  - AICc model selection
+  - first-principles derivation
+  - matter-wave interferometry
+  - open quantum systems
+  - python
+
+license: "CC-BY-NC-SA-4.0"
+
+references:
+  - type: software
+    title: "DTQEM v17.0-C: Final Coherence Model for Path-Interference Experiments"
+    authors:
+      - family-names: Berramdane
+        given-names: Reddouane
+    year: 2026
+    doi: "10.5281/zenodo.20460770"
 
 comment: |
-  Development of DTQEM v17.0-C was assisted by AI tools:
-  - DeepSeek – critical analysis and theory discussion
-  - Claude (Anthropic) – code writing and derivations
-  - Perplexity AI – model selection methodology and scientific discussion
+  Development was assisted by AI language models as computational tools:
+  - DeepSeek (critical analysis, methodology validation)
+  - Claude (Anthropic) (code writing, derivations, documentation)
+  - Arena AI (first‑principles derivations of scaling exponents and unification)
 
-  The author remains solely responsible for the final scientific interpretation,
-  the calibrated parameters, and any errors.
+  Human scientific supervision, calibration, and final validation:
+  Reddouane Berramdane.
