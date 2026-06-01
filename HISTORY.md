@@ -1,3 +1,185 @@
+
+```markdown
+# DTQEM – Project History & Changelog
+
+All notable changes to the DTQEM project are documented in this file.  
+Format inspired by [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
+---
+
+## [v18.0-C] – 2026-06-01  ← CURRENT RELEASE
+
+### 🎯 Summary
+Major theoretical upgrade: transition from independent‑bath approximation to a unified joint‑bath framework with a first‑principles‑derived crossover coupling coefficient `c`.  
+This release also integrates the `v63.x` particle‑scaling models and the **Unified DTQEM** equation.
+
+### ✨ Added
+
+#### Core model (v18.0‑C)
+- **Joint‑bath crossover term** `c · I_path · ΔT/T_ref` in the coherence equation.
+- **First‑principles derivation** of all coefficients:
+  - `a(ω_c, T)` from Lorentzian spectral density + Fermi’s Golden Rule.
+  - `b(T)` from high‑temperature Ohmic bath (linear in T, R²=0.998).
+- **Operational bridge**: mapping `I_path ← n̄` via Englert‑Greenberger distinguishability →  
+  `I_path(n̄) = √(1 − e^{−κ n̄})`.
+- **AICc statistical threshold**: at least **N ≥ 36** samples required to reliably detect `c > 0`.
+
+#### Unified model (particle + environment)
+- **Unified DTQEM equation** combining v18.0‑C (environmental) with v63.1‑C (particle structure):
+```
+
+τ_c(m, v, N, I, T) = τ_c0 / [ A·(m/μ)^β·(v/c)^δ·I + B·(1+ζN)·ΔT/T_ref + C_joint·(m/μ)^β·(v/c)^δ·I·(1+ζN)·ΔT/T_ref ]
+
+```
+- **First‑principles scaling exponents** (β, δ, ζ) derived with assistance from Arena AI.
+
+#### Code & documentation
+- **Delta‑method uncertainty propagation** for all predictions.
+- **Input validation** with physical boundary warnings.
+- **Unit test suite** (`test_dtqem.py`) covering 5 test classes.
+- **Full LaTeX manuscript** (`paper.tex`) ready for arXiv submission.
+- **Figures**:
+  - Figure 1 : Lorentzian spectral line shape `a(ω_c)` (peak at 5.0 GHz).
+  - Figure 2 : AICc model selection probability vs. sample size (threshold at N=36).
+  - Figure 3 : Coherence time landscape `τ_c` for C60 (N=60) and C700 (N=700).
+
+### 🔧 Changed
+- Model equation extended from 3 to 4 parameters (added `c = 0.5000 ± 0.0201`).
+- `predict()` now supports optional `return_uncertainty=True`.
+- Repository structure reorganised into `models/`, `figures/`, `paper/`.
+
+### 📊 Performance vs v17.0‑C
+
+| Metric     | v17.0‑C  | v18.0‑C   | Improvement |
+|------------|----------|-----------|-------------|
+| R²         | 0.9679   | **0.9982**| +3.1%       |
+| LOOCV R²   | 0.9356   | **0.9814**| +4.9%       |
+| RMSE       | 0.0202   | **0.0045**| ×4.5 better |
+
+### 📁 Files in this release
+
+```
+
+models/v17/dtqem_baseline_v17.py
+models/v18/DTQEM_v63_1_C.py          ← Core v18.0‑C model + uncertainty
+models/v63/DTQEM_v63_1_C.py          ← τ_c scaling model
+models/v63/dtqem_v63_joint.py        ← Joint‑bath (mass‑velocity crossover)
+models/unified/dtqem_unified_simulator.py
+tests/test_dtqem.py
+scripts/generate_figures.py
+scripts/generate_figure3.py
+figures/figure1.png
+figures/figure2.png
+figures/figure3.png
+paper/paper.tex
+README.md
+LICENSE
+CITATION.cff
+
+```
+
+### 🔗 DOI
+> Zenodo (main release): [10.5281/zenodo.20460770](https://doi.org/10.5281/zenodo.20460770)  
+> *This DOI points to the v17.0‑C baseline; after upload of the full v18.0‑C archive, a new DOI will be issued and updated here.*
+
+### ⚠️ Known Limitations
+- Calibrated on synthetic data (N=8 for baseline); experimental validation (N≥36) pending.
+- Valid range: `I_path ∈ [0, 1]`, `T ∈ [300, 550] K`.
+- Assumes Markovian dynamics (no non‑Markovian revivals).
+- Pure‑dephasing model only (T₂*); T₁ relaxation not included.
+
+---
+
+## [v17.0‑C] – 2026-05-30  ← PREVIOUS RELEASE
+
+### 🎯 Summary
+Final calibrated baseline coherence model. Independent‑bath approximation (`c = 0`).  
+Three‑parameter model validated by LOOCV.
+
+### Equation
+```
+
+C = C₀ · exp(−a_path · I_path − a_temp · ΔT/T_ref)
+
+```
+
+### Parameters
+
+| Parameter | Value  | Std Error |
+|-----------|--------|-----------|
+| C₀        | 0.3675 | ±0.0052   |
+| a_path    | 1.6968 | ±0.0245   |
+| a_temp    | 0.8055 | ±0.0148   |
+| T_ref     | 300 K  | fixed     |
+
+### Performance
+
+| Metric   | Value  |
+|----------|--------|
+| R²       | 0.9679 |
+| LOOCV R² | 0.9356 |
+| RMSE     | 0.0202 |
+
+### 🔗 DOI
+> Zenodo: [10.5281/zenodo.20460770](https://doi.org/10.5281/zenodo.20460770)
+
+### Files
+```
+
+dtqem_v17.0-C_coherence.py   ← Standalone coherence function
+LICENSE
+README_v17.md
+
+```
+
+---
+
+## [v63.1‑C] – 2026-05 (parallel branch, now integrated)
+
+### 🎯 Summary
+Coherence **time** τ_c scaling model for massive composite particles.  
+Inverse problem solver with Delta‑method uncertainty propagation.
+
+### Equation
+```
+
+τ_c = τ_c0 / [ (m/μ)^β · (v/c)^δ · (1 + ζN) ]
+
+```
+
+### Exponents (first‑principles derived)
+
+| Exponent | Value | Origin |
+|----------|-------|--------|
+| β        | 0.44  | Debye‑Pikovski frozen modes |
+| δ        | 1/3   | van der Waals + eikonal scattering |
+| ζ        | 0.005 | Symmetry‑suppressed blackbody emission |
+| τ_c0     | 9.8×10⁻²⁷ s | Phenomenological scale |
+
+---
+
+## [v63.0] – Legacy (historical reference only)
+
+- Original empirical τ_c scaling (no derivations).
+- Superseded by v63.1‑C.
+
+---
+
+## 🗺️ Roadmap
+
+| Version   | Target    | Description |
+|-----------|-----------|-------------|
+| v18.1‑C   | Q3 2026   | Experimental validation (N≥36 real data points) |
+| v19.0‑C   | Q4 2026   | Non‑Markovian extension (HEOM framework) |
+| v20.0‑C   | 2027      | T₁ relaxation integration |
+
+---
+
+*Maintained by: Reddouane Berramdane*  
+*License: CC BY‑NC‑SA 4.0*  
+*Contact: reddoma@gmail.com*
+```
+
 ## v17.0-C (2026-05-29) â€“ Final Coherence Model
 
 **Final simplified release:** compact exponential model for the quantum coherence factor C (equivalent to visibility V) in path-interference experiments.
