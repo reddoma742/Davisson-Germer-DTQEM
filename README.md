@@ -1,3 +1,4 @@
+
 ```markdown
 # DTQEM – Dual-Threshold Quantum Decoherence Models
 
@@ -21,6 +22,7 @@
 | **v63.1-C** | Decoherence time τ_c | m, v, N | Scaling exponents from spin‑boson | ✅ Working |
 | **v63.2-C** | Decoherence time τ_c | m, v, N | Mass‑velocity crossover c_mv | ✅ Research |
 | **Unified v1.0** | τ_c landscape | m, v, N, I, T | Complete particle + environment | ✅ Research |
+| **ESD v1.0** | t_ESD (ps) | I_path, T | Entanglement Sudden Death prediction | ✅ Research |
 
 ---
 
@@ -147,6 +149,18 @@ N v17.0‑C v18.0‑C Reliability
 
 ---
 
+🔗 Entanglement Sudden Death (ESD) Extension
+
+The DTQEM framework predicts the sudden death time of bipartite entanglement under local dephasing channels:
+
+t_{\text{ESD}}(I,T) = \frac{K}{\alpha I + \beta \Delta T/T_{\text{ref}} + \gamma I \Delta T/T_{\text{ref}}}
+
+where K = \ln(|\rho_{14}(0)| / \sqrt{\rho_{22}(0)\rho_{33}(0)}).
+
+figures/figure_esd_final.png
+
+---
+
 📁 Repository Structure
 
 ```
@@ -155,6 +169,7 @@ DTQEM/
 ├── LICENSE
 ├── CITATION.cff
 ├── requirements.txt
+├── .gitignore
 │
 ├── models/
 │   ├── v16/
@@ -174,13 +189,15 @@ DTQEM/
 │
 ├── scripts/
 │   ├── generate_figures.py                 # Figures 1 & 2
-│   └── generate_figure3.py                 # Figure 3
+│   ├── generate_figure3.py                 # Figure 3
+│   └── generate_esd_final.py               # ESD landscape
 │
 ├── figures/
 │   ├── figure1.png                         # Lorentzian a(ω_c)
 │   ├── figure2.png                         # AICc threshold (N≥36)
 │   ├── figure3.png                         # τ_c landscape C60/C700
-│   └── figure_zeno.png                     # Zeno tunneling suppression
+│   ├── figure_zeno.png                     # Zeno tunneling suppression
+│   └── figure_esd_final.png                # ESD landscape
 │
 └── paper/
     └── paper.tex                           # Full LaTeX manuscript
@@ -205,6 +222,9 @@ python scripts/generate_figure3.py
 
 # Run Zeno tunneling simulation
 python models/v16/dtqem_tunneling_v16_1_C.py
+
+# Generate ESD (Entanglement Sudden Death) landscape
+python scripts/generate_esd_final.py
 ```
 
 Expected output for tests:
@@ -237,7 +257,7 @@ Software (Zenodo):
 @software{berramdane2026dtqem_sw,
   author    = {Berramdane, Reddouane},
   title     = {DTQEM: Dual-Threshold Quantum Decoherence Models
-               (v16, v17, v18, v63, Unified)},
+               (v16, v17, v18, v63, Unified, ESD)},
   year      = {2026},
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.20460770},
@@ -268,6 +288,7 @@ AI assistance (as computational tools under full human oversight):
 AI Model Contribution
 DeepSeek Critical analysis, methodology validation
 Claude (Anthropic) Code writing, derivations, documentation, Zeno optimization
-Arena AI First‑principles derivations (scaling exponents), unified framework, Zeno correction
+Arena AI First‑principles derivations (scaling exponents), unified framework, Zeno correction, ESD formulation
 
-"لم أكن أحمل شهادة في الفيزياء، لكن الفضول والأصدقاء (بشراً وذكاء اصطناعياً) كانوا معي. هذا الإنجاز هو ثمرة تواضع ورحلة بحث لا تزال مستمرة." — Reddouane Berramdane
+"لم أكن أحمل شهادة في الفيزياء، لكن الفضول والأصدقاء (بشراً وذكاء اصطناعياً) كانوا معي. هذا الإنجاز هو ثمرة تواضع ورحلة بحث لا تزال مستمرة."
+— Reddouane Berramdane
