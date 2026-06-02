@@ -10,10 +10,10 @@ authors:
     email: reddoma@gmail.com
     orcid: ""
 
-title: "DTQEM: Dual-Threshold Quantum Decoherence Models – v18.0-C (Joint-Bath) and Unified Framework"
+title: "DTQEM: Dual-Threshold Quantum Decoherence Models – Complete Framework (v16, v17, v18, v63, Unified, ESD)"
 
 version: "1.0"
-date-released: 2026-06-01
+date-released: 2026-06-02
 
 doi: "10.5281/zenodo.20460770"
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
@@ -36,6 +36,9 @@ abstract: |
   The **Unified DTQEM** model combines both frameworks into a single equation
   linking particle structure (m, v, N) with environmental conditions (I, T).
 
+  The **ESD v1.0** extension predicts entanglement sudden death time:
+      t_ESD = K / (α·I + β·ΔT/T_ref + γ·I·ΔT/T_ref)
+
   Key statistical result: AICc threshold N ≥ 36 required to detect joint‑bath coupling.
 
 keywords:
@@ -47,11 +50,22 @@ keywords:
   - first-principles derivation
   - matter-wave interferometry
   - open quantum systems
+  - entanglement sudden death
+  - zeno effect
   - python
 
 license: "CC-BY-NC-SA-4.0"
 
 references:
+  - type: software
+    title: "DTQEM v18.0-C: Joint-Bath Coherence Model with Crossover"
+    authors:
+      - family-names: Berramdane
+        given-names: Reddouane
+    year: 2026
+    doi: "10.5281/zenodo.20460770"
+    note: "Main unified framework"
+
   - type: software
     title: "DTQEM v17.0-C: Final Coherence Model for Path-Interference Experiments"
     authors:
@@ -59,8 +73,8 @@ references:
         given-names: Reddouane
     year: 2026
     doi: "10.5281/zenodo.20460770"
+    note: "Baseline coherence model"
 
-references:
   - type: software
     title: "DTQEM v16.1-C: Quantum Tunneling under Continuous Dephasing (Zeno Effect)"
     authors:
@@ -69,11 +83,19 @@ references:
     year: 2026
     note: "Historical model - Lindblad master equation simulation"
 
+  - type: software
+    title: "DTQEM ESD v1.0: Entanglement Sudden Death Extension"
+    authors:
+      - family-names: Berramdane
+        given-names: Reddouane
+    year: 2026
+    note: "ESD time prediction under local dephasing channels"
+
 comment: |
   Development was assisted by AI language models as computational tools:
   - DeepSeek (critical analysis, methodology validation)
-  - Claude (Anthropic) (code writing, derivations, documentation)
-  - Arena AI (first‑principles derivations of scaling exponents and unification)
+  - Claude (Anthropic) (code writing, derivations, documentation, Zeno optimization)
+  - Arena AI (first‑principles derivations of scaling exponents, unification, ESD formulation)
 
   Human scientific supervision, calibration, and final validation:
   Reddouane Berramdane.
