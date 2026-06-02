@@ -60,6 +60,15 @@ references:
     year: 2026
     doi: "10.5281/zenodo.20460770"
 
+references:
+  - type: software
+    title: "DTQEM v16.1-C: Quantum Tunneling under Continuous Dephasing (Zeno Effect)"
+    authors:
+      - family-names: Berramdane
+        given-names: Reddouane
+    year: 2026
+    note: "Historical model - Lindblad master equation simulation"
+
 comment: |
   Development was assisted by AI language models as computational tools:
   - DeepSeek (critical analysis, methodology validation)
