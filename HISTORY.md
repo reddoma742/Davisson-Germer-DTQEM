@@ -1,4 +1,29 @@
 
+## [v16.1-C] – 2026-06-02 (Historical - Zeno Effect)
+
+### Added
+- **Quantum tunneling under continuous dephasing** (Lindblad master equation)
+- Hamiltonian: H = (Δ/2) σ_x (fixed coherent tunneling)
+- Lindblad operator: L = √(γ·E_ext) σ_z (pure dephasing)
+- Calculation of P_left, P_right, and coherence
+- Metadata JSON for figure_zeno.png
+
+### Parameters (Optimized)
+- Δ = 78.15 μeV (coherent splitting)
+- γ₀ = 1.2×10¹¹ s⁻¹ (dephasing rate)
+- t_max = 20 ps
+
+### Results at t = 20 ps
+- E_ext = 0.0 → P_right = 0.86
+- E_ext = 0.3 → P_right = 0.60
+- E_ext = 0.7 → P_right = 0.42
+- E_ext = 1.0 → P_right = 0.34
+
+### Files
+- `models/v16/dtqem_tunneling_v16_1_C.py`
+- `figures/figure_zeno.png`
+- `figures/figure_zeno.png.meta.json`
+
 ```markdown
 # DTQEM – Project History & Changelog
 
