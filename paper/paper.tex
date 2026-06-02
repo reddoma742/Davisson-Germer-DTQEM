@@ -41,14 +41,14 @@
 \date{\today}
 
 \begin{abstract}
-Characterizing quantum decoherence in open quantum systems is essential for developing robust quantum technologies. In this work, we present the physical and statistical foundations of the Dual-Threshold Quantum Decoherence Model (DTQEM) release v18.0-C. Unlike previous decoupled formulations, the v18.0-C framework unifies path-measurement-induced decoherence and thermal dephasing into a single mathematical expression: $C = C_0 \exp(-a I_{\text{path}} - b \Delta T/T_{\text{ref}} - c I_{\text{path}} \Delta T/T_{\text{ref}})$, which directly accounts for cross-correlated environmental modes ($\rho > 0$) through a crossover coupling coefficient $c$. The historical model v17.0-C represents the independent-bath limit where $c = 0$. We provide a rigorous first-principles derivation of the DTQEM exponents using the spin-boson framework and Fermi's Golden Rule, deriving the path-decoherence coefficient $a(\omega_c,T)$ from a Lorentzian spectral density and the thermal dephasing coefficient $b(T)$ from a high-temperature Ohmic bath. We establish an operational bridge for the path information $I_{\text{path}}$ using the Englert-Greenberger distinguishability relation, mapping it directly to the average photon occupancy $\bar{n}$ of a readout cavity. Furthermore, using Akaike Information Criterion with Correction (AICc) on synthetic joint-bath datasets, we show a strict statistical limit: small datasets ($N=8$) are blind to the crossover coefficient, whereas a minimum of $N \ge 36$ samples is required to reliably resolve the joint-bath coupling $c$. Finally, we discuss physical limitations including thermal relaxation ($T_1$), non-Markovian short-time dynamics, and propose concrete experimental realizations using superconducting qubits and molecular matter-wave interferometry.
+Characterizing quantum decoherence in open quantum systems is essential for developing robust quantum technologies. In this work, we present the physical and statistical foundations of the Dual-Threshold Quantum Decoherence Model (DTQEM) release v18.0-C. Unlike previous decoupled formulations, the v18.0-C framework unifies path-measurement-induced decoherence and thermal dephasing into a single mathematical expression: $C = C_0 \exp(-a I_{\text{path}} - b \Delta T/T_{\text{ref}} - c I_{\text{path}} \Delta T/T_{\text{ref}})$, which directly accounts for cross-correlated environmental modes ($\rho > 0$) through a crossover coupling coefficient $c$. The historical model v17.0-C represents the independent-bath limit where $c = 0$. We provide a rigorous first-principles derivation of the DTQEM exponents using the spin-boson framework and Fermi's Golden Rule, deriving the path-decoherence coefficient $a(\omega_c,T)$ from a Lorentzian spectral density and the thermal dephasing coefficient $b(T)$ from a high-temperature Ohmic bath. We establish an operational bridge for the path information $I_{\text{path}}$ using the Englert-Greenberger distinguishability relation, mapping it directly to the average photon occupancy $\bar{n}$ of a readout cavity. Furthermore, using Akaike Information Criterion with Correction (AICc) on synthetic joint-bath datasets, we show a strict statistical limit: small datasets ($N=8$) are blind to the crossover coefficient, whereas a minimum of $N \ge 36$ samples is required to reliably resolve the joint-bath coupling $c$. We extend the DTQEM framework to predict Entanglement Sudden Death (ESD) in bipartite quantum systems, deriving a closed-form expression for $t_{\text{ESD}}$ under local dephasing channels. Finally, we discuss physical limitations including thermal relaxation ($T_1$), non-Markovian short-time dynamics, and propose concrete experimental realizations using superconducting qubits and molecular matter-wave interferometry.
 \end{abstract}
 
 \maketitle
 
 \section{Introduction}
 
-Maintaining quantum coherence in the presence of environmental noise remains one of the premier challenges of quantum information processing. Quantum decoherence—the progressive loss of phase coherence between states in a superposition—is typically driven by two distinct mechanisms: the active extraction of path information by a measurement apparatus or detector, and the passive dephasing induced by thermal fluctuations of the surrounding environment~\cite{breuer2002}. 
+Maintaining quantum coherence in the presence of environmental noise remains one of the premier challenges of quantum information processing. Quantum decoherence---the progressive loss of phase coherence between states in a superposition---is typically driven by two distinct mechanisms: the active extraction of path information by a measurement apparatus or detector, and the passive dephasing induced by thermal fluctuations of the surrounding environment~\cite{breuer2002}. 
 
 Historically, these two decoherence channels have been studied in isolation, assuming independent environmental baths. Under such decoupling approximations, the baseline model (v17.0-C) was formulated. The complementarity principle, traditionally defined through the Englert-Greenberger-Yasin inequality~\cite{englert1996}, relates path information to fringe visibility, while the standard theory of open quantum systems describes thermal dephasing through models such as the spin-boson model or the Caldeira-Leggett framework~\cite{weiss2012}. 
 
@@ -130,7 +130,7 @@ where $\eta$ is the coupling strength, $\gamma$ is the cavity spectral width, an
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.85\linewidth]{figure1.png}
+    \includegraphics[width=0.85\linewidth]{figures/figure1.png}
     \caption{Analytical spectral line shape of the path-decoherence coefficient $a(\omega_c)$ as a function of the detector resonance frequency $\omega_c$. The peak is centered at $\omega_{\text{path}} = 5.0$~GHz ($\gamma = 1.0$~GHz, $\eta = 1.6968$), indicating resonant coherence suppression.}
     \label{fig:lorentzian}
 \end{figure}
@@ -195,8 +195,8 @@ where $N$ is the sample size, $K$ is the number of parameters ($K=3$ for v17.0-C
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.85\linewidth]{figure2.png}
-    \caption{Model selection probability via Akaike Information Criterion with Correction (AICc) as a function of sample size $N$ under a joint-bath scenario ($c=0.5$, noise $\sigma=0.005$). The vertical line represents the statistical reliability threshold ($N \ge 36$) where the crossover coupling model v18.0-C (blue curve) is correctly resolved over the decoupled v17.0-C limit (red curve).}
+    \includegraphics[width=0.85\linewidth]{figures/figure2.png}
+    \caption{Model selection probability via Akaike Information Criterion with Correction (AICc) as a function of sample size $N$ under a joint-bath scenario ($c=0.5$, noise $\sigma=0.005$). The vertical line represents the statistical reliability threshold ($N \ge 36$) where the crossover coupling model v18.0-C is correctly resolved over the decoupled v17.0-C limit.}
     \label{fig:aicc_threshold}
 \end{figure}
 
@@ -239,7 +239,7 @@ where $A$ and $B$ are scaling constants, and $C_{\text{joint}}$ is the joint-bat
 
 \begin{figure*}[t]
     \centering
-    \includegraphics[width=\textwidth]{figure3.png}
+    \includegraphics[width=\textwidth]{figures/figure3.png}
     \caption{The unified coherence time $\tau_c$ landscape as a function of temperature $T$ and path information $I_{\text{path}}$ for (a) a standard fullerene molecule $C_{60}$ ($N=60$), and (b) a giant carbon cluster $C_{700}$ ($N=700$). This comparison visually demonstrates how internal complexity ($N$) and mass ($m$) completely alter the dephasing response of the system to external thermal environments.}
     \label{fig:unified_landscape}
 \end{figure*}
@@ -259,11 +259,110 @@ Equation~(\ref{eq:unified}) successfully bridges the two regimes and reproduces 
 
 Figure~\ref{fig:unified_landscape} shows the coherence time $\tau_c$ landscape across temperature and path-information axes. Notice how internal complexity $N=700$ (Panel b) severely accelerates thermal dephasing compared to $C_{60}$ (Panel a), causing the coherence times to compress by several orders of magnitude as temperature rises, reflecting the Debye-Pikovski coupling.
 
+\section{Entanglement Sudden Death in DTQEM Dephasing Channels}
+
+\label{sec:esd}
+
+The unified DTQEM framework can be extended to predict the decay of bipartite entanglement under local dephasing channels. Following the approach of Yu and Eberly~\cite{yu2009sudden}, we consider a two-qubit system initialized in an X-state, which encompasses Bell states and Werner states as special cases.
+
+\subsection{Physical Setup}
+
+Consider two qubits exposed to independent local pure dephasing channels, where the dephasing rates are modulated by the DTQEM parameters. The Lindblad master equation for each qubit is given by:
+
+\begin{equation}
+    \dot{\rho} = \sum_{k=1}^{2} \frac{\Gamma_k}{2} \left( \sigma_z^{(k)} \rho \sigma_z^{(k)} - \rho \right)
+    \label{eq:lindblad_esd}
+\end{equation}
+
+where $\Gamma_k(I,T)$ is the effective dephasing rate for qubit $k$, expressed within the DTQEM framework as:
+
+\begin{equation}
+    \Gamma_k(I,T) = \alpha \cdot I_{\text{path}} + \beta \cdot \frac{\Delta T}{T_{\text{ref}}} 
+                  + \gamma \cdot I_{\text{path}} \cdot \frac{\Delta T}{T_{\text{ref}}}
+    \label{eq:gamma_dtqem}
+\end{equation}
+
+with $\alpha = A \cdot m^{\beta} v^{\delta}$, $\beta = B \cdot (1+\zeta N)$, and $\gamma = C_{\text{joint}} \cdot m^{\beta} v^{\delta} (1+\zeta N)$.
+
+\subsection{Initial X-State and Time Evolution}
+
+The initial density matrix of the two-qubit system is taken as an X-state. Under local pure dephasing, the off-diagonal density matrix elements decay exponentially:
+
+\begin{equation}
+    \rho_{14}(t) = \rho_{14}(0) \, e^{-(\Gamma_1 + \Gamma_2)t}
+    \label{eq:rho14_decay}
+\end{equation}
+
+while the diagonal populations remain constant:
+\begin{equation}
+    \rho_{11}(t) = \rho_{11}(0), \quad
+    \rho_{22}(t) = \rho_{22}(0), \quad
+    \rho_{33}(t) = \rho_{33}(0), \quad
+    \rho_{44}(t) = \rho_{44}(0)
+\end{equation}
+
+\subsection{Concurrence and Entanglement Sudden Death Time}
+
+For an X-state, the concurrence $\mathcal{C}(t)$, which quantifies entanglement, takes the closed form:
+
+\begin{equation}
+    \mathcal{C}(t) = 2 \, \max \left\{ 0, \; |\rho_{14}(t)| - \sqrt{\rho_{22}(t) \rho_{33}(t)} \right\}
+    \label{eq:concurrence}
+\end{equation}
+
+Under our simplifying assumption ($\rho_{23}=0$), the concurrence reduces to:
+
+\begin{equation}
+    \mathcal{C}(t) = 2 \, \max \left\{ 0, \; |\rho_{14}(0)| \, e^{-(\Gamma_1+\Gamma_2)t} 
+                      - \sqrt{\rho_{22}(0) \rho_{33}(0)} \right\}
+    \label{eq:concurrence_simple}
+\end{equation}
+
+Entanglement sudden death occurs when $\mathcal{C}(t)$ reaches zero at a finite time $t_{\text{ESD}}$. Solving $\mathcal{C}(t_{\text{ESD}}) = 0$ yields:
+
+\begin{equation}
+    t_{\text{ESD}}(I,T) = \frac{1}{\Gamma_1 + \Gamma_2} \,
+    \ln \left( \frac{|\rho_{14}(0)|}{\sqrt{\rho_{22}(0) \rho_{33}(0)}} \right)
+    \label{eq:tesd_general}
+\end{equation}
+
+Substituting the DTQEM dephasing rates from Eq.~(\ref{eq:gamma_dtqem}) with $\Gamma_1 = \Gamma_2 = \Gamma$ for identical qubits, we obtain:
+
+\begin{equation}
+    t_{\text{ESD}}(I,T) = \frac{K}{\alpha I + \beta \dfrac{\Delta T}{T_{\text{ref}}} 
+                           + \gamma I \dfrac{\Delta T}{T_{\text{ref}}}}
+    \label{eq:tesd_dtqem}
+\end{equation}
+
+where $K = \ln \left( |\rho_{14}(0)| / \sqrt{\rho_{22}(0) \rho_{33}(0)} \right)$ is a constant determined solely by the initial state.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.85\linewidth]{figures/figure_esd_final.png}
+    \caption{Entanglement sudden death time $t_{\mathrm{ESD}}$ landscape as a function of path information $I_{\mathrm{path}}$ and temperature $T$. The colormap (viridis reversed) indicates short ESD times (yellow, high risk) to long ESD times (purple, stability). White contour lines highlight constant $t_{\mathrm{ESD}}$ values (1.5, 2.0, 3.0, 5.0, 10.0, 20.0, 30.0, 50.0 ps). The joint-bath crossover coefficient $\gamma = 0.5$ accelerates entanglement decay, reducing $t_{\mathrm{ESD}}$ at high $I_{\mathrm{path}}$ and elevated temperatures.}
+    \label{fig:esd_landscape}
+\end{figure}
+
+Figure~\ref{fig:esd_landscape} shows the ESD time landscape generated using Eq.~(\ref{eq:tesd_dtqem}). The logarithmic sensitivity to $I_{\text{path}}$ and $T$ suggests that ESD could serve as a sensitive probe of joint-bath correlations in future experiments.
+
+\subsection{Quantum Zeno Effect: Historical Context}
+
+As a historical precursor to the DTQEM framework, we also simulated the Quantum Zeno effect: continuous measurement suppresses coherent tunneling. Using a Lindblad master equation with Hamiltonian $H = (\Delta/2)\sigma_x$ and dephasing operator $L = \sqrt{\gamma E_{\text{ext}}}\sigma_z$, we demonstrated that increasing measurement strength $E_{\text{ext}}$ reduces tunneling probability.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.85\linewidth]{figures/figure_zeno.png}
+    \caption{Quantum Zeno effect: Tunneling probability $P_{\mathrm{right}}(t)$ under continuous measurement. As measurement strength $E_{\text{ext}}$ increases from 0 to 1, tunneling is progressively suppressed. Parameters: $\Delta = 78.15$ $\mu$eV, $\gamma_0 = 1.2\times10^{11}$ s$^{-1}$.}
+    \label{fig:zeno}
+\end{figure}
+
+Figure~\ref{fig:zeno} shows the time evolution of tunneling probability for different measurement strengths, clearly demonstrating the Zeno freezing effect: from $P_{\text{right}} = 0.86$ (no measurement) to $P_{\text{right}} = 0.34$ (strong measurement).
+
 \section{Discussion and Limitations}
 
 \subsection{Thermal Relaxation ($T_1$) versus Pure Dephasing ($T_2$)}
 
-The phenomenological framework of the proposed DTQEM v18.0-C model implicitly assumes that the decoherence channel is dominated by pure dephasing processes (with a characteristic timescale $T_{\phi}$ or $T_2^*$). This diagonal coupling approximation—where the system-environment interaction commutes with the system's bare Hamiltonian—is physically robust in solid-state and optical platforms where the environmental spectral density at the system's transition frequency is negligible, or when $\hbar \omega_{\text{sys}} \gg k_B T$~\cite{weiss2012}. 
+The phenomenological framework of the proposed DTQEM v18.0-C model implicitly assumes that the decoherence channel is dominated by pure dephasing processes (with a characteristic timescale $T_{\phi}$ or $T_2^*$). This diagonal coupling approximation---where the system-environment interaction commutes with the system's bare Hamiltonian---is physically robust in solid-state and optical platforms where the environmental spectral density at the system's transition frequency is negligible, or when $\hbar \omega_{\text{sys}} \gg k_B T$~\cite{weiss2012}. 
 
 However, in regimes where off-diagonal system-bath coupling is non-negligible, or when the thermal energy of the bath matches the system's level spacing ($k_B T \sim \hbar \omega_{\text{sys}}$), energy-exchanging longitudinal relaxation ($T_1$ transitions) will inevitably occur through the absorption and emission of bath quanta~\cite{breuer2002}. In such scenarios, the overall transverse relaxation rate is governed by $1/T_2 = 1/(2T_1) + 1/T_{\phi}$. 
 
@@ -281,7 +380,7 @@ While the exponential ansatz of DTQEM v18.0-C accurately captures the net asympt
 
 \subsection{Proposed Experimental Implementation}
 
-To validate the Unified DTQEM Equation~(\ref{eq:unified}), we propose two distinct experimental platforms:
+To validate the Unified DTQEM Equation~(\ref{eq:unified}) and the ESD predictions, we propose two distinct experimental platforms:
 
 \subsubsection{Platform A: Molecular Matter-Wave Interferometry}
 
@@ -293,78 +392,4 @@ The most direct test of the unified theory is a Talbot-Lau matter-wave interfero
 
 \subsubsection{Platform B: Superconducting Transmon Qubits}
 
-An alternative solid-state test can be realized using a superconducting transmon qubit coupled to a readout resonator. Here, the average photon number $\bar{n}$ inside the resonator is controlled by the microwave drive power, setting $I_{\text{path}} = \sqrt{1 - e^{-\kappa \bar{n}}}$. The thermal bath temperature $T$ is controlled by heating the mixing chamber of the dilution refrigerator from $50\text{ mK}$ to $500\text{ mK}$. By systematically varying $\bar{n}$ and $T$ across at least 36 design points, researchers can directly fit the v18.0-C model and extract the diagnostic parameter $c$ to quantify the cross-correlation between the readout field and the thermal background.
-
-\section{Conclusions}
-
-In this work, we presented the physical and statistical foundations of the Dual-Threshold Quantum Decoherence Model (DTQEM) v18.0-C. We derived the phenomenological coefficients $a(\omega_c, T)$ and $b(T)$ of the model from first principles using the spin-boson and Ohmic bath models. We established a direct operational mapping linking the path information $I_{\text{path}}$ to the average cavity photon number $\bar{n}$, overcoming the historical abstraction of complementarity. We demonstrated via AICc that a minimum of $N \ge 36$ samples is required to overcome statistical penalties and detect the crossover coupling $c$, establishing a key experimental protocol. We presented the unified DTQEM equation that combines particle-structure scaling ($m, v, N$) with environmental conditions ($I_{\text{path}}, T$), providing a complete framework for quantum decoherence. These results define clear operational boundaries for exponential decoherence models and provide a roadmap for experimental verification in superconducting and atomic quantum platforms.
-
-\begin{acknowledgments}
-The author acknowledges the assistance of AI language models as computational tools:
-\begin{itemize}
-    \item \textbf{DeepSeek} — critical analysis, methodology validation
-    \item \textbf{Claude (Anthropic)} — code writing, derivations, documentation
-    \item \textbf{Arena AI} — first-principles derivations of scaling exponents (v63) and unification framework
-\end{itemize}
-All AI models were used under full human scientific supervision. The final scientific claims, model calibration, parameter selection, interpretation, and validation are solely the responsibility of the human author, \textbf{Reddouane Berramdane}.
-\end{acknowledgments}
-
-\appendix
-
-\section{Python Code Implementation}
-
-The Python library `dtqem_joint_bath_v18.py` implements the v18.0-C model with input validation, uncertainty propagation, and operational mapping:
-
-\begin{lstlisting}[language=Python]
-import numpy as np
-import scipy.stats as stats
-
-class DTQEMModel:
-    def __init__(self, C0=0.3675, a=1.6968, b=0.8055, c=0.5000, T_ref=300.0):
-        self.C0 = C0
-        self.a = a
-        self.b = b
-        self.c = c
-        self.T_ref = T_ref
-
-    @staticmethod
-    def map_photon_number_to_Ipath(n_bar, kappa=1.0):
-        return np.sqrt(1.0 - np.exp(-kappa * np.maximum(0.0, n_bar)))
-
-    def predict(self, I_path, T, return_uncertainty=False):
-        I_safe = np.clip(I_path, 0.0, 1.0)
-        dT = (np.array(T) - self.T_ref) / self.T_ref
-        C = self.C0 * np.exp(-self.a*I_safe - self.b*dT - self.c*I_safe*dT)
-        return C
-\end{lstlisting}
-
-Full code and simulation scripts are available at:\\
-\url{https://github.com/reddoma742/Davisson-Germer-DTQEM} \\
-Archived at Zenodo: \url{https://doi.org/10.5281/zenodo.20460770}
-
-\begin{thebibliography}{99}
-
-\bibitem{breuer2002}
-H.-P. Breuer and F. Petruccione, \emph{The Theory of Open Quantum Systems} (Oxford University Press, 2002).
-
-\bibitem{englert1996}
-B.-G. Englert, Fringe visibility and which-way information: An inequality, \emph{Phys. Rev. Lett.} \textbf{77}, 2154 (1996).
-
-\bibitem{weiss2012}
-U. Weiss, \emph{Quantum Dissipative Systems}, 4th ed. (World Scientific, 2012).
-
-\bibitem{breuer2016}
-H.-P. Breuer, E.-M. Laine, J. Piilo, and B. Vacchini, Colloquium: Non-Markovian dynamics in open quantum systems, \emph{Rev. Mod. Phys.} \textbf{88}, 021002 (2016).
-
-\bibitem{rivas2014}
-\'{A}. Rivas, S. F. Huelga, and M. B. Plenio, Quantum non-Markovianity: characterization, quantification and detection, \emph{Rep. Prog. Phys.} \textbf{77}, 094001 (2014).
-
-\bibitem{burnham2002}
-K. P. Burnham and D. R. Anderson, \emph{Model Selection and Multimodel Inference}, 2nd ed. (Springer, 2002).
-
-\bibitem{zenodo_dtqem}
-R. Berramdane, \emph{DTQEM v18.0-C: Unified Quantum Decoherence Framework with Joint-Bath Crossover}, Zenodo (2026), DOI: \url{10.5281/zenodo.20460770}.
-
-\end{thebibliography}
-
-\end{document}
+An alternative solid-state test can be realized using a superconducting transmon qubit coupled to a readout resonator. Here, the average photon number $\bar{n}$ inside the resonator is controlled by the microwave drive power, setting $I_{\text{path}} = \sqrt{1 - e^{-\kappa \bar{n}}}$. The thermal bath temperature $T$ is controlled by heating the mixing chamber of the dilution refrigerator from $50\text{ mK}$ to $500\text{ mK}$. By systematically varying $\bar{n}$ and $T$ across at least 36 design points, researchers can directly fit the v18.
