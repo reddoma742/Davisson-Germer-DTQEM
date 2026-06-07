@@ -243,6 +243,7 @@ where $K = \frac{1}{2} \ln\left( |\rho_{14}(0)| / \sqrt{\rho_{22}(0)\rho_{33}(0)
 \end{figure}
 
 \subsection{Quantum Zeno Effect}
+
 Under continuous measurement, the quantum Zeno effect suppresses tunneling, as illustrated in Fig.~\ref{fig:zeno}.
 
 \begin{figure}[t]
@@ -252,44 +253,23 @@ Under continuous measurement, the quantum Zeno effect suppresses tunneling, as i
     \label{fig:zeno}
 \end{figure}
 
-
 \section{Assumptions and Regime of Validity}
 \label{sec:assumptions}
 
-The derivations and predictions presented in this work are valid within a specific physical
-regime characterized by the following conditions:
-
+The derivations and predictions presented in this work are valid within a specific physical regime characterized by the following conditions:
 \begin{enumerate}
-\item \textbf{Weak-coupling regime ($\eta_{\text{th}} \ll 1$):} The system-bath coupling
-must be sufficiently weak to justify second-order perturbation theory (Born approximation)
-and Fermi's Golden Rule. Strong-coupling physics, including non-Markovian revivals, falls
-outside the present framework.
-
-\item \textbf{High cutoff-frequency limit ($\omega_D \gg \omega_c$):} The Drude cutoff
-of the Ohmic bath must greatly exceed the system transition frequency so that
-$J_{\text{th}}(\omega_c) \approx \eta_{\text{th}}\,\omega_c$.
-
-\item \textbf{Controlled temperature window:} The thermal dephasing derivation for $b(T)$
-uses the high-temperature Ohmic limit at room-scale temperatures, while the isotopic
-correction uses the cryogenic quantum-correction expansion valid near $T \sim 10$~mK.
-Extrapolating outside these windows requires explicit re-derivation.
-
-\item \textbf{Pure dephasing dominance ($T_1 \gg T_\phi$):} The model treats only
-transverse dephasing; longitudinal relaxation is neglected.
-
-\item \textbf{Markovian bath:} The bath correlation time $\tau_B$ is assumed much shorter
-than the system evolution timescale.
+\item \textbf{Weak-coupling regime ($\eta_{\text{th}} \ll 1$):} The system-bath coupling must be sufficiently weak to justify second-order perturbation theory (Born approximation) and Fermi's Golden Rule. Strong-coupling physics, including non-Markovian revivals, falls outside the present framework.
+\item \textbf{High cutoff-frequency limit ($\omega_D \gg \omega_c$):} The Drude cutoff of the Ohmic bath must greatly exceed the system transition frequency so that $J_{\text{th}}(\omega_c) \approx \eta_{\text{th}}\,\omega_c$.
+\item \textbf{Controlled temperature window:} The thermal dephasing derivation for $b(T)$ uses the high-temperature Ohmic limit at room-scale temperatures, while the isotopic correction uses the cryogenic quantum-correction expansion valid near $T \sim 10$~mK. Extrapolating outside these windows requires explicit re-derivation.
+\item \textbf{Pure dephasing dominance ($T_1 \gg T_\phi$):} The model treats only transverse dephasing; longitudinal relaxation is neglected.
+\item \textbf{Markovian bath:} The bath correlation time $\tau_B$ is assumed much shorter than the system evolution timescale.
 \end{enumerate}
 
-\textbf{Statistical guideline:} The AICc threshold $N \ge 36$ is a dataset-specific
-result derived from the synthetic simulations described in Sec.~V. It should be treated
-as a practical guideline, not a universal law; the precise threshold depends on noise
-level $\sigma$, signal strength, and parameter values.
+\textbf{Statistical guideline:} The AICc threshold $N \ge 36$ is a dataset-specific result derived from the synthetic simulations described in Sec.~V. It should be treated as a practical guideline, not a universal law; the precise threshold depends on noise level $\sigma$, signal strength, and parameter values.
 
-\textbf{Isotopic ratio:} The predicted value $b_D/b_H \approx 0.248$ is conditional on
-the hyperfine transition frequencies used, the reference temperature $T = 10$~mK, and
-the quantum-correction scheme of Eq.~(\ref{eq:b_quantum_scaling}). It constitutes a
-falsifiable, model-dependent prediction rather than a model-independent constant.
+\textbf{Isotopic ratio:} The predicted value $b_D/b_H \approx 0.248$ is conditional on the hyperfine transition frequencies used, the reference temperature $T = 10$~mK, and the quantum-correction scheme of Eq.~(\ref{eq:b_quantum_scaling}). It constitutes a falsifiable, model-dependent prediction rather than a model-independent constant.
+
+A brief sensitivity analysis shows that the predicted ratio is temperature-dependent: varying $T$ from 5 to 20~mK shifts the ratio by $\pm 0.02$, while a 5\% perturbation of $\nu_D$ changes it by less than $0.01$. These variations are small but non-negligible, confirming that the value 0.248 should be understood as a central estimate within the stated regime rather than an exact constant.
 
 \section{Discussion and Limitations}
 
@@ -328,6 +308,7 @@ According to Fermi's Golden Rule, the thermal transition and dephasing rate $\Ga
 \end{equation}
 
 \subsubsection{Validity Conditions}
+
 For this derivation to hold, the system-bath interaction must satisfy three key physical constraints:
 \begin{enumerate}
     \item \textbf{Weak-Coupling Regime ($\eta_{\text{th}} \ll 1$):} The system-bath coupling strength must be sufficiently weak to justify the second-order perturbation theory of Fermi's Golden Rule and prevent non-Markovian memory effects.
@@ -341,6 +322,7 @@ Applying these three conditions, the thermal transition rate expands as:
 \end{equation}
 
 \subsubsection{Mapping to the DTQEM Exponent}
+
 The total dephasing accumulated by the qubit over the effective interaction time $t_{\text{eff}}$ (the duration the system is exposed to the thermal bath or trapped in the cavity) is $\Gamma(T) \cdot t_{\text{eff}}$. Equating this to the DTQEM thermal dephasing exponent yields:
 \begin{equation}
     b(T) \cdot \frac{\Delta T}{T_{\text{ref}}} = \Gamma(T) \cdot t_{\text{eff}} \implies b(T) = \Gamma(T) \cdot t_{\text{eff}} \left( \frac{T_{\text{ref}}}{\Delta T} \right)
@@ -353,6 +335,7 @@ Substituting the expanded dephasing rate, we obtain the mass-dependent DTQEM dep
 where $b_0 = \frac{2 \pi \eta_{\text{th}} k_B T_{\text{ref}} t_{\text{eff}}}{\hbar}$ is the classical mass-independent dephasing, and $\chi = \frac{\hbar^2}{12 (k_B T)^2}$ is the quantum correction factor.
 
 \subsubsection{Isotopic Comparison and Predicted 0.248 Ratio}
+
 To test this isotopic scaling, we compare a trapped Hydrogen atom ($^1$H) and a Deuterium atom ($^2$D) under identical cryogenic dephasing environments. For the hyperfine clock transitions, the ground-state transition frequencies are:
 \begin{align}
     \nu_H &= \frac{\omega_H}{2\pi} \approx 1.4204\,\text{GHz} \\
@@ -435,6 +418,10 @@ Archived at Zenodo: \url{https://doi.org/10.5281/zenodo.20460770}
 \bibitem{weiss2012} U. Weiss, \emph{Quantum Dissipative Systems}, 4th ed. (World Scientific, 2012).
 \bibitem{rivas2014} \'{A}. Rivas et al., \emph{Rep. Prog. Phys.} \textbf{77}, 094001 (2014).
 \bibitem{burnham2002} K. P. Burnham and D. R. Anderson, \emph{Model Selection and Multimodel Inference} (Springer, 2002).
+\bibitem{breuer2016}
+H.-P. Breuer, E.-M. Laine, J. Piilo, and B. Vacchini,
+``Colloquium: Non-Markovian dynamics in open quantum systems,''
+\textit{Rev. Mod. Phys.} \textbf{88}, 021002 (2016).
 \bibitem{yu2009sudden} T. Yu and J. H. Eberly, \emph{Science} \textbf{323}, 598 (2009).
 \bibitem{zenodo_dtqem} R. Berramdane, Zenodo (2026), DOI: \url{10.5281/zenodo.20460770}.
 
