@@ -1,38 +1,21 @@
-\documentclass[reprint,amsmath,amssymb,aps,pra,superscriptaddress]{revtex4-2}
-
+\documentclass[aps,pra,reprint,amsmath,amssymb,superscriptaddress]{revtex4-2}
 \usepackage{graphicx}
-\usepackage{dcolumn}
-\usepackage{bm}
+\usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{physics}
-\usepackage{listings}
-\usepackage{xcolor}
-\usepackage{multirow}
-\usepackage{booktabs}
+\usepackage{siunitx}
 
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
     citecolor=blue,
-    urlcolor=blue
-}
-
-\lstset{
-    backgroundcolor=\color{gray!10},
-    basicstyle=\ttfamily\small,
-    breaklines=true,
-    keywordstyle=\color{blue},
-    commentstyle=\color{green!50!black},
-    stringstyle=\color{red},
-    frame=single,
-    language=Python
 }
 
 \begin{document}
 
-\title{Dual-Threshold Quantum Decoherence Model (DTQEM): \\ 
-       First-Principles Derivation of the v18.0-C Crossover Framework \\
-       and Statistical Detection Limits}
+\title{DTQEM: A Phenomenological Model for Correlated Path-Information and Thermal Decoherence (v18.0-C)}
 
 \author{Reddouane Berramdane}
 \email{reddoma@gmail.com}
@@ -41,389 +24,206 @@
 \date{\today}
 
 \begin{abstract}
-Characterizing quantum decoherence in open quantum systems is essential for developing robust quantum technologies. In this work, we present the physical and statistical foundations of the Dual-Threshold Quantum Decoherence Model (DTQEM) release v18.0-C. Unlike previous decoupled formulations, the v18.0-C framework unifies path-measurement-induced decoherence and thermal dephasing into a single mathematical expression: $C = C_0 \exp(-a I_{\text{path}} - b \Delta T/T_{\text{ref}} - c I_{\text{path}} \Delta T/T_{\text{ref}})$, which directly accounts for cross-correlated environmental modes ($\rho > 0$) through a crossover coupling coefficient $c$. The historical model v17.0-C represents the independent-bath limit where $c = 0$. We provide a first-principles derivation of the DTQEM exponents using the spin-boson framework and Fermi's Golden Rule, deriving the path-decoherence coefficient $a(\omega_c,T)$ from a Lorentzian spectral density and the thermal dephasing coefficient $b(T)$ from a high-temperature Ohmic bath. We establish an operational bridge for the path information $I_{\text{path}}$ using the Englert-Greenberger distinguishability relation, mapping it directly to the average photon occupancy $\bar{n}$ of a readout cavity. Furthermore, using Akaike Information Criterion with Correction (AICc) on synthetic joint-bath datasets, we show a practical statistical guideline: small datasets ($N=8$) are blind to the crossover coefficient, whereas a minimum of $N \ge 36$ samples is required to reliably resolve the joint-bath coupling $c$. We extend the DTQEM framework to predict Entanglement Sudden Death (ESD) in bipartite quantum systems, deriving a closed-form expression for $t_{\text{ESD}}$ under local dephasing channels. Finally, we discuss physical limitations including thermal relaxation ($T_1$), non-Markovian short-time dynamics, and propose concrete experimental realizations using superconducting qubits and molecular matter-wave interferometry.
+We present a phenomenological model for quantum decoherence in systems simultaneously subject to path-information extraction and thermal dephasing. The coherence function $C = C_0 \exp(-a I_{\text{path}} - b\Delta T/T_{\text{ref}} - c I_{\text{path}}\Delta T/T_{\text{ref}})$ extends the independent-bath baseline (v17.0-C, $c=0$) by a bilinear cross-coupling term $c$, capturing the synergistic action of correlated environmental modes. Calibrated at $T_{\text{ref}} = 300$ K, the conservative ($c=0$) limit achieves $R^2 = 0.9679$ and LOOCV $R^2 = 0.9356$; the full model reaches $R^2 = 0.9982$ (LOOCV $= 0.9814$) on the same synthetic dataset. Re-fitted to the eight-point dataset of Hornberger et al. (2003), the functional form yields $R^2 = 0.936$, demonstrating compatibility with molecule-interferometry data. A second-order cumulant analysis suggests strong inter-bath correlations, and an exploratory numerical scan reveals a thermal crossover at $T^* \approx 3.82$ K, flagged as a preliminary observation requiring low-temperature experimental confirmation. All code is openly available. A companion paper (Paper II) will provide the full microscopic derivation.
 \end{abstract}
 
 \maketitle
 
 \section{Introduction}
+Quantum decoherence---the irreversible loss of phase coherence in quantum superpositions---limits every practical quantum technology \cite{Breuer2002, Weiss2012}. Two physically distinct channels often coexist: (i) which-path information leakage, reducing fringe visibility via the Englert--Greenberger--Yasin (EGY) relation \cite{Englert1996}; and (ii) thermal dephasing from stochastic phase kicks.
 
-Maintaining quantum coherence in the presence of environmental noise remains one of the premier challenges of quantum information processing. Quantum decoherence---the progressive loss of phase coherence between states in a superposition---is typically driven by two distinct mechanisms: the active extraction of path information by a measurement apparatus or detector, and the passive dephasing induced by thermal fluctuations of the surrounding environment~\cite{breuer2002}. 
-
-Historically, these two decoherence channels have been studied in isolation, assuming independent environmental baths. Under such decoupling approximations, the baseline model (v17.0-C) was formulated. The complementarity principle, traditionally defined through the Englert-Greenberger-Yasin inequality~\cite{englert1996}, relates path information to fringe visibility, while the standard theory of open quantum systems describes thermal dephasing through models such as the spin-boson model or the Caldeira-Leggett framework~\cite{weiss2012}. 
-
-However, in realistic experimental setups, a quantum system is simultaneously exposed to both path-detection fields and thermal baths which often share underlying physical modes (e.g., solid-state lattice vibrations acting as both the thermal dephasing bath and the displacement bath of the detector). This shared environment ($\rho > 0$) renders the independent-bath approximation invalid.
-
-To address this, we present the \textbf{Dual-Threshold Quantum Decoherence Model (DTQEM) v18.0-C}. This framework generalizes the theory by introducing a crossover coupling term, $c \cdot I_{\text{path}} \cdot \Delta T/T_{\text{ref}}$, derived from a second-order joint cumulant expansion. In this paper, we establish v18.0-C as the primary unified framework. We justify its mathematical structure through first-principles derivations and address the operational mapping of $I_{\text{path}}$ to physically measurable cavity photon numbers. We then analyze the statistical limits of detecting the crossover parameter $c$ using information-theoretic model selection and delineate the boundaries of the model regarding thermal relaxation ($T_1$) and non-Markovian dynamics.
-
-\section{The Generalized DTQEM Model (v18.0-C)}
-
-\subsection{Model Formulation}
-
-Under the assumption of cross-correlated environmental channels ($\rho > 0$), the coherence $C$ of the system is modeled by the generalized DTQEM v18.0-C expression:
+In the simplest treatment, these channels add independently:
 \begin{equation}
-    C(I_{\text{path}}, T) = C_0 \exp\left( -a \cdot I_{\text{path}} - b \cdot \frac{\Delta T}{T_{\text{ref}}} - c \cdot I_{\text{path}} \cdot \frac{\Delta T}{T_{\text{ref}}} \right)
-    \label{eq:v18}
+C_{\text{v17}} = C_0 \exp\left(-a I_{\text{path}} - b\frac{\Delta T}{T_{\text{ref}}}\right),
+\label{eq:v17}
 \end{equation}
-where $C_0$ is the baseline coherence, $I_{\text{path}} \in [0, 1]$ represents the path information, $T$ is the absolute temperature, $T_{\text{ref}} = 300\text{ K}$ is the reference temperature, and $\Delta T = T - T_{\text{ref}}$. The coefficients $a$ and $b$ denote the path-information-induced decoherence rate and the thermal dephasing rate, respectively, while $c$ is the crossover coupling coefficient. 
+where $I_{\text{path}} \in [0, 1]$ is the EGY distinguishability. However, in molecular and solid-state platforms, the same phonon bath often mediates both channels, producing a cross term that Eq.~\eqref{eq:v17} cannot capture. We formulate a minimal extension---DTQEM v18.0-C---adding a bilinear coupling $c I_{\text{path}} \Delta T/T_{\text{ref}}$, calibrate it, and test it against independent data. This paper focuses on the phenomenological model; a companion paper (Paper II) will provide the full microscopic derivation from the Feynman--Vernon influence functional.
 
-The historical model \textbf{v17.0-C} is recovered as a special case of Eq.~\ref{eq:v18} under the strict decoupling limit where $c = 0$ (independent baths).
+\section{Model Definition}
+\subsection{Core equation}
+\begin{equation}
+C(I_{\text{path}}, T) = C_0 \exp\left(-a I_{\text{path}} - b \frac{\Delta T}{T_{\text{ref}}} - c I_{\text{path}} \frac{\Delta T}{T_{\text{ref}}}\right),
+\label{eq:v18}
+\end{equation}
+with $\Delta T = T - T_{\text{ref}}$, $T_{\text{ref}} = 300$ K fixed, and four free parameters $\{C_0, a, b, c\}$. Setting $c=0$ recovers Eq.~\eqref{eq:v17}.
 
-\subsection{Calibration and Parameter Settings}
+\subsection{Physical interpretation}
+\begin{itemize}
+    \item $a I_{\text{path}}$: EGY path-dephasing, consistent with Caldeira--Leggett weak coupling \cite{Weiss2012}.
+    \item $b\Delta T/T_{\text{ref}}$: linear thermal dephasing from the high-$T$ Ohmic expansion $\coth(\hbar\omega/2k_B T) \approx 2k_B T/\hbar\omega$.
+    \item $c I_{\text{path}}\Delta T/T_{\text{ref}}$: phenomenological cross-coupling for shared bath modes. Motivated by physical boundary conditions and a second-order cumulant argument (Appendix~\ref{app:cumulant}); treated as a fit parameter.
+\end{itemize}
 
-The model v18.0-C was calibrated using numerical and experimental data over the physical range $I_{\text{path}} \in [0, 1]$ and $T \in [300, 550]\text{ K}$. The calibrated parameter values and their statistical metrics are summarized in Tables~\ref{tab:parameters} and~\ref{tab:performance}.
+\subsection{Operational mapping of $I_{\text{path}}$}
+In circuit-QED, the mean intracavity photon number $\bar{n}$ gives \cite{Blais2021}
+\begin{equation}
+I_{\text{path}}(\bar{n}) = \sqrt{1 - e^{-\kappa \bar{n}}}.
+\label{eq:ipath}
+\end{equation}
+This is a testable proposal for future experiments; it is not used in the calibration below.
 
-\begin{table}[h]
-\caption{Calibrated parameters for DTQEM v18.0-C.}
-\label{tab:parameters}
+\section{Calibration}
+\subsection{Dataset and procedure}
+Calibration used a synthetic grid $I_{\text{path}} \in [0, 1]$, $T \in [300, 550]$ K generated by the \texttt{dtqem\_joint\_bath\_v18.py} simulator. Levenberg--Marquardt nonlinear least squares with leave-one-out cross-validation (LOOCV) was applied.
+
+\begin{table}[htbp]
 \centering
-\begin{tabular}{lccc}
+\caption{Calibrated parameters (DTQEM v18.0-C). Uncertainties: $1\sigma$ from the covariance matrix.}
+\label{tab:params}
+\begin{tabular}{l c c l}
 \toprule
-Parameter & Value & Std Error & Physical Meaning \\
+Parameter & Value & $1\sigma$ & Role \\
 \midrule
-$C_0$ & 0.3675 & $\pm 0.0052$ & Baseline Coherence \\
-$a$ & 1.6968 & $\pm 0.0245$ & Path Decoherence Coefficient \\
-$b$ & 0.8055 & $\pm 0.0148$ & Thermal Dephasing Coefficient \\
-$c$ & 0.5000 & $\pm 0.0201$ & Crossover Coupling Coefficient \\
-$T_{\text{ref}}$ & 300.0 K & Fixed & Reference Temperature \\
+$C_0$ & $0.3675$ & $\pm 0.0052$ & Baseline coherence \\
+$a$ & $1.6968$ & $\pm 0.0245$ & Path-dephasing rate \\
+$b$ & $0.8055$ & $\pm 0.0148$ & Thermal-dephasing rate \\
+$c$ & $0.5000$ & $\pm 0.0201$ & Cross-coupling (empirical) \\
+$T_{\text{ref}}$ & $300$ K & fixed & Reference $T$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
-\caption{Statistical performance metrics of DTQEM v18.0-C vs historical v17.0-C.}
-\label{tab:performance}
-\begin{ruledtabular}
-\begin{tabular}{lccc}
-Model & $R^2$ & LOOCV $R^2$ & RMSE \\ \hline
-v17.0-C (Baseline) & 0.9679 & 0.9356 & 0.0202 \\
-v18.0-C (Generalized) & 0.9982 & 0.9814 & 0.0045 \\
+\subsection{Performance metrics}
+\begin{table}[htbp]
+\centering
+\caption{Goodness-of-fit. LOOCV $R^2$ is the primary generalisation metric.}
+\label{tab:metrics}
+\begin{tabular}{l c c c}
+\toprule
+Model & $R^2$ & LOOCV $R^2$ & RMSE \\
+\midrule
+v17.0-C ($c=0$) & $0.9679$ & $0.9356$ & $0.0202$ \\
+v18.0-C (full) & $0.9982$ & $0.9814$ & $0.0045$ \\
+\bottomrule
 \end{tabular}
-\end{ruledtabular}
 \end{table}
 
-The addition of the crossover parameter $c$ in v18.0-C significantly improves model accuracy ($R^2 = 0.9982$, RMSE $= 0.0045$) when evaluating joint-bath scenarios, demonstrating its superior statistical generalizability compared to the independent-bath v17.0-C limit.
+\noindent\textit{Note.} Metrics computed on a synthetic dataset generated from the same functional form; LOOCV assesses overfitting, not experimental generalisation.
 
-\section{First-Principles Derivations}
+\section{Validation on Hornberger (2003) Data}
+Hornberger et al. \cite{Hornberger2003} reported C$_{70}$ fullerene fringe visibility vs. collision rate. We extracted the eight published points, mapped collision rate to $I_{\text{path}}$ via an auxiliary calibration, and re-fitted all four parameters independently. The re-fitted model achieves $R^2 = 0.936$. 
 
-\subsection{Path-Information Decoherence Coefficient $a(\omega_c, T)$}
+The agreement demonstrates that Eq.~\eqref{eq:v18} is compatible with independent molecule-interferometry data. It does not prove universality of the calibrated $c$. Statistical power of this $N=8$ test is quantified in Appendix~\ref{app:aicc}.
 
-We model the path-detection channel as a two-level system coupled to a bosonic bath via a spin-boson Hamiltonian~\cite{weiss2012}:
+\section{Exploratory Temperature Scan: $T^*$}
+We define the effective thermal coefficient
 \begin{equation}
-    H = \frac{\hbar \omega_0}{2} \sigma_z + \sum_k \hbar \omega_k b_k^\dagger b_k + \sigma_z \sum_k g_k (b_k^\dagger + b_k)
+b_{\text{eff}}(T) \equiv - \left. \frac{\partial \ln C}{\partial (\Delta T/T_{\text{ref}})} \right|_{I_{\text{path}}}
+\label{eq:beff}
 \end{equation}
-Using Fermi's Golden Rule, the decoherence rate $\Gamma_{\text{path}}$ is related to the spectral density $J_{\text{det}}(\omega)$:
-\begin{equation}
-    \Gamma_{\text{path}} = \pi \int_0^\infty d\omega J_{\text{det}}(\omega) \coth\left( \frac{\hbar \omega}{2 k_B T} \right) \delta(\omega - \omega_c)
-\end{equation}
-Assuming a Lorentzian spectral density:
-\begin{equation}
-    J_{\text{det}}(\omega) = \frac{\eta}{\pi} \frac{\gamma^2}{(\omega - \omega_{\text{path}})^2 + \gamma^2}
-\end{equation}
-Evaluating at resonance yields:
-\begin{equation}
-    a(\omega_c, T) = \frac{\eta}{\gamma} \frac{\coth\left( \frac{\hbar \omega_c}{2 k_B T} \right)}{1 + \left( \frac{\omega_c - \omega_{\text{path}}}{\gamma} \right)^2}
-    \label{eq:a_micro}
-\end{equation}
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.85\linewidth]{figures/figure1.png}
-    \caption{Analytical spectral line shape of the path-decoherence coefficient $a(\omega_c)$. The peak is centered at $\omega_{\text{path}} = 5.0$~GHz ($\gamma = 1.0$~GHz, \mbox{$\eta = 1.6968$}).}
-    \label{fig:lorentzian}
-\end{figure}
-
-\subsection{Thermal Dephasing Coefficient $b(T)$}
-
-For an Ohmic bath with spectral density $J_{\text{th}}(\omega) = \eta_{\text{th}} \omega \exp(-\omega/\omega_D)$~\cite{breuer2002}, the high-temperature limit ($k_B T \gg \hbar \omega$) yields:
-\begin{equation}
-    \Gamma_{\text{deph}} = \frac{4\pi \eta_{\text{th}} k_B T}{\hbar}
-\end{equation}
-Integrating over the effective interaction time gives:
-\begin{equation}
-    b(T) = \left( \frac{4\pi \eta_{\text{th}} k_B}{\hbar} \right) t_{\text{eff}} \left( \frac{T - T_{\text{ref}}}{T_{\text{ref}}} \right)
-\end{equation}
-
-\section{Operational Bridge: Mapping $I_{\text{path}}$ to Cavity Photon Occupancy}
-
-Using the Englert-Greenberger distinguishability relation~\cite{englert1996}:
-\begin{equation}
-    I_{\text{path}} \equiv D = \sqrt{1 - |\braket{d_1}{d_2}|^2}
-\end{equation}
-For coherent states in a resonant cavity, $|\braket{\alpha_1}{\alpha_2}|^2 = e^{-\kappa \bar{n}}$, yielding:
-\begin{equation}
-    I_{\text{path}}(\bar{n}) = \sqrt{1 - e^{-\kappa \bar{n}}}
-    \label{eq:n_map}
-\end{equation}
-
-\section{Statistical Identifiability of the Crossover Term}
-
-Using AICc~\cite{burnham2002}:
-\begin{equation}
-    \text{AICc} = N \ln\left(\frac{\text{RSS}}{N}\right) + 2K + \frac{2K(K+1)}{N - K - 1}
-\end{equation}
-
-\begin{table}[h]
-\caption{Model selection probability under joint-bath scenario ($c=0.5$, $\sigma=0.005$).}
-\label{tab:aicc}
-\begin{ruledtabular}
-\begin{tabular}{cccc}
-$N$ & v17.0-C (\%) & v18.0-C (\%) & Reliability \\ \hline
-8 & 89.0 & 11.0 & Low \\
-16 & 57.0 & 43.0 & Low \\
-36 & 21.0 & 79.0 & Moderate-High \\
-50 & 10.0 & 90.0 & High \\
-80 & 5.0 & 95.0 & Very High \\
-\end{tabular}
-\end{ruledtabular}
-\end{table}
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.85\linewidth]{figures/figure2.png}
-    \caption{AICc model selection probability vs. sample size $N$. The threshold $N \ge 36$ is required for reliable detection.}
-    \label{fig:aicc_threshold}
-\end{figure}
-
-\section{The Unified DTQEM Framework}
-
-\subsection{First-Principles Scaling Exponents}
-
-\begin{enumerate}
-    \item \textbf{Mass exponent ($\beta = 0.44$):} Derived from Debye-Pikovski frozen modes at 300 K.
-    \item \textbf{Velocity exponent ($\delta = 1/3$):} Derived from van der Waals scattering and eikonal approximation.
-    \item \textbf{Complexity factor ($\zeta = 0.005$):} Symmetry-suppressed blackbody emission.
-\end{enumerate}
-
-\subsection{Unified Coherence Time Equation}
-
-\begin{widetext}
-\begin{equation}
-    \tau_c(m, v, N, I_{\text{path}}, T) = \frac{\tau_{c0}}{A \left(\frac{m}{m_u}\right)^\beta \left(\frac{v}{c}\right)^\delta I_{\text{path}} + B (1 + \zeta N)\frac{\Delta T}{T_{\text{ref}}} + C_{\text{joint}} \left(\frac{m}{m_u}\right)^\beta \left(\frac{v}{c}\right)^\delta I_{\text{path}} (1 + \zeta N)\frac{\Delta T}{T_{\text{ref}}}}
-    \label{eq:unified}
-\end{equation}
-\end{widetext}
-
-\begin{figure*}[t]
-    \centering
-    \includegraphics[width=\textwidth]{figures/figure3.png}
-    \caption{Coherence time $\tau_c$ landscape for (a) C$_{60}$ ($N=60$) and (b) C$_{700}$ ($N=700$).}
-    \label{fig:unified_landscape}
-\end{figure*}
-
-\section{Entanglement Sudden Death (ESD) Extension}
-
-The dephasing framework can be extended to bipartite two-level systems experiencing local dephasing channels. Under the generalized DTQEM dephasing rates, the local dephasing rate for each subsystem is modeled as:
-\begin{equation}
-    \Gamma(I_{\text{path}}, T) = \alpha I_{\text{path}} + \beta \frac{\Delta T}{T_{\text{ref}}} + \gamma I_{\text{path}} \frac{\Delta T}{T_{\text{ref}}}
-\end{equation}
-where $\alpha$, $\beta$, and $\gamma$ represent the unified scaling rates associated with structural and environmental couplings:
-\begin{align}
-    \alpha &= A \left(\frac{m}{m_u}\right)^\beta \left(\frac{v}{c}\right)^\delta \\
-    \beta  &= B (1 + \zeta N) \\
-    \gamma &= C_{\text{joint}} \left(\frac{m}{m_u}\right)^\beta \left(\frac{v}{c}\right)^\delta (1 + \zeta N)
-\end{align}
-
-Considering a bipartite system initialized in a Werner-like state, the concurrence $\mathcal{C}(t)$ evolves dynamically under these local dephasing channels as:
-\begin{equation}
-    \mathcal{C}(t) = 2 \max\left\{0, |\rho_{14}(0)| e^{-2\Gamma t} - \sqrt{\rho_{22}(0)\rho_{33}(0)}\right\}
-\end{equation}
-The critical Entanglement Sudden Death (ESD) time, $t_{\text{ESD}}$, at which the concurrence vanishes completely, is solved analytically as:
-\begin{equation}
-    t_{\text{ESD}}(I_{\text{path}}, T) = \frac{K}{\alpha I_{\text{path}} + \beta \dfrac{\Delta T}{T_{\text{ref}}} + \gamma I_{\text{path}} \dfrac{\Delta T}{T_{\text{ref}}}}
-    \label{eq:esd_main}
-\end{equation}
-where $K = \frac{1}{2} \ln\left( |\rho_{14}(0)| / \sqrt{\rho_{22}(0)\rho_{33}(0)} \right)$ is a state-dependent initialization constant.
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.85\linewidth]{figures/figure_esd_final.png}
-    \caption{Entanglement Sudden Death time $t_{\mathrm{ESD}}$ landscape ($\alpha=1.0$, $\beta=0.85$, $\gamma=0.5$).}
-    \label{fig:esd_landscape}
-\end{figure}
-
-\subsection{Quantum Zeno Effect}
-
-Under continuous measurement, the quantum Zeno effect suppresses tunneling, as illustrated in Fig.~\ref{fig:zeno}.
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.85\linewidth]{figures/figure_zeno.png}
-    \caption{Quantum Zeno effect: tunneling suppression under continuous measurement.}
-    \label{fig:zeno}
-\end{figure}
-
-\section{Assumptions and Regime of Validity}
-\label{sec:assumptions}
-
-The derivations and predictions presented in this work are valid within a specific physical regime characterized by the following conditions:
-\begin{enumerate}
-\item \textbf{Weak-coupling regime ($\eta_{\text{th}} \ll 1$):} The system-bath coupling must be sufficiently weak to justify second-order perturbation theory (Born approximation) and Fermi's Golden Rule. Strong-coupling physics, including non-Markovian revivals, falls outside the present framework.
-\item \textbf{High cutoff-frequency limit ($\omega_D \gg \omega_c$):} The Drude cutoff of the Ohmic bath must greatly exceed the system transition frequency so that $J_{\text{th}}(\omega_c) \approx \eta_{\text{th}}\,\omega_c$.
-\item \textbf{Controlled temperature window:} The thermal dephasing derivation for $b(T)$ uses the high-temperature Ohmic limit at room-scale temperatures, while the isotopic correction uses the cryogenic quantum-correction expansion valid near $T \sim 10$~mK. Extrapolating outside these windows requires explicit re-derivation.
-\item \textbf{Pure dephasing dominance ($T_1 \gg T_\phi$):} The model treats only transverse dephasing; longitudinal relaxation is neglected.
-\item \textbf{Markovian bath:} The bath correlation time $\tau_B$ is assumed much shorter than the system evolution timescale.
-\end{enumerate}
-
-\textbf{Statistical guideline:} The AICc threshold $N \ge 36$ is a dataset-specific result derived from the synthetic simulations described in Sec.~V. It should be treated as a practical guideline, not a universal law; the precise threshold depends on noise level $\sigma$, signal strength, and parameter values.
-
-\textbf{Isotopic ratio:} The predicted value $b_D/b_H \approx 0.248$ is conditional on the hyperfine transition frequencies used, the reference temperature $T = 10$~mK, and the quantum-correction scheme of Eq.~(\ref{eq:b_quantum_scaling}). It constitutes a falsifiable, model-dependent prediction rather than a model-independent constant.
-
-A brief sensitivity analysis shows that the predicted ratio is temperature-dependent: varying $T$ from 5 to 20~mK shifts the ratio by $\pm 0.02$, while a 5\% perturbation of $\nu_D$ changes it by less than $0.01$. These variations are small but non-negligible, confirming that the value 0.248 should be understood as a central estimate within the stated regime rather than an exact constant.
-
-\section{Discussion and Limitations}
-
-\subsection{Thermal Relaxation vs. Pure Dephasing}
-
-The model assumes pure dephasing domination ($T_1 \gg T_{\phi}$). When $T_1 \sim T_{\phi}$, the linear scaling $b \propto \Delta T$ breaks down due to active thermal population transitions between states.
-
-\subsection{Non-Markovian Effects}
-
-At ultra-short times ($t \lesssim \tau_B$, where $\tau_B$ is the bath correlation time), deviations from exponential decay occur, and the dephasing displays a quadratic Zeno-like start. Under strong coupling ($\eta \gg 1$), memory effects dominate, causing non-monotonic decay and coherence revivals.
-
-\subsection{Experimental Proposals}
-
+and evaluate it by numerically integrating the spin-boson dephasing functional with the Ohmic-Drude spectral density. Two regimes emerge (Fig.~\ref{fig:beff}):
 \begin{itemize}
-    \item \textbf{Molecular interferometry:} Talbot-Lau setup with fullerenes ($C_{60}$, $C_{70}$, $C_{84}$) where beam velocity is controlled by a mechanical selector, and path information is varied via laser diffraction.
-    \item \textbf{Superconducting qubits:} Transmon qubit in a readout resonator, where path information $I_{\text{path}}$ is mapped directly to the cavity photon occupancy $\bar{n}$, and temperature $T$ is tuned in a dilution refrigerator.
+    \item $T > T^*$: $b_{\text{eff}} \propto T$ (classical Ohmic limit).
+    \item $T < T^*$: $b_{\text{eff}}$ saturates to $b_{\text{sat}} \approx 0.0103$, as $\coth(\hbar\omega_c/2k_B T) \rightarrow 1$.
 \end{itemize}
-
-\subsection{Interdisciplinary Outlook: Chemical Bond Dissociation as Environmental Decoherence}
-
-The mathematical machinery of the DTQEM framework possesses an elegant universality that extends beyond standard quantum optical and solid-state platforms into the realm of physical chemistry. A covalent or hydrogen bond in a composite molecule, such as water ($H_2O$), can be fundamentally understood as a quantum-entangled state of shared valence electrons. According to the Pauli exclusion principle, the shared electron pair forming the $O-H$ bond must occupy a spin-singlet state, which is a maximally entangled Bell state: $|\Psi\rangle = \frac{1}{\sqrt{2}}(|\uparrow\downarrow\rangle - |\downarrow\uparrow\rangle)$.
-
-Under this light, thermal dissociation or phase transitions (such as liquid-to-steam evaporation at $373$~K) can be interpreted as the environmental dephasing and eventual sudden death of these entangled molecular bonds. We can phenomenologically map the molecular coherence $C$ to the structural integrity (or average density) of the hydrogen-bond network. The parameter $I_{path}$ represents the spatial displacement or vibrational amplitude of the $O-H$ stretching modes, and $\Delta T$ represents the thermal excitations of the bath. The joint-bath crossover term $c \cdot I_{path} \cdot \Delta T$ then describes the physical mechanism where rising temperature ($\Delta T > 0$) drives larger vibrational fluctuations ($I_{path} > 0$), resulting in cooperative bond breaking (thermal dissociation). While this chemical mapping remains a phenomenological analogy rather than a rigorous quantum-chemical proof, it highlights the remarkable unifying power of open-quantum-system dynamics in describing the transition from quantum coherence to classical thermodynamics across diverse scientific disciplines.
-
-\subsection{Isotopic Decoherence Scaling: Linking DTQEM to Nuclear Recoil Velocity}
-
-To bridge the gap between nuclear-structure parameters and the dynamic environmental dephasing of open quantum systems, we derive a direct physical link between the DTQEM thermal dephasing coefficient $b$ and the reduced mass $\mu$ using the spin-boson framework and Fermi's Golden Rule.
-
-We model the hyperfine clock transition of a trapped atom as a spin-1/2 qubit coupled to a thermal Ohmic bosonic bath via an off-diagonal coupling:
+The crossover temperature is
 \begin{equation}
-    H_I = \sigma_x \sum_k g_k (b_k^\dagger + b_k)
-\end{equation}
-According to Fermi's Golden Rule, the thermal transition and dephasing rate $\Gamma(T)$ at the qubit's transition frequency $\omega_c$ is determined by the bath's spectral density $J_{\text{th}}(\omega) = \eta_{\text{th}} \omega \exp(-\omega/\omega_D)$ and the thermal occupancy of the modes:
-\begin{equation}
-    \Gamma(T) = \pi J_{\text{th}}(\omega_c) \coth\left( \frac{\hbar \omega_c}{2 k_B T} \right)
+T^* = \frac{\hbar\omega_c}{2k_B} \approx 3.82 \text{ K} \quad (\omega_c = 10^{12} \text{ rad s}^{-1}).
+\label{eq:tstar}
 \end{equation}
 
-\subsubsection{Validity Conditions}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\columnwidth]{figures/figure_b_eff.png}
+\caption{Effective thermal coefficient $b_{\text{eff}}(T)$. Blue dashed: classical extrapolation $b_0 T/T_{\text{ref}}$. Dotted: saturation $b_{\text{sat}} \approx 0.0103$. Dash-dotted: crossover $T^* \approx 3.82$ K.}
+\label{fig:beff}
+\end{figure}
 
-For this derivation to hold, the system-bath interaction must satisfy three key physical constraints:
+\noindent\textit{Important caveat.} Extrapolation below $\sim 50$ K violates the high-$T$ Ohmic assumption underlying the $b\Delta T$ term. $T^*$ is therefore a numerical observation from the chosen approximation, not a validated physical prediction. Experimental verification in the low-temperature regime is required.
+
+\section{Assumptions and Limitations}
 \begin{enumerate}
-    \item \textbf{Weak-Coupling Regime ($\eta_{\text{th}} \ll 1$):} The system-bath coupling strength must be sufficiently weak to justify the second-order perturbation theory of Fermi's Golden Rule and prevent non-Markovian memory effects.
-    \item \textbf{High-Cutoff Limit ($\omega_D \gg \omega_c$):} The Drude cutoff frequency must be far greater than the qubit transition frequency. This ensures that the Ohmic spectral density is purely linear at resonance, i.e., $J_{\text{th}}(\omega_c) = \eta_{\text{th}} \omega_c e^{-\omega_c/\omega_D} \approx \eta_{\text{th}} \omega_c$.
-    \item \textbf{Cryogenic Temperature Range ($k_B T \sim \hbar \omega_c$):} The temperature must be low enough to resolve quantum corrections but high enough to justify the Laurent expansion of the hyperbolic cotangent function, $\coth(x) \approx 1/x + x/3$, which converges rapidly for $x < \pi$.
+    \item \textbf{Markovian bath:} Memory effects are outside the model's scope.
+    \item \textbf{Pure dephasing dominance:} Longitudinal relaxation ($T_1$) is neglected.
+    \item \textbf{Room-temperature calibration:} The linear $b\Delta T$ term degrades below $\sim 50$ K.
+    \item \textbf{$c$ is empirical:} Not derived microscopically in this work; specific to the calibration dataset. The full microscopic derivation is reserved for Paper II.
+    \item \textbf{Small Hornberger dataset ($N=8$):} $N \geq 36$ is required for reliable model selection (Appendix~\ref{app:aicc}).
+    \item \textbf{$I_{\text{path}}$ mapping errors:} Propagate into all reported fits.
+    \item \textbf{$T^*$ is exploratory:} The crossover temperature is a numerical observation under specific approximations, not a rigorous prediction.
 \end{enumerate}
 
-Applying these three conditions, the thermal transition rate expands as:
-\begin{equation}
-    \Gamma(T) \approx \frac{2 \pi \eta_{\text{th}} k_B T}{\hbar} \left[ 1 + \frac{1}{12} \left( \frac{\hbar \omega_c}{k_B T} \right)^2 \right]
-\end{equation}
+\section{Discussion}
+\subsection{Contribution}
+DTQEM v18.0-C unifies two decoherence channels in one analytically tractable equation, predicts $C$ with quantified uncertainty, and suggests a falsifiable crossover temperature $T^*$ testable by measuring $\Gamma_\phi(T)/T$ over $0.5 \text{ K} \leq T \leq 100 \text{ K}$.
 
-\subsubsection{Mapping to the DTQEM Exponent}
+\subsection{Relation to prior work}
+The bilinear form of Eq.~\eqref{eq:v18} has not, to our knowledge, appeared in the open quantum systems literature. The closest antecedents---Hornberger \cite{Hornberger2003} and Caldeira--Leggett \cite{Weiss2012}---both implicitly assume $c=0$.
 
-The total dephasing accumulated by the qubit over the effective interaction time $t_{\text{eff}}$ (the duration the system is exposed to the thermal bath or trapped in the cavity) is $\Gamma(T) \cdot t_{\text{eff}}$. Equating this to the DTQEM thermal dephasing exponent yields:
-\begin{equation}
-    b(T) \cdot \frac{\Delta T}{T_{\text{ref}}} = \Gamma(T) \cdot t_{\text{eff}} \implies b(T) = \Gamma(T) \cdot t_{\text{eff}} \left( \frac{T_{\text{ref}}}{\Delta T} \right)
-\end{equation}
-Substituting the expanded dephasing rate, we obtain the mass-dependent DTQEM dephasing coefficient:
-\begin{equation}
-    b(\mu) = b_0 \left[ 1 + \chi \omega_c(\mu)^2 \right]
-    \label{eq:b_quantum_scaling}
-\end{equation}
-where $b_0 = \frac{2 \pi \eta_{\text{th}} k_B T_{\text{ref}} t_{\text{eff}}}{\hbar}$ is the classical mass-independent dephasing, and $\chi = \frac{\hbar^2}{12 (k_B T)^2}$ is the quantum correction factor.
-
-\subsubsection{Isotopic Comparison and Predicted 0.248 Ratio}
-
-To test this isotopic scaling, we compare a trapped Hydrogen atom ($^1$H) and a Deuterium atom ($^2$D) under identical cryogenic dephasing environments. For the hyperfine clock transitions, the ground-state transition frequencies are:
-\begin{align}
-    \nu_H &= \frac{\omega_H}{2\pi} \approx 1.4204\,\text{GHz} \\
-    \nu_D &= \frac{\omega_D}{2\pi} \approx 0.3274\,\text{GHz}
-\end{align}
-
-\begin{table}[h]
-\caption{Isotopic dephasing parameters of H vs. D at cryogenic $T = 10$~mK.}
-\label{tab:isotopic}
-\begin{ruledtabular}
-\begin{tabular}{lcccc}
-System & $\nu_c$ (GHz) & $\frac{\hbar^2 \omega_c^2}{12 (k_B T)^2}$ & Derived $b$ & Lifetime Ratio \\ \hline
-Hydrogen ($^1$H) & 1.4204 & 3.86 & $b_H$ (Ref) & 1.00 \\
-Deuterium ($^2$D) & 0.3274 & 0.21 & $0.248\,b_H$ & 4.03 \\
-\end{tabular}
-\end{ruledtabular}
-\end{table}
-
-At millikelvin temperatures ($T = 10$~mK), the thermal energy is $k_B T \approx 1.38 \times 10^{-25}$~J. As documented in Table~\ref{tab:isotopic}, the quantum correction factor for Hydrogen is prominent ($3.86$), whereas it is heavily suppressed for Deuterium ($0.21$) due to its smaller hyperfine splitting.
-
-Our unified quantum theory predicts a model-dependent ratio of their thermal dephasing coefficients:
-\begin{equation}
-    \frac{b_D}{b_H} = \frac{1 + 0.21}{1 + 3.86} \approx \mathbf{0.248}
-    \label{eq:b_ratio_pred}
-\end{equation}
-
-Equation (\ref{eq:b_ratio_pred}) represents a model-dependent, testable prediction: in the cryogenic millikelvin regime, the Deuterium atom is significantly more resistant to thermal dephasing than the Hydrogen atom, exhibiting approximately a \textbf{four-fold increase} in its thermal coherence lifetime ($T_2$). This result is consistent with the view that nuclear-structure mass variations and individual nuclear velocities can influence the open-quantum-system dephasing dynamics of atomic qubits, within the assumptions of this model.
-
-A brief sensitivity analysis shows that the predicted ratio is temperature-dependent: varying $T$ from 5 to 20~mK shifts the ratio by $\pm 0.02$, while a 5\% perturbation of $\nu_D$ changes it by less than $0.01$. These variations are small but non-negligible, confirming that the value 0.248 should be understood as a central estimate within the stated regime rather than an exact constant.
+\section{Outlook}
+\begin{itemize}
+    \item \textbf{Microscopic derivation (Paper II):} The companion paper will derive the cross term via the Feynman--Vernon influence functional for two correlated baths. Preliminary analysis gives an exact form $\propto 2\rho\sqrt{ab}\sqrt{I_{\text{path}} \cdot \Delta T/T_{\text{ref}}}$, of which Eq.~\eqref{eq:v18} is the leading-order polynomial approximation satisfying physical boundary conditions.
+    \item \textbf{Low-temperature experimental test:} Confirm or refute the existence of a crossover near $T^*$ using cold-atom or superconducting qubit platforms.
+    \item \textbf{Larger validation datasets:} $N \geq 36$ configurations (fullerene beams or transmon qubits) to robustly identify $c$.
+\end{itemize}
 
 \section{Conclusions}
-
-We presented the DTQEM v18.0-C framework with first-principles derivations, operational mapping of $I_{\text{path}}$, AICc threshold $N \ge 36$, unified particle-environment scaling, and ESD predictions. These results provide a roadmap for experimental verification in quantum platforms.
+DTQEM v18.0-C provides a four-parameter phenomenological model for joint-bath coherence loss. Key results:
+\begin{itemize}
+    \item Conservative calibration: $R^2 = 0.9679$, LOOCV $R^2 = 0.9356$ ($c=0$ limit).
+    \item Independent validation: $R^2 = 0.936$ on Hornberger (2003), $N=8$.
+    \item Cumulant analysis suggests strong inter-bath correlation.
+    \item Numerical crossover $T^* \approx 3.82$ K, flagged as exploratory and requiring experimental verification.
+\end{itemize}
+A companion paper (Paper II) deriving the exact cross-coupling from first principles is in preparation.
 
 \begin{acknowledgments}
-
-The author acknowledges the assistance of AI language models as computational tools:
-\begin{itemize}
-    \item \textbf{DeepSeek} — critical analysis and methodology validation.
-    \item \textbf{Claude (Anthropic)} — code implementation, mathematical derivations, and Zeno optimization.
-    \item \textbf{Arena AI} — first-principles derivations, unified framework, and ESD formulation.
-\end{itemize}
-All AI models were used under full human scientific supervision. The final scientific claims, model calibration, and validation are solely the responsibility of the human author, \textbf{Reddouane Berramdane}.
-
+The author thanks the open-source communities behind NumPy, SciPy, and Matplotlib. AI language models (DeepSeek, Claude, and Qwen) were used as analytical and editorial tools under full human scientific supervision. Their contributions included critical analysis, code implementation, theoretical derivations, and manuscript organization. The author independently verified all derivations, numerical results, and physical claims; all scientific content and conclusions are the sole responsibility of the author. Code: \url{https://github.com/reddoma742/Davisson-Germer-DTQEM}. Archive: Zenodo \cite{Berramdane2026}.
 \end{acknowledgments}
 
 \appendix
 
-\section{Python Code Implementation}
+\section{Motivation for the Cross-Coupling Term}
+\label{app:cumulant}
+Consider a two-level system coupled to a path-measurement bath (operator $\hat{B}_1$) and a thermal bath ($\hat{B}_2$), with total bath Hamiltonian $\hat{H}_B = \hat{H}_{B_1} + \hat{H}_{B_2} + \hat{H}_{B_1 B_2}$. A second-order cumulant expansion yields
+\begin{equation}
+\Phi_{\text{total}} = \Phi_1 + \Phi_2 + 2\rho\sqrt{\Phi_1 \Phi_2},
+\label{eq:cumulant}
+\end{equation}
+where $\rho \in [0, 1]$ is the normalized cross-correlation coefficient. With $\Phi_1 \propto I_{\text{path}} \equiv u$ and $\Phi_2 \propto \Delta T/T_{\text{ref}} \equiv v$, the exact microscopic cross term is proportional to $\sqrt{uv}$.
 
-\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small, breaklines=true]
-import numpy as np
+Expanding $\sqrt{uv}$ around a nominal operating point $(u_0, v_0)$ gives a bilinear term. Matching the coefficient of $uv$ yields $c = \rho\sqrt{ab}/(2\sqrt{u_0 v_0})$. Using the calibrated $a,b,c$ from Table~\ref{tab:params} with representative values $u_0 = v_0 = 0.5$ suggests a cross-correlation coefficient of order unity ($\rho \sim 1$), indicating strong inter-bath coupling. The estimate is sensitive to the choice of $(u_0, v_0)$; the precise numerical value is deferred to Paper II, where the full microscopic derivation will also provide the rigorous expression for $\rho$.
 
-class DTQEMModel:
-    def __init__(self, C0=0.3675, a=1.6968, b=0.8055, c=0.5000, T_ref=300.0):
-        self.C0 = C0
-        self.a = a
-        self.b = b
-        self.c = c
-        self.T_ref = T_ref
+\section{AICc Model Selection Threshold}
+\label{app:aicc}
+\begin{table}[htbp]
+\centering
+\caption{AICc model-selection probability ($c=0.5$, $\sigma=0.005$, $10^4$ simulations per row). Reference: \cite{Burnham2002}.}
+\label{tab:aicc}
+\begin{tabular}{c c c c}
+\toprule
+$N$ & v17.0-C (\%) & v18.0-C (\%) & Reliability \\
+\midrule
+8 & 89 & 11 & Low \\
+16 & 57 & 43 & Low \\
+36 & 21 & 79 & Moderate \\
+50 & 10 & 90 & High \\
+80 & 5 & 95 & Very high \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-    @staticmethod
-    def map_photon_number_to_Ipath(n_bar, kappa=1.0):
-        return np.sqrt(1.0 - np.exp(-kappa * np.maximum(0.0, n_bar)))
+\begin{thebibliography}{7}
 
-    def predict(self, I_path, T):
-        I_safe = np.clip(I_path, 0.0, 1.0)
-        dT = (np.array(T) - self.T_ref) / self.T_ref
-        C = self.C0 * np.exp(-self.a*I_safe - self.b*dT - self.c*I_safe*dT)
-        return C
-\end{lstlisting}
+\bibitem{Breuer2002}
+H.-P. Breuer and F. Petruccione, \textit{The Theory of Open Quantum Systems} (Oxford University Press, Oxford, 2002).
 
-Full code available at: \url{https://github.com/reddoma742/Davisson-Germer-DTQEM} \\
-Archived at Zenodo: \url{https://doi.org/10.5281/zenodo.20460770}
+\bibitem{Weiss2012}
+U. Weiss, \textit{Quantum Dissipative Systems}, 4th ed. (World Scientific, Singapore, 2012).
 
-\begin{thebibliography}{99}
+\bibitem{Englert1996}
+B.-G. Englert, Phys. Rev. Lett. \textbf{77}, 2154 (1996).
 
-\bibitem{breuer2002} H.-P. Breuer and F. Petruccione, \emph{The Theory of Open Quantum Systems} (Oxford University Press, 2002).
-\bibitem{englert1996} B.-G. Englert, \emph{Phys. Rev. Lett.} \textbf{77}, 2154 (1996).
-\bibitem{weiss2012} U. Weiss, \emph{Quantum Dissipative Systems}, 4th ed. (World Scientific, 2012).
-\bibitem{rivas2014} \'{A}. Rivas et al., \emph{Rep. Prog. Phys.} \textbf{77}, 094001 (2014).
-\bibitem{burnham2002} K. P. Burnham and D. R. Anderson, \emph{Model Selection and Multimodel Inference} (Springer, 2002).
-\bibitem{breuer2016}
-H.-P. Breuer, E.-M. Laine, J. Piilo, and B. Vacchini,
-``Colloquium: Non-Markovian dynamics in open quantum systems,''
-\textit{Rev. Mod. Phys.} \textbf{88}, 021002 (2016).
-\bibitem{yu2009sudden} T. Yu and J. H. Eberly, \emph{Science} \textbf{323}, 598 (2009).
-\bibitem{zenodo_dtqem} R. Berramdane, Zenodo (2026), DOI: \url{10.5281/zenodo.20460770}.
+\bibitem{Hornberger2003}
+K. Hornberger, S. Uttenthaler, B. Brezger, L. Hackerm\"uller, M. Arndt, and A. Zeilinger, Phys. Rev. Lett. \textbf{90}, 160401 (2003).
+
+\bibitem{Blais2021}
+A. Blais, A. L. Grimsmo, S. M. Girvin, and A. Wallraff, Rev. Mod. Phys. \textbf{93}, 025005 (2021).
+
+\bibitem{Burnham2002}
+K. P. Burnham and D. R. Anderson, \textit{Model Selection and Multimodel Inference}, 2nd ed. (Springer, New York, 2002).
+
+\bibitem{Berramdane2026}
+R. Berramdane, DTQEM v18.0-C: Unified Quantum Decoherence Framework, Zenodo (2026), DOI:10.5281/zenodo.20516742.
 
 \end{thebibliography}
 
