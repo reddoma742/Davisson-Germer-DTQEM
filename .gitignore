@@ -53,8 +53,10 @@ htmlcov/
 *.out
 *.toc
 *.synctex.gz
-# Keep the final PDF (uncomment if you want to track it)
-# !paper/paper.pdf
+
+# Keep the final paper PDF
+!paper1_final.pdf
+!paper2.pdf
 
 # Output folders (specific to your project)
 output/
@@ -69,11 +71,9 @@ results/*.png
 *.jpeg
 
 # But keep the main figures for documentation
+!figures/figure_b_eff.png
 !figures/figure1.png
 !figures/figure2.png
-!figures/figure3.png
-!figures/figure_zeno.png
-!figures/figure_esd_final.png
 
 # IDE
 .vscode/
