@@ -1,4 +1,37 @@
+## [v18.0-C-paper] – 2026-06-11  ← PAPER RELEASE
 
+### 🎯 Summary
+Publication-ready release of DTQEM v18.0-C. Complete LaTeX manuscript (Paper I) 
+submitted to arXiv, including full calibration, validation on Hornberger (2003) data, 
+and exploratory temperature scan predicting T* ≈ 3.82 K.
+
+### ✨ Added (this release)
+
+#### Paper (LaTeX)
+- `paper/paper1_final.tex` – complete manuscript ready for arXiv
+- Abstract includes: R²=0.9679 (c=0), R²=0.9982 (full), LOOCV R²=0.9814
+- Validation on Hornberger et al. (2003): R²=0.936 (N=8)
+- Appendix: cumulant derivation of cross-coupling term
+- Acknowledgments: explicit mention of AI models (DeepSeek, Claude, Qwen)
+
+#### Figure
+- `figures/figure_b_eff.png` – effective thermal coefficient b_eff(T)
+  - Classical regime: T > T* (b ∝ T)
+  - Saturation regime: T < T* (b_sat ≈ 0.0103)
+  - Crossover: T* ≈ 3.82 K (marked as exploratory)
+
+#### Code improvements
+- Custom `\coth` command (removed physics package dependency)
+- Suppressed LaTeX warnings (siunitx compatibility)
+
+### 📊 New validation result
+
+| Dataset | R² | Notes |
+|---------|-----|-------|
+| Hornberger 2003 (N=8) | 0.936 | Independent experimental validation |
+
+### 📁 New files
+paper/paper1_final.tex figures/figure_b_eff.png scripts/generate_figure_beff.py (optional) .gitignore (updated)
 
 ```markdown
 # DTQEM – Project History & Changelog
@@ -6,6 +39,14 @@
 All notable changes to the DTQEM project are documented in this file.  
 Format inspired by [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+### 🔗 DOI
+> Zenodo (to be updated after upload):  
+> Current: [10.5281/zenodo.20516742](https://doi.org/10.5281/zenodo.20516742)  
+> New DOI will be shared after final archive submission.
+
+### ⚠️ Updated limitations
+- Hornberger validation (N=8) demonstrates compatibility, not universality
+- T* ≈ 3.82 K is exploratory – requires low-temperature experimental confirmation
 ---
 
 ## [ESD v1.0] – 2026-06-02  ← LATEST ADDITION
