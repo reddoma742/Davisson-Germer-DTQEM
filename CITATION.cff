@@ -10,10 +10,10 @@ authors:
     email: reddoma@gmail.com
     orcid: ""
 
-title: "DTQEM: Dual-Threshold Quantum Decoherence Models – Complete Framework (v16, v17, v18, v63, Unified, ESD)"
+title: "DTQEM: Dual-Threshold Quantum Decoherence Models – Complete Framework (v16, v17, v18, Unified, ESD)"
 
 version: "1.0"
-date-released: 2026-06-02
+date-released: 2026-06-11
 
 doi: "10.5281/zenodo.20460770"
 url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
@@ -91,10 +91,20 @@ references:
     year: 2026
     note: "ESD time prediction under local dephasing channels"
 
+  - type: article
+    title: "DTQEM: A Phenomenological Model for Correlated Path-Information and Thermal Decoherence (v18.0-C)"
+    authors:
+      - family-names: Berramdane
+        given-names: Reddouane
+    year: 2026
+    note: "arXiv preprint (Paper I)"
+    url: "https://arxiv.org/abs/xxxx.xxxxx"
+
 comment: |
   Development was assisted by AI language models as computational tools:
   - DeepSeek (critical analysis, methodology validation)
   - Claude (Anthropic) (code writing, derivations, documentation, Zeno optimization)
+  - Qwen (editorial assistance, manuscript formatting, LaTeX optimization)
   - Arena AI (first‑principles derivations of scaling exponents, unification, ESD formulation)
 
   Human scientific supervision, calibration, and final validation:
