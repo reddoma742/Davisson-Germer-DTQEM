@@ -27,9 +27,11 @@
 \affiliation{Independent Researcher, Oujda, Morocco}
 
 \date{\today}
+\vspace{0.5cm}
+\texttt{DOI: 10.5281/zenodo.20670032}
 
 \begin{abstract}
-We present a phenomenological model for quantum decoherence in systems simultaneously subject to path-information extraction and thermal dephasing. The coherence function $C = C_0 \exp(-a I_{\text{path}} - b\Delta T/T_{\text{ref}} - c I_{\text{path}}\Delta T/T_{\text{ref}})$ extends the independent-bath baseline (v17.0-C, $c=0$) by a bilinear cross-coupling term $c$, capturing the synergistic action of correlated environmental modes. Calibrated at $T_{\text{ref}} = 300$ K, the conservative ($c=0$) limit achieves $R^2 = 0.9679$ and LOOCV $R^2 = 0.9356$; the full model reaches $R^2 = 0.9982$ (LOOCV $= 0.9814$) on the same synthetic dataset. Re-fitted to the eight-point dataset of Hornberger et al. (2003), the functional form yields $R^2 = 0.936$, demonstrating compatibility with molecule-interferometry data. A second-order cumulant analysis suggests strong inter-bath correlations, and an exploratory numerical scan reveals a thermal crossover at $T^* \approx 3.82$ K, flagged as a preliminary observation requiring low-temperature experimental confirmation. All code is openly available. A companion paper (Paper II) will provide the full microscopic derivation.
+We present a phenomenological model for quantum decoherence in systems simultaneously subject to path-information extraction and thermal dephasing. The coherence function $C = C_0 \exp(-a I_{\text{path}} - b\Delta T/T_{\text{ref}} - c I_{\text{path}}\Delta T/T_{\text{ref}})$ extends the independent-bath baseline (v17.0-C, $c=0$) by a bilinear cross-coupling term $c$, capturing the synergistic action of correlated environmental modes. Calibrated at $T_{\text{ref}} = 300$ K, the conservative ($c=0$) limit achieves $R^2 = 0.9679$ and LOOCV $R^2 = 0.9356$; the full model reaches $R^2 = 0.9982$ (LOOCV $= 0.9814$) on the same synthetic dataset. Re-fitted to the eight-point dataset of Hornberger et al. (2003), the functional form yields $R^2 = 0.936$, demonstrating compatibility with molecule-interferometry data. A second-order cumulant analysis suggests strong inter-bath correlations, and an exploratory numerical scan reveals a thermal crossover at $T^* \approx 3.82$ K, flagged as a preliminary observation requiring low-temperature experimental confirmation. All code is openly available. A companion paper (Paper II) provides the full microscopic derivation.
 \end{abstract}
 
 \maketitle
@@ -42,7 +44,7 @@ In the simplest treatment, these channels add independently:
 C_{\text{v17}} = C_0 \exp\left(-a I_{\text{path}} - b\frac{\Delta T}{T_{\text{ref}}}\right),
 \label{eq:v17}
 \end{equation}
-where $I_{\text{path}} \in [0, 1]$ is the EGY distinguishability. However, in molecular and solid-state platforms, the same phonon bath often mediates both channels, producing a cross term that Eq.~\eqref{eq:v17} cannot capture. We formulate a minimal extension---DTQEM v18.0-C---adding a bilinear coupling $c I_{\text{path}} \Delta T/T_{\text{ref}}$, calibrate it, and test it against independent data. This paper focuses on the phenomenological model; a companion paper (Paper II) will provide the full microscopic derivation from the Feynman--Vernon influence functional.
+where $I_{\text{path}} \in [0, 1]$ is the EGY distinguishability. However, in molecular and solid-state platforms, the same phonon bath often mediates both channels, producing a cross term that Eq.~\eqref{eq:v17} cannot capture. We formulate a minimal extension---DTQEM v18.0-C---adding a bilinear coupling $c I_{\text{path}} \Delta T/T_{\text{ref}}$, calibrate it, and test it against independent data. This paper focuses on the phenomenological model; a companion paper (Paper II) provides the full microscopic derivation from the Feynman--Vernon influence functional.
 
 \section{Model Definition}
 \subsection{Core equation}
@@ -141,7 +143,7 @@ T^* = \frac{\hbar\omega_c}{2k_B} \approx 3.82 \text{ K} \quad (\omega_c = 10^{12
     \item \textbf{Markovian bath:} Memory effects are outside the model's scope.
     \item \textbf{Pure dephasing dominance:} Longitudinal relaxation ($T_1$) is neglected.
     \item \textbf{Room-temperature calibration:} The linear $b\Delta T$ term degrades below $\sim 50$ K.
-    \item \textbf{$c$ is empirical:} Not derived microscopically in this work; specific to the calibration dataset. The full microscopic derivation is reserved for Paper II.
+    \item \textbf{$c$ is empirical:} Not derived microscopically in this work; specific to the calibration dataset. The full microscopic derivation is presented in Paper II.
     \item \textbf{Small Hornberger dataset ($N=8$):} $N \geq 36$ is required for reliable model selection (Appendix~\ref{app:aicc}).
     \item \textbf{$I_{\text{path}}$ mapping errors:} Propagate into all reported fits.
     \item \textbf{$T^*$ is exploratory:} The crossover temperature is a numerical observation under specific approximations, not a rigorous prediction.
@@ -156,7 +158,7 @@ The bilinear form of Eq.~\eqref{eq:v18} has not, to our knowledge, appeared in t
 
 \section{Outlook}
 \begin{itemize}
-    \item \textbf{Microscopic derivation (Paper II):} The companion paper will derive the cross term via the Feynman--Vernon influence functional for two correlated baths. Preliminary analysis gives an exact form $\propto 2\rho\sqrt{ab}\sqrt{I_{\text{path}} \cdot \Delta T/T_{\text{ref}}}$, of which Eq.~\eqref{eq:v18} is the leading-order polynomial approximation satisfying physical boundary conditions.
+    \item \textbf{Microscopic derivation (Paper II):} The companion paper derives the cross term via the Feynman--Vernon influence functional for two correlated baths. The exact form is $\propto 2\rho\sqrt{ab}\sqrt{I_{\text{path}} \cdot \Delta T/T_{\text{ref}}}$, of which Eq.~\eqref{eq:v18} is the leading-order polynomial approximation satisfying physical boundary conditions.
     \item \textbf{Low-temperature experimental test:} Confirm or refute the existence of a crossover near $T^*$ using cold-atom or superconducting qubit platforms.
     \item \textbf{Larger validation datasets:} $N \geq 36$ configurations (fullerene beams or transmon qubits) to robustly identify $c$.
 \end{itemize}
@@ -169,7 +171,7 @@ DTQEM v18.0-C provides a four-parameter phenomenological model for joint-bath co
     \item Cumulant analysis suggests strong inter-bath correlation.
     \item Numerical crossover $T^* \approx 3.82$ K, flagged as exploratory and requiring experimental verification.
 \end{itemize}
-A companion paper (Paper II) deriving the exact cross-coupling from first principles is in preparation.
+A companion paper (Paper II) deriving the exact cross-coupling from first principles is available alongside this work.
 
 \begin{acknowledgments}
 The author thanks the open-source communities behind NumPy, SciPy, and Matplotlib. AI language models (DeepSeek, Claude, and Qwen) were used as analytical and editorial tools under full human scientific supervision. Their contributions included critical analysis, code implementation, theoretical derivations, and manuscript organization. The author independently verified all derivations, numerical results, and physical claims; all scientific content and conclusions are the sole responsibility of the author. Code: \url{https://github.com/reddoma742/Davisson-Germer-DTQEM}. Archive: Zenodo \cite{Berramdane2026}.
@@ -186,7 +188,7 @@ Consider a two-level system coupled to a path-measurement bath (operator $\hat{B
 \end{equation}
 where $\rho \in [0, 1]$ is the normalized cross-correlation coefficient. With $\Phi_1 \propto I_{\text{path}} \equiv u$ and $\Phi_2 \propto \Delta T/T_{\text{ref}} \equiv v$, the exact microscopic cross term is proportional to $\sqrt{uv}$.
 
-Expanding $\sqrt{uv}$ around a nominal operating point $(u_0, v_0)$ gives a bilinear term. Matching the coefficient of $uv$ yields $c = \rho\sqrt{ab}/(2\sqrt{u_0 v_0})$. Using the calibrated $a,b,c$ from Table~\ref{tab:params} with representative values $u_0 = v_0 = 0.5$ suggests a cross-correlation coefficient of order unity ($\rho \sim 1$), indicating strong inter-bath coupling. The estimate is sensitive to the choice of $(u_0, v_0)$; the precise numerical value is deferred to Paper II, where the full microscopic derivation will also provide the rigorous expression for $\rho$.
+Expanding $\sqrt{uv}$ around a nominal operating point $(u_0, v_0)$ gives a bilinear term. Matching the coefficient of $uv$ yields $c = \rho\sqrt{ab}/(2\sqrt{u_0 v_0})$. Using the calibrated $a,b,c$ from Table~\ref{tab:params} with representative values $u_0 = v_0 = 0.5$ suggests a cross-correlation coefficient of order unity ($\rho \sim 1$), indicating strong inter-bath coupling. The estimate is sensitive to the choice of $(u_0, v_0)$; the precise numerical value is presented in Paper II, which provides the full microscopic derivation and the rigorous expression for $\rho$.
 
 \section{AICc Model Selection Threshold}
 \label{app:aicc}
@@ -228,7 +230,7 @@ A. Blais, A. L. Grimsmo, S. M. Girvin, and A. Wallraff, Rev. Mod. Phys. \textbf{
 K. P. Burnham and D. R. Anderson, \textit{Model Selection and Multimodel Inference}, 2nd ed. (Springer, New York, 2002).
 
 \bibitem{Berramdane2026}
-R. Berramdane, DTQEM v18.0-C: Unified Quantum Decoherence Framework, Zenodo (2026), \href{https://doi.org/10.5281/zenodo.20516742}{DOI:10.5281/zenodo.20516742}.
+R. Berramdane, DTQEM: A Phenomenological Model for Correlated Path-Information and Thermal Decoherence (v18.0-C), Zenodo (2026), \href{https://doi.org/10.5281/zenodo.20670032}{DOI:10.5281/zenodo.20670032}.
 
 \end{thebibliography}
 
