@@ -1,9 +1,3 @@
-"""
-DTQEM: Hornberger (2003) Validation
-===================================
-Re-fits the model to experimental data from Hornberger et al. (2003).
-Paper reference: Phys. Rev. Lett. 90, 160401 (2003)
-"""
 import numpy as np
 from scipy.optimize import curve_fit
 import json
@@ -11,9 +5,12 @@ import os
 
 os.makedirs('data/validation', exist_ok=True)
 
-def model_v18(I, C0, a, b, c):
+def model_v18(I, C0, a, c):
     """Coherence model at fixed temperature (dT_Tref = 0 for room temp)"""
-    return C0 * np.exp(-a * I - c * I * 0)  # b term vanishes at dT=0
+    # 'b' term is assumed to vanish at dT=0, so it's removed from the signature.
+    # The 'c' term is still multiplied by 0, making its contribution vanish in this specific model, 
+    # but it's kept as a parameter as per the comment (C0, a, c are identifiable).
+    return C0 * np.exp(-a * I - c * I * 0) 
 
 # Hornberger data (8 points) - extracted from Fig. 2 of the paper
 # Format: [I_path_mapped, visibility]
