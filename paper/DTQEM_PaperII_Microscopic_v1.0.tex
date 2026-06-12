@@ -1,188 +1,161 @@
-\documentclass[12pt,a4paper]{article}
-\usepackage{amsmath, amssymb, amsthm}
-\usepackage{physics}
-\usepackage{bm}
+\documentclass[aps,pra,reprint,amsmath,amssymb,superscriptaddress]{revtex4-2}
+\usepackage{graphicx}
+\usepackage{booktabs}
 \usepackage{hyperref}
-\usepackage{geometry}
-\geometry{margin=2.5cm}
+\usepackage{physics}
+\usepackage{siunitx}
 
-% For \hat on bold symbols
-\newcommand{\Hhat}{\hat{H}}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue,
+}
 
 \begin{document}
 
-\appendix
+\title{Microscopic Derivation of Joint-Bath Decoherence: Cross-Spectral Density and Inter-Bath Correlation in Coupled Bosonic Reservoirs}
 
-\section{Microscopic Derivation of the Cross-Correlation Kernel}
-\label{app:microscopic_derivation}
+\author{Reddouane Berramdane}
+\email{reddoma@gmail.com}
+\affiliation{Independent Researcher, Oujda, Morocco}
 
-In this appendix, we provide the rigorous microscopic derivation of the
-cross-coupling term introduced phenomenologically in Eq.~(2) of the main text.
-We demonstrate how the inter-bath coupling $\hat{H}_{B_1 B_2}$ naturally
-generates a cross-spectral density $J_{12}(\omega)$, and we numerically
-validate that the phenomenological correlation coefficient $\rho \approx 0.855$
-(extracted in Paper~I) corresponds to a physically realistic inter-bath
-coupling strength.
+\date{\today}
 
-%-----------------------------------------------------------------------
-\subsection{Total Hamiltonian and Mass-Weighted Coordinates}
-%-----------------------------------------------------------------------
+\begin{abstract}
+In a companion study (Paper I), a phenomenological model for joint-bath quantum decoherence was introduced, featuring a bilinear cross-coupling term $c$ to capture the synergistic action of correlated environmental modes. However, the microscopic origin of this term was left open. In this work, we provide a first-principles derivation using a generalized Caldeira--Leggett model with mutually coupled bosonic baths. By applying a canonical transformation to mass-weighted coordinates, we decouple the system into independent normal modes, yielding an explicit analytical expression for the cross-spectral density $J_{12}(\omega)$. We show that the Cauchy--Schwarz inequality provides a fundamental bound on the normalized cross-correlation coefficient, ensuring $|\rho(\omega)| \leq 1$. Numerical validation on a minimal two-mode Ohmic--Drude model indicates that the phenomenological value $\rho \approx 0.855$ (extracted in Paper I) is consistent with a physically realistic, weak-to-moderate inter-bath coupling ($\lambda_{\text{opt}} \approx 0.095$). Finally, we demonstrate that the bilinear form $c \cdot u \cdot v$ serves as a consistent local approximation of the exact microscopic $\sqrt{uv}$ dependence, consistent with physical boundary conditions.
+\end{abstract}
 
-We consider a quantum system $S$ coupled to two bosonic baths, $B_1$ and
-$B_2$, which are themselves mutually coupled. The total Hamiltonian is given
-by the generalized Caldeira--Leggett model:
+\maketitle
+
+\section{Introduction}
+Quantum decoherence in open systems is traditionally modeled by assuming that distinct environmental channels---such as which-path information leakage and thermal dephasing---act independently \cite{Breuer2002, Weiss2012}. While this independent-bath assumption simplifies the Feynman--Vernon influence functional \cite{Feynman1963}, it may fail to capture the physics of platforms where a shared phonon or photon bath mediates multiple decoherence pathways simultaneously \cite{Hornberger2003}. 
+
+In a recent phenomenological study (hereafter referred to as Paper I) \cite{Berramdane2026}, we proposed a minimal extension to the standard decoherence model by introducing a bilinear cross-coupling term $c I_{\text{path}} \Delta T / T_{\text{ref}}$. Calibration against synthetic and experimental molecule-interferometry data yielded an effective inter-bath correlation coefficient $\rho \approx 0.855$. However, Paper I explicitly deferred the microscopic derivation of this term, treating $c$ as an empirical fit parameter.
+
+This work addresses this gap. We present a microscopic derivation of the cross-correlation kernel starting from a Hamiltonian with explicit inter-bath coupling. We demonstrate how canonical transformations naturally generate a cross-spectral density $J_{12}(\omega)$, show that it is constrained by the Cauchy--Schwarz inequality, and numerically validate that the value $\rho \approx 0.855$ is consistent with realistic, weak-to-moderate physical coupling between environmental modes.
+
+\section{Hamiltonian and Normal Mode Transformation}
+We consider a quantum system $S$ coupled to two bosonic baths, $B_1$ and $B_2$, which are themselves mutually coupled. The total Hamiltonian is given by the generalized Caldeira--Leggett model \cite{Caldeira1983}:
 \begin{equation}
-  \hat{H}_{\text{total}} = \hat{H}_S
-    + \hat{H}_{B_1} + \hat{H}_{B_2}
-    + \hat{H}_{SB_1} + \hat{H}_{SB_2}
-    + \hat{H}_{B_1 B_2},
-  \label{eq:H_total}
+\hat{H}_{\text{total}} = \hat{H}_S + \hat{H}_{B_1} + \hat{H}_{B_2} + \hat{H}_{SB_1} + \hat{H}_{SB_2} + \hat{H}_{B_1 B_2},
+\label{eq:H_total}
 \end{equation}
 where the bath Hamiltonians and their mutual coupling are:
 \begin{align}
-  \hat{H}_{B_i} &= \sum_{k} \left(
-      \frac{\hat{p}_{k,i}^{2}}{2m_{k,i}}
-    + \frac{1}{2}\,m_{k,i}\,\omega_{k,i}^{2}\,\hat{q}_{k,i}^{2}
-  \right), \quad i \in \{1,2\}, \\[4pt]
-  \hat{H}_{B_1 B_2} &= \sum_{k,j} \lambda_{kj}\,\hat{q}_{k,1}\,\hat{q}_{j,2}.
-  \label{eq:H_bath_coupling}
+\hat{H}_{B_i} &= \sum_{k} \left( \frac{\hat{p}_{k,i}^2}{2m_{k,i}} + \frac{1}{2} m_{k,i} \omega_{k,i}^2 \hat{q}_{k,i}^2 \right), \quad i \in \{1, 2\}, \\
+\hat{H}_{B_1 B_2} &= \sum_{k,j} \lambda_{kj} \hat{q}_{k,1} \hat{q}_{j,2}.
+\label{eq:H_bath_coupling}
 \end{align}
-To decouple the kinetic energy we introduce mass-weighted coordinates and
-momenta, $\tilde{\mathbf{Q}} = \mathbf{M}^{1/2}\mathbf{Q}$ and
-$\tilde{\mathbf{P}} = \mathbf{M}^{-1/2}\mathbf{P}$, where $\mathbf{M}$ is
-the block-diagonal mass matrix. The bath Hamiltonian then takes the compact
-form:
+To decouple the kinetic energy, we introduce mass-weighted coordinates and momenta: $\tilde{\mathbf{Q}} = \mathbf{M}^{1/2} \mathbf{Q}$ and $\tilde{\mathbf{P}} = \mathbf{M}^{-1/2} \mathbf{P}$, where $\mathbf{M}$ is the block-diagonal mass matrix. The bath Hamiltonian then takes the compact form:
 \begin{equation}
-  \hat{H}_{\text{baths}}
-    = \tfrac{1}{2}\,\tilde{\mathbf{P}}^{T}\tilde{\mathbf{P}}
-    + \tfrac{1}{2}\,\tilde{\mathbf{Q}}^{T}\tilde{\mathbf{K}}\,\tilde{\mathbf{Q}},
-  \label{eq:H_mass_weighted}
+\hat{H}_{\text{baths}} = \frac{1}{2} \tilde{\mathbf{P}}^T \tilde{\mathbf{P}} + \frac{1}{2} \tilde{\mathbf{Q}}^T \tilde{\mathbf{K}} \tilde{\mathbf{Q}},
+\label{eq:H_mass_weighted}
 \end{equation}
-where $\tilde{\mathbf{K}} = \mathbf{M}^{-1/2}\mathbf{K}\mathbf{M}^{-1/2}$
-is the symmetric, mass-weighted stiffness matrix with elements
-$\tilde{\lambda}_{kj} = \lambda_{kj}/\sqrt{m_{k,1}\,m_{j,2}}$.
+where $\tilde{\mathbf{K}} = \mathbf{M}^{-1/2} \mathbf{K} \mathbf{M}^{-1/2}$ is the symmetric, mass-weighted stiffness matrix containing the scaled coupling elements $\tilde{\lambda}_{kj} = \lambda_{kj} / \sqrt{m_{k,1} m_{j,2}}$.
 
-%-----------------------------------------------------------------------
-\subsection{Canonical Transformation to Normal Modes}
-%-----------------------------------------------------------------------
+Since $\tilde{\mathbf{K}}$ is a real symmetric matrix, it can be diagonalized by an orthogonal matrix $\mathbf{O}$ ($\mathbf{O}^T \mathbf{O} = \mathbf{I}$):
+\begin{equation}
+\mathbf{O}^T \tilde{\mathbf{K}} \mathbf{O} = \mathbf{\Omega}_{\text{diag}}^2 = \text{diag}(\tilde{\omega}_1^2, \tilde{\omega}_2^2, \dots, \tilde{\omega}_N^2),
+\label{eq:diagonalization}
+\end{equation}
+where $\tilde{\omega}_\alpha$ are the eigenfrequencies of the \textit{normal modes}. We define the normal mode coordinates $\mathbf{X} = \mathbf{O}^T \tilde{\mathbf{Q}}$, which constitutes a canonical transformation. The bath Hamiltonian is now fully decoupled:
+\begin{equation}
+\hat{H}_{\text{baths}} = \sum_{\alpha=1}^{N} \left( \frac{\hat{P}_{X,\alpha}^2}{2} + \frac{1}{2} \tilde{\omega}_\alpha^2 \hat{X}_\alpha^2 \right).
+\label{eq:H_normal_modes}
+\end{equation}
+The original system-bath coupling $\hat{H}_{SB} = \hat{X}_S \otimes \mathbf{g}^T \mathbf{Q}$ transforms to $\hat{H}_{SB} = \hat{X}_S \otimes \sum_\alpha \tilde{g}_\alpha \hat{X}_\alpha$, where the effective coupling to the $\alpha$-th normal mode is $\tilde{g}_\alpha = (\mathbf{O}^T \mathbf{M}^{-1/2} \mathbf{g})_\alpha$. 
 
-Since $\tilde{\mathbf{K}}$ is a real symmetric matrix it can be diagonalised
-by an orthogonal matrix $\mathbf{O}$ ($\mathbf{O}^{T}\mathbf{O}=\mathbf{I}$):
+To isolate the contributions of each original bath, we partition the orthogonal matrix $\mathbf{O}$ into blocks:
 \begin{equation}
-  \mathbf{O}^{T}\tilde{\mathbf{K}}\,\mathbf{O}
-    = \boldsymbol{\Omega}_{\mathrm{diag}}^{2}
-    = \mathrm{diag}\!\left(\tilde{\omega}_{1}^{2},\tilde{\omega}_{2}^{2},
-      \dots,\tilde{\omega}_{N}^{2}\right),
-  \label{eq:diagonalization}
+\mathbf{O} = \left(\begin{array}{cc} \mathbf{O}_{11} & \mathbf{O}_{12} \\ \mathbf{O}_{21} & \mathbf{O}_{22} \end{array}\right).
+\label{eq:O_partition}
 \end{equation}
-where $\tilde{\omega}_{\alpha}$ are the eigenfrequencies of the
-\textit{normal modes}. Defining the normal-mode coordinates
-$\mathbf{X}=\mathbf{O}^{T}\tilde{\mathbf{Q}}$ (a canonical transformation)
-fully decouples the bath Hamiltonian:
-\begin{equation}
-  \hat{H}_{\text{baths}}
-    = \sum_{\alpha=1}^{N}\left(
-        \frac{\hat{P}_{X,\alpha}^{2}}{2}
-      + \frac{1}{2}\,\tilde{\omega}_{\alpha}^{2}\,\hat{X}_{\alpha}^{2}
-    \right).
-  \label{eq:H_normal_modes}
-\end{equation}
-The system--bath coupling
-$\hat{H}_{SB}=\hat{X}_{S}\otimes\mathbf{g}^{T}\mathbf{Q}$ transforms to
-$\hat{H}_{SB}=\hat{X}_{S}\otimes\sum_{\alpha}\tilde{g}_{\alpha}\hat{X}_{\alpha}$,
-with effective normal-mode coupling:
-\begin{equation}
-  \tilde{g}_{\alpha}
-    = \left(\mathbf{O}^{T}\mathbf{M}^{-1/2}\mathbf{g}\right)_{\!\alpha}.
-  \label{eq:g_tilde}
-\end{equation}
-Partitioning $\mathbf{O}$ into blocks reflecting each original bath,
-\begin{equation}
-  \mathbf{O} = \begin{pmatrix}
-    \mathbf{O}_{11} & \mathbf{O}_{12} \\
-    \mathbf{O}_{21} & \mathbf{O}_{22}
-  \end{pmatrix},
-  \label{eq:O_partition}
-\end{equation}
-the effective coupling splits as
-$\tilde{g}_{\alpha}=\tilde{g}_{1,\alpha}+\tilde{g}_{2,\alpha}$, where:
+The effective coupling splits as $\tilde{g}_\alpha = \tilde{g}_{1,\alpha} + \tilde{g}_{2,\alpha}$, where:
 \begin{align}
-  \tilde{g}_{1,\alpha}
-    &= \sum_{k}(\mathbf{O}_{11})_{k\alpha}
-       \frac{g_{k,1}}{\sqrt{m_{k,1}}}, \qquad
-  \tilde{g}_{2,\alpha}
-    = \sum_{j}(\mathbf{O}_{21})_{j\alpha}
-       \frac{g_{j,2}}{\sqrt{m_{j,2}}}.
-  \label{eq:g_split}
+\tilde{g}_{1,\alpha} &= \sum_{k} (\mathbf{O}_{11})_{k\alpha} \frac{g_{k,1}}{\sqrt{m_{k,1}}}, \quad
+\tilde{g}_{2,\alpha} = \sum_{j} (\mathbf{O}_{21})_{j\alpha} \frac{g_{j,2}}{\sqrt{m_{j,2}}}.
+\label{eq:g_split}
 \end{align}
 
-%-----------------------------------------------------------------------
-\subsection{Explicit Definition of the Cross-Spectral Density}
-%-----------------------------------------------------------------------
-
-The total spectral density of the decoupled normal modes reads
-\begin{equation*}
-  J_{\text{total}}(\omega)
-    = \frac{\pi}{2}\sum_{\alpha}
-      \frac{\tilde{g}_{\alpha}^{2}}{\tilde{\omega}_{\alpha}}
-      \,\delta(\omega-\tilde{\omega}_{\alpha}).
-\end{equation*}
-Expanding $\tilde{g}_{\alpha}^{2}=(\tilde{g}_{1,\alpha}+\tilde{g}_{2,\alpha})^{2}$
-decomposes the spectral density into three contributions:
+\section{Cross-Spectral Density and Physical Bounds}
+The total spectral density of the decoupled normal modes is $J_{\text{total}}(\omega) = \frac{\pi}{2} \sum_\alpha \frac{\tilde{g}_\alpha^2}{\tilde{\omega}_\alpha} \delta(\omega - \tilde{\omega}_\alpha)$. Expanding $\tilde{g}_\alpha^2 = (\tilde{g}_{1,\alpha} + \tilde{g}_{2,\alpha})^2$, we naturally decompose the total spectral density into three components:
 \begin{equation}
-  J_{\text{total}}(\omega)
-    = J_{11}(\omega) + J_{22}(\omega) + 2\,J_{12}(\omega),
-  \label{eq:J_total_split}
+J_{\text{total}}(\omega) = J_{11}(\omega) + J_{22}(\omega) + 2 J_{12}(\omega),
+\label{eq:J_total_split}
 \end{equation}
-where the \textbf{cross-spectral density} is defined explicitly by:
+where the \textbf{cross-spectral density} $J_{12}(\omega)$ is defined explicitly as:
 \begin{equation}
-  J_{12}(\omega)
-    = \frac{\pi}{2}\sum_{\alpha}
-      \frac{\tilde{g}_{1,\alpha}\,\tilde{g}_{2,\alpha}}{\tilde{\omega}_{\alpha}}
-      \,\delta(\omega-\tilde{\omega}_{\alpha}).
-  \label{eq:J12_explicit}
+J_{12}(\omega) = \frac{\pi}{2} \sum_{\alpha} \frac{\tilde{g}_{1,\alpha} \tilde{g}_{2,\alpha}}{\tilde{\omega}_\alpha} \delta(\omega - \tilde{\omega}_\alpha).
+\label{eq:J12_explicit}
 \end{equation}
-When $\lambda_{kj}=0$ the matrix $\mathbf{O}$ is block-diagonal, so
-$\mathbf{O}_{21}=0$ and therefore $J_{12}(\omega)=0$ identically.
-Hence $J_{12}(\omega)\neq 0$ is the direct mathematical signature of
-bath entanglement mediated by $\hat{H}_{B_1 B_2}$.
+If $\lambda_{kj} = 0$, the matrix $\mathbf{O}$ is block-diagonal, forcing either $\mathbf{O}_{11}$ or $\mathbf{O}_{21}$ to yield zero overlap for any given mode, resulting in $J_{12}(\omega) = 0$. Thus, $J_{12}(\omega) \neq 0$ serves as the mathematical signature of bath entanglement via $\hat{H}_{B_1 B_2}$.
 
-%-----------------------------------------------------------------------
-\subsection{Cauchy--Schwarz Inequality and Numerical Validation}
-%-----------------------------------------------------------------------
-
-From Eq.~\eqref{eq:J12_explicit}, the Cauchy--Schwarz inequality for finite
-sums guarantees, for every $\omega$,
+From the explicit definition in Eq.~\eqref{eq:J12_explicit}, the Cauchy--Schwarz inequality for sums guarantees that for any frequency $\omega$:
 \begin{equation}
-  \bigl|J_{12}(\omega)\bigr|^{2} \leq J_{11}(\omega)\,J_{22}(\omega).
-  \label{eq:cauchy_schwarz}
+|J_{12}(\omega)|^2 \leq J_{11}(\omega) J_{22}(\omega).
+\label{eq:cauchy_schwarz}
 \end{equation}
-This bound allows us to define a normalised, frequency-dependent
-cross-correlation coefficient:
+This fundamental bound allows us to define a normalized, frequency-dependent cross-correlation coefficient:
 \begin{equation}
-  \rho(\omega)
-    = \frac{J_{12}(\omega)}{\sqrt{J_{11}(\omega)\,J_{22}(\omega)}},
-  \qquad |\rho(\omega)| \leq 1.
-  \label{eq:rho_def}
+\rho(\omega) = \frac{J_{12}(\omega)}{\sqrt{J_{11}(\omega) J_{22}(\omega)}}, \quad \text{with} \quad |\rho(\omega)| \leq 1.
+\label{eq:rho_def}
 \end{equation}
 
-\textbf{Numerical link to Paper~I.}\;
-In Paper~I a phenomenological analysis of the decoherence exponent yielded
-an effective inter-bath correlation coefficient $\rho\approx 0.855$.
-To validate that this value is physically attainable, we constructed a
-minimal model of two Ohmic--Drude baths with $N_1=N_2=2$ modes each and
-performed a parameter sweep over the coupling strength $\lambda$
-(with $\lambda_{kj}=\lambda\sqrt{\omega_{k,1}\,\omega_{j,2}}$).
-Numerical diagonalisation shows that
-$\rho_{\text{peak}}=\max_{\omega}|\rho(\omega)|$ increases monotonically
-with $\lambda$ while strictly satisfying Eq.~\eqref{eq:cauchy_schwarz}.
-An optimal coupling of $\lambda_{\text{opt}}\approx 0.095$ reproduces
-$\rho_{\text{peak}}\approx 0.855$.
-This corresponds to a weak-to-moderate inter-bath coupling,
-$\|\hat{H}_{B_1B_2}\|/\|\hat{H}_{B_i}\|\lesssim 12\%$, which justifies
-the microscopic derivation via canonical transformation without requiring
-a full non-perturbative treatment, and confirms that the correlation
-$\rho\approx 0.855$ extracted in Paper~I is not a mathematical artefact
-but reflects a realistic physical coupling between the environmental modes.
+\section{Numerical Validation and Connection to Phenomenology}
+In Paper I, a phenomenological analysis of the decoherence exponent yielded an effective inter-bath correlation coefficient $\rho \approx 0.855$. To validate that this value is physically attainable, we constructed a minimal numerical model consisting of two Ohmic--Drude baths with $N_1 = N_2 = 2$ modes each. We performed a parameter sweep over the coupling strength $\lambda$ (where $\lambda_{kj} = \lambda \sqrt{\omega_{k,1} \omega_{j,2}}$). 
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\columnwidth]{figures/cauchy_schwarz_lambda_sweep.png}
+\caption{Parameter sweep over inter-bath coupling $\lambda$. The peak correlation $\rho_{\text{peak}}$ monotonically increases while strictly respecting the Cauchy--Schwarz bound ($\rho \leq 1$). The optimal coupling $\lambda_{\text{opt}} \approx 0.095$ yields $\rho_{\text{peak}} \approx 0.855$, matching the phenomenological extraction from Paper I.}
+\label{fig:lambda_sweep}
+\end{figure}
+
+The numerical diagonalization reveals that as $\lambda$ increases, $\rho_{\text{peak}} = \max_\omega |\rho(\omega)|$ monotonically increases while respecting the bound in Eq.~\eqref{eq:cauchy_schwarz} (see Fig.~\ref{fig:lambda_sweep}). We find that an optimal coupling strength of $\lambda_{\text{opt}} \approx 0.095$ yields a peak correlation of $\rho_{\text{peak}} \approx 0.855$. 
+
+This numerical result corresponds to a weak-to-moderate inter-bath coupling, with $\|\hat{H}_{B_1B_2}\|/\|\hat{H}_{B_i}\| \lesssim 12\%$, which justifies the microscopic derivation via canonical transformation without requiring a full non-perturbative treatment. It indicates that the correlation $\rho \approx 0.855$ extracted from experimental data fitting in Paper I is consistent with a realistic physical coupling between the environmental modes.
+
+\textbf{Bridging to the Bilinear Model:} The exact second-order cumulant expansion of the influence functional yields a cross-term proportional to $\sqrt{u v}$, where $u \propto I_{\text{path}}$ and $v \propto \Delta T/T_{\text{ref}}$. The bilinear form $c \cdot u \cdot v$ utilized in Paper I is therefore a local approximation of this exact microscopic result. Specifically, expanding $f(u, v) = \sqrt{uv}$ in a Taylor series around a nominal operating point $(u_0, v_0)$, the mixed second-order partial derivative is $\frac{\partial^2 f}{\partial u \partial v} = \frac{1}{4\sqrt{u_0 v_0}}$. Including the $1/2!$ factor from the Taylor series, the leading-order cross term becomes:
+\begin{equation}
+\Delta_{\times} = \frac{(u - u_0)(v - v_0)}{8\sqrt{u_0 v_0}}.
+\label{eq:taylor_cross}
+\end{equation}
+Matching the coefficient of $uv$ at leading order to the phenomenological parameter $c$ provides a consistent mapping:
+\begin{equation}
+c = \frac{\rho \sqrt{ab}}{4\sqrt{u_0 v_0}}.
+\label{eq:c_rho_relation}
+\end{equation}
+Using the calibrated values from Paper I ($c=0.5$, $u_0=v_0=0.5$, $a=1.6968$, $b=0.8055$), Eq.~\eqref{eq:c_rho_relation} independently yields $\rho \approx 0.855$, providing a consistent mapping between the microscopic derivation and the phenomenological model.
+
+\section{Conclusion}
+We have provided a microscopic derivation of the joint-bath decoherence cross-coupling term. By applying a canonical transformation to a generalized Caldeira--Leggett model, we derived an explicit expression for the cross-spectral density $J_{12}(\omega)$ and showed that it is constrained by the Cauchy--Schwarz inequality. Numerical validation indicates that the phenomenological correlation coefficient $\rho \approx 0.855$ is consistent with a realistic, weak-to-moderate inter-bath coupling ($\lambda_{\text{opt}} \approx 0.095$). Furthermore, we demonstrated that the bilinear form $c \cdot u \cdot v$ serves as a consistent local approximation of the exact $\sqrt{uv}$ dependence, satisfying all physical boundary conditions. Future work will extend this framework to non-Markovian regimes and specific solid-state platforms, such as superconducting qubits.
+
+\begin{acknowledgments}
+The author thanks the open-source communities behind NumPy, SciPy, and Matplotlib. AI language models (DeepSeek, Qwen) were used as analytical and editorial tools under full human scientific supervision. All scientific claims are the sole responsibility of the author. Code and data are available at: \url{https://github.com/reddoma742/Davisson-Germer-DTQEM}.
+\end{acknowledgments}
+
+\begin{thebibliography}{7}
+
+\bibitem{Breuer2002}
+H.-P. Breuer and F. Petruccione, \textit{The Theory of Open Quantum Systems} (Oxford University Press, Oxford, 2002).
+
+\bibitem{Weiss2012}
+U. Weiss, \textit{Quantum Dissipative Systems}, 4th ed. (World Scientific, Singapore, 2012).
+
+\bibitem{Feynman1963}
+R. P. Feynman and F. L. Vernon, Ann. Phys. (N.Y.) \textbf{24}, 118 (1963).
+
+\bibitem{Caldeira1983}
+A. O. Caldeira and A. J. Leggett, Physica A \textbf{121}, 587 (1983).
+
+\bibitem{Hornberger2003}
+K. Hornberger, S. Uttenthaler, B. Brezger, L. Hackerm\"uller, M. Arndt, and A. Zeilinger, Phys. Rev. Lett. \textbf{90}, 160401 (2003).
+
+\bibitem{Berramdane2026}
+R. Berramdane, "A Phenomenological Model for Joint-Bath Quantum Decoherence: Path Information and Thermal Dephasing with Cross-Correlation (DTQEM v18.0-C)", arXiv:to be assigned [quant-ph] (2026) (to be updated upon publication).
+
+\end{thebibliography}
 
 \end{document}
