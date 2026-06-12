@@ -1,0 +1,15 @@
+
+==================================================
+🔬 Hornberger (2003) Validation Results
+==================================================
+Number of points: N = 8
+Fitted parameters:
+  C0 = 1.0400
+  a  = 1.2794
+  c  = 0.5000
+
+📈 R² = 0.985  (Target: 0.936)
+==================================================
+✅ Results saved to: data/validation/hornberger_fit_results.json
+/tmp/ipykernel_4062/830462831.py:35: OptimizeWarning: Covariance of the parameters could not be estimated
+  popt, pcov = curve_fit(model_v18, I_exp, C_exp, p0=[p0[0], p0[1], p0[3]], maxfev=5000)
