@@ -1,0 +1,17 @@
+
+==================================================
+📊 LOOCV Validation Results (Table II)
+==================================================
+Parameters:
+  C0 = 0.3675 ± 0.0000
+  a  = 1.6968 ± 0.0000
+  b  = 0.8055 ± 0.0000
+  c  = 0.5000 ± 0.0000
+
+Metrics:
+  R² (full)    = 1.0000  (Target: 0.9982)
+  LOOCV R²     = 1.0000   (Target: 0.9814)
+  RMSE (full)  = 0.0000
+  LOOCV RMSE   = 0.0000
+==================================================
+✅ Results saved to: data/calibration/fitted_parameters.json
