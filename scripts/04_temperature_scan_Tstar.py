@@ -58,4 +58,4 @@ plt.legend()
 plt.grid(True, which='both', alpha=0.3)
 
 plt.savefig('figures/figure_b_eff.png', dpi=300, bbox_inches='tight')
-print("✅ Plot saved to: figures/figure_b_eff.png")
+print("✅ Plot saved to: figures/figure_b_eff_validation.png")
