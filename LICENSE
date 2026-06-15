@@ -37,10 +37,24 @@ For the full legal code, see: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 How to cite this work (software and models):
 
-    Berramdane, Reddouane. DTQEM: Dual-Threshold Quantum Decoherence Models (v17.0-C, v18.0-C, v63.x, Unified).
+    Berramdane, Reddouane. DTQEM: Dual-Threshold Quantum Decoherence Models – Complete Framework (Papers I, II, III).
+    Zenodo, 2026. DOI: 10.5281/zenodo.XXXXXXXX (to be updated after upload)
+
+For the individual papers:
+
+    Paper I (Phenomenological Model):
+        Berramdane, Reddouane. DTQEM: A Phenomenological Model for Correlated Path-Information and Thermal Decoherence (v18.0-C).
+        Zenodo, 2026. DOI: 10.5281/zenodo.XXXXXXXX
+
+    Paper II (Microscopic Derivation):
+        Berramdane, Reddouane. Microscopic Derivation of Joint-Bath Decoherence: Cross-Spectral Density and Inter-Bath Correlation.
+        Zenodo, 2026. DOI: 10.5281/zenodo.XXXXXXXX (companion paper)
+
+    Paper III (Vibronic Model):
+        Berramdane, Reddouane. Vibronic-Mediated Decoherence: A Microscopic Foundation for Temperature-Dependent Dephasing in DTQEM.
+        Zenodo, 2026. DOI: 10.5281/zenodo.XXXXXXXX
+
+Previous version (v17.0-C baseline):
+
+    Berramdane, Reddouane. DTQEM v17.0-C: Final Coherence Model for Path-Interference Experiments.
     Zenodo, 2026. DOI: 10.5281/zenodo.20460770
-
-For the academic paper (Paper I - Phenomenological Model):
-
-    Berramdane, Reddouane. DTQEM: A Phenomenological Model for Correlated Path-Information and Thermal Decoherence (v18.0-C).
-    arXiv preprint, 2026. (To be updated after submission)
