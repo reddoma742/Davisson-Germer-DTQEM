@@ -1,3 +1,83 @@
+```markdown
+## [v18.0-C-paper] – 2026-06-15  ← FINAL PAPERS RELEASE
+
+### 🎯 Summary
+Completion of the three‑paper DTQEM series: phenomenological model (Paper I), microscopic derivation (Paper II), and vibronic‑mediated temperature‑dependent dephasing (Paper III). The series transitions from empirical fitting to first‑principles theory with falsifiable predictions.
+
+### ✨ Added – Papers
+
+#### Paper I (Phenomenological Joint‑Bath Model)
+- `papers/DTQEM_PaperI_Phenomenological_v1.0.tex`
+- Bilinear cross‑coupling term `c·I_path·ΔT/T_ref`
+- Calibration: R² = 0.9982 (synthetic), LOOCV R² = 0.9814
+- Validation on Hornberger (2003): R² = 0.936 (N=8)
+- AICc threshold: N ≥ 36 for reliable detection
+
+#### Paper II (Microscopic Derivation)
+- `papers/DTQEM_PaperII_Microscopic_v1.0.tex`
+- Canonical transformation → cross‑spectral density `J₁₂(ω)`
+- Cauchy–Schwarz bound: `|J₁₂|² ≤ J₁₁·J₂₂`
+- Correlation coefficient `ρ ≈ 0.855`, optimal coupling `λ_opt ≈ 0.095`
+
+#### Paper III (Vibronic‑Mediated Dephasing)
+- `papers/DTQEM_PaperIII_Vibronic_Mediated_Decoherence_v1.0.tex`
+- Effective dephasing coefficient: `a_eff(T) = a₀ + 2S·coth(ħω_v/2k_BT)`
+- Huang–Rhys factor `S = g²/ω_v²` – measurable independently
+- Predictions: low‑T saturation, high‑T linear growth, isotope‑dependent crossover `T*`
+- Isotope shift: `ΔT*/T* ≈ -3.9%` for ¹²C → ¹³C in C₇₀
+
+### ✨ Added – Documentation & Metadata
+- **Acknowledgments** in all three papers explicitly mention AI models (DeepSeek, Claude, Qwen) as analytical tools under human supervision.
+- `papers/README.md` – overview of all three papers with compilation instructions.
+- Updated `CITATION.cff` with entries for Papers I, II, III.
+- Updated main `README.md` with Paper III in the model table and citation section.
+
+### 🔧 Changed
+- Repository structure: `papers/` folder now contains all three `.tex` and `.pdf` files.
+- `.gitignore` updated to keep final PDFs of all three papers.
+- `HISTORY.md` restructured to separate paper releases from code releases.
+
+### 📊 Performance summary (Paper III)
+
+| Regime | Behavior | Formula |
+|--------|----------|---------|
+| Low T | Saturation | `a_eff → a₀ + 2S` |
+| High T | Linear growth | `a_eff ≈ a₀ + 4Sk_BT/(ħω_v)` |
+| Crossover | `T* ≈ ħω_v/2k_B` | Example: C₇₀ → `T* ≈ 195 K` |
+
+### 🔮 Testable predictions
+- **Isotope effect**: `T*'/T* = √(μ/μ')`, `S'/S = μ'/μ`
+- **Low‑T saturation** – measurable in superconducting qubits or cryogenic interferometry
+- **High‑T linear slope** – directly related to `S` and `ω_v`
+
+### 📁 Files added/updated
+
+```
+
+papers/DTQEM_PaperI_Phenomenological_v1.0.tex
+papers/DTQEM_PaperI_Phenomenological_v1.0.pdf
+papers/DTQEM_PaperII_Microscopic_v1.0.tex
+papers/DTQEM_PaperII_Microscopic_v1.0.pdf
+papers/DTQEM_PaperIII_Vibronic_Mediated_Decoherence_v1.0.tex
+papers/DTQEM_PaperIII_Vibronic_Mediated_Decoherence_v1.0.pdf
+papers/README.md
+README.md (updated)
+CITATION.cff (updated)
+.gitignore (updated)
+HISTORY.md (updated)
+
+```
+
+### 🔗 DOI
+> **Current release DOI (for all three papers together):**  
+> *To be assigned after Zenodo upload – use tag `v18.0-C-paper`.*
+
+### 🧪 Next steps
+- Upload to Zenodo (DOI will be issued)
+- Submit Papers I, II, III to arXiv (quant-ph)
+- Contact experimental groups (e.g., Arndt lab, Vienna) for isotope effect test
+```
+
 ## [v18.0-C-paper] – 2026-06-11  ← PAPER RELEASE
 
 ### 🎯 Summary
