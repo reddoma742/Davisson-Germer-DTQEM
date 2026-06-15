@@ -54,9 +54,10 @@ htmlcov/
 *.toc
 *.synctex.gz
 
-# Keep the final paper PDF
-!paper1_final.pdf
-!paper2.pdf
+# Keep the final paper PDFs (Papers I, II, III)
+!papers/DTQEM_PaperI_Phenomenological_v1.0.pdf
+!papers/DTQEM_PaperII_Microscopic_v1.0.pdf
+!papers/DTQEM_PaperIII_Vibronic_Mediated_Decoherence_v1.0.pdf
 
 # Output folders (specific to your project)
 output/
