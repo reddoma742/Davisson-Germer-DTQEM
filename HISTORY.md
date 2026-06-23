@@ -1,3 +1,68 @@
+# Paper I — History
+
+## Version 1.0.0 (2026-06-22) — Initial Release
+
+### Overview
+First complete version of the manuscript *"A Single-Mode Occupation-Number Model for Temperature-Dependent Zero-Field Splitting in NV Centers"*.
+
+### Key Milestones
+
+- **2026-06-19:** Project conception. The idea of a single effective phonon mode for D(T) is proposed.
+- **2026-06-19:** First fit to Ouyang et al. (2024) data. The model achieves R² = 0.999946 with ω = 711 cm⁻¹.
+- **2026-06-20:** Extrapolation test against Liu et al. (2019) parametrization up to 1000 K. R² = 0.998185, max deviation < 2 MHz.
+- **2026-06-20:** Monte Carlo uncertainty propagation added. 95% parameter-uncertainty bands for both DTQEM and power-law models.
+- **2026-06-21:** Relation between n(ν̃,T) and coth(ν̃,T) clarified. Zero-point contribution absorbed into D₀.
+- **2026-06-21:** Notation changed from ω to ν̃ (wavenumber) for physical consistency.
+- **2026-06-21:** DTQEM acronym defined in the manuscript. Section 4.4 expanded to outline Paper II.
+- **2026-06-22:** Final polishing: figure captions, data availability, acknowledgments, and cover letter.
+
+### Contributors
+- **Reddouane Berramdane** — scientific supervision, calibration, validation.
+- **DeepSeek** — code development, data extraction, critical analysis.
+- **Claude (Anthropic)** — code polishing, LaTeX manuscript preparation, philosophical discussions.
+- **Grok (xAI)** — scientific review, transport integral framework.
+- **Perplexity AI** — literature survey, methodological feedback.
+
+### Figures
+- **Figure 1:** DTQEM fit to Ouyang et al. data (fit, residuals, R² comparison).
+- **Figure 2:** Extrapolation to 1000 K with Monte Carlo parameter-uncertainty bands.
+
+### Data
+- Calibration: Ouyang et al. (2024), Table 1 — 18 points, 298–383 K.
+- Validation: Liu et al. (2019), Fig. 2(c) — digitized benchmark up to 1000 K.
+
+### Code
+- `DTQEM_figures_COLAB.py` — generates both figures (PNG + PDF) in a single run.
+
+### Repository
+- `Paper_I_DTQEM/`
+  - `main.tex` — final manuscript.
+  - `DTQEM_figures_COLAB.py` — figure generation code.
+  - `cover_letter.tex` — submission cover letter.
+  - `fig1_dtqem_fit_final.png/pdf` — Figure 1.
+  - `fig2_MC_bands_final.png/pdf` — Figure 2.
+  - `README.md` — project overview.
+  - `LICENSE` — CC-BY-NC-SA-4.0.
+  - `CITATION.cff` — citation metadata.
+  - `.gitignore` — Git ignore rules.
+  - `archive/` — previous versions and drafts.
+
+### Key Results
+- Model: D(T) = D₀ + A·n(ν̃,T) — 3 interpretable parameters.
+- Calibration: R² = 0.999946, RMSE = 1.75×10⁻⁵ GHz.
+- Effective phonon wavenumber: ν̃ = 711 ± 48 cm⁻¹ (≈ 88 meV).
+- Extrapolation to 1000 K: R² = 0.998185, RMSE = 1.32 MHz.
+- Power-law model fails outside calibration window (deviation > 70 MHz at 1000 K).
+- 95% parameter-uncertainty bands confirm robustness of extrapolation.
+
+### Philosophical Discussions (Saved for Paper II)
+- Double-slit experiment analogy: heat as a "physical observer."
+- Coherence retention factor γ(T,t) = exp[-t/T_coh(T)].
+- Why γ never reaches zero: Γ₀ as a minimum decoherence rate.
+- Comparison with Yang-Mills mass gap: functional similarity (non-zero minimum).
+- The neutron as a "neutral reservoir" for nuclear stability.
+- Energy levels as "barrels" — minimum energy cannot be fully drained.
+
 ```markdown
 ## [v18.0-C-paper] – 2026-06-15  ← FINAL PAPERS RELEASE
 
