@@ -28,14 +28,11 @@ dist/
 *.swp
 *.swo
 
-# Data files (optional – adjust to your needs)
+# Data files
 *.h5
 *.pkl
 *.npy
 *.npz
-*.csv
-*.json
-*.xlsx
 
 # Testing
 .pytest_cache/
@@ -43,7 +40,7 @@ dist/
 htmlcov/
 .tox/
 
-# LaTeX temporary files (if you compile paper.tex locally)
+# LaTeX temporary files
 *.aux
 *.bbl
 *.blg
@@ -54,32 +51,27 @@ htmlcov/
 *.toc
 *.synctex.gz
 
-# Keep the final paper PDFs (Papers I, II, III)
-!papers/DTQEM_PaperI_Phenomenological_v1.0.pdf
-!papers/DTQEM_PaperII_Microscopic_v1.0.pdf
-!papers/DTQEM_PaperIII_Vibronic_Mediated_Decoherence_v1.0.pdf
+# Keep the final compiled PDF
+!paper_I_final.pdf
 
-# Output folders (specific to your project)
+# Output folders (specific to this project)
 output/
-results/
-figures/generated/
+archive/
 
 # Generated images (exclude from tracking)
 output/*.png
 output/*.jpg
-results/*.png
-*.jpg
-*.jpeg
+output/*.pdf
 
-# But keep the main figures for documentation
-!figures/figure_b_eff.png
-!figures/figure1.png
-!figures/figure2.png
+# But keep the main figures for the paper
+!fig1_dtqem_fit_final.png
+!fig1_dtqem_fit_final.pdf
+!fig2_MC_bands_final.png
+!fig2_MC_bands_final.pdf
 
 # IDE
 .vscode/
 .idea/
-*.swp
 
 # OS
 .DS_Store
@@ -88,7 +80,3 @@ desktop.ini
 
 # MyPy / type checking
 .mypy_cache/
-
-# Project-specific (if any)
-*.bak
-*.orig
