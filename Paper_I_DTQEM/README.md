@@ -4,7 +4,7 @@
 **Author:** Reddouane BERRAMDANE  
 **Affiliation:** Independent Researcher  
 **Date:** June 21, 2026  
-**License:** [To be added]
+**License:** [CC BY-NC-SA 4.0]
 
 ---
 
@@ -96,7 +96,7 @@ If you use this work, please cite:
             Zero-Field Splitting in NV Centers},
   author = {Reddouane Berramdane},
   year   = {2026},
-  doi    = {[TO BE PROVIDED]}
+  doi    = {[https://doi.org/10.5281/zenodo.20819966]}
 }
 ```
 
