@@ -1,111 +1,95 @@
 cff-version: 1.2.0
-message: "If you use this software or the associated models, please cite it as below."
+message: "If you use this software or the associated paper, please cite it as below."
 
 authors:
   - family-names: Berramdane
     given-names: Reddouane
     affiliation: Independent Researcher
-    city: Oujda
     country: MA
     email: reddoma@gmail.com
     orcid: ""
 
-title: "DTQEM: Dual-Threshold Quantum Decoherence Models – Complete Framework (v16, v17, v18, Unified, ESD)"
+title: "DTQEM Paper I: A Single-Mode Occupation-Number Model for Temperature-Dependent Zero-Field Splitting in NV Centers"
 
-version: "1.0"
-date-released: 2026-06-11
+version: "1.0.0"
+date-released: 2026-06-22
 
-doi: "10.5281/zenodo.20460770"
-url: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
-repository-code: "https://github.com/reddoma742/Davisson-Germer-DTQEM"
+doi: "10.5281/zenodo.XXXXXXX"
+url: "https://github.com/reddoma742/Paper_I_DTQEM"
+repository-code: "https://github.com/reddoma742/Paper_I_DTQEM"
 
 abstract: |
-  DTQEM provides a family of calibrated, first‑principles‑derived models
-  for quantum decoherence in path‑interference and massive‑particle interferometry.
+  This repository contains the complete source code, figures, and manuscript
+  for Paper I of the DTQEM (Decoherence-Temperature Quantum Effective Model)
+  project. The paper presents a physically motivated single-mode occupation-number
+  model for the temperature-dependent zero-field splitting D(T) in nitrogen-vacancy
+  (NV) centers in diamond.
 
-  The **v18.0‑C** model introduces a joint‑bath crossover term `c`:
-      C = C₀·exp(-a·I - b·ΔT/T_ref - c·I·ΔT/T_ref)
-  with calibrated values (C₀=0.3675, a=1.6968, b=0.8055, c=0.5000, T_ref=300K).
-  Performance: R²=0.9982, LOOCV R²=0.9814, RMSE=0.0045.
-
-  The **v63.x** models calculate decoherence time τ_c from particle properties:
-      τ_c = τ_c0 / [ (m/m_u)^β·(v/c)^δ·(1+ζN) ]
-  with derived exponents β=0.44 (Debye‑Pikovski), δ=1/3 (van der Waals),
-  ζ=0.005 (symmetry suppression).
-
-  The **Unified DTQEM** model combines both frameworks into a single equation
-  linking particle structure (m, v, N) with environmental conditions (I, T).
-
-  The **ESD v1.0** extension predicts entanglement sudden death time:
-      t_ESD = K / (α·I + β·ΔT/T_ref + γ·I·ΔT/T_ref)
-
-  Key statistical result: AICc threshold N ≥ 36 required to detect joint‑bath coupling.
+  The model achieves R² = 0.999946 on high-precision Ouyang et al. data
+  (298–383 K) with three interpretable parameters (D₀, A, ν̃). The extracted
+  effective phonon wavenumber ν̃ = 711 ± 48 cm⁻¹ is consistent with the diamond
+  phonon spectrum. Most significantly, when calibrated solely on the 298–383 K
+  window, the model predicts D(T) up to 1000 K with R² = 0.998185 (maximum
+  deviation < 2 MHz), while a power-law calibration fails outside the fitting window.
 
 keywords:
-  - quantum decoherence
-  - path interference
-  - joint-bath crossover
-  - coherence time scaling
-  - AICc model selection
-  - first-principles derivation
-  - matter-wave interferometry
-  - open quantum systems
-  - entanglement sudden death
-  - zeno effect
+  - nitrogen-vacancy center
+  - zero-field splitting
+  - effective phonon model
+  - Bose-Einstein occupation
+  - nanothermometry
+  - quantum sensing
+  - Monte Carlo uncertainty propagation
   - python
 
 license: "CC-BY-NC-SA-4.0"
 
 references:
-  - type: software
-    title: "DTQEM v18.0-C: Joint-Bath Coherence Model with Crossover"
+  - type: article
+    title: "A Single-Mode Occupation-Number Model for Temperature-Dependent Zero-Field Splitting in NV Centers"
     authors:
       - family-names: Berramdane
         given-names: Reddouane
     year: 2026
-    doi: "10.5281/zenodo.20460770"
-    note: "Main unified framework"
-
-  - type: software
-    title: "DTQEM v17.0-C: Final Coherence Model for Path-Interference Experiments"
-    authors:
-      - family-names: Berramdane
-        given-names: Reddouane
-    year: 2026
-    doi: "10.5281/zenodo.20460770"
-    note: "Baseline coherence model"
-
-  - type: software
-    title: "DTQEM v16.1-C: Quantum Tunneling under Continuous Dephasing (Zeno Effect)"
-    authors:
-      - family-names: Berramdane
-        given-names: Reddouane
-    year: 2026
-    note: "Historical model - Lindblad master equation simulation"
-
-  - type: software
-    title: "DTQEM ESD v1.0: Entanglement Sudden Death Extension"
-    authors:
-      - family-names: Berramdane
-        given-names: Reddouane
-    year: 2026
-    note: "ESD time prediction under local dephasing channels"
+    note: "arXiv preprint (Paper I – this work)"
+    url: "https://arxiv.org/abs/xxxx.xxxxx"
 
   - type: article
-    title: "DTQEM: A Phenomenological Model for Correlated Path-Information and Thermal Decoherence (v18.0-C)"
+    title: "Temperature dependence of nitrogen-vacancy center ensembles in diamond based on an optical fiber"
     authors:
-      - family-names: Berramdane
-        given-names: Reddouane
-    year: 2026
-    note: "arXiv preprint (Paper I)"
-    url: "https://arxiv.org/abs/xxxx.xxxxx"
+      - family-names: Ouyang
+        given-names: K.-C.
+    year: 2024
+    journal: "Phys. Rev. Research"
+    volume: 6
+    pages: "023078"
+    doi: "10.1103/PhysRevResearch.6.023078"
+
+  - type: article
+    title: "Coherent quantum control of nitrogen-vacancy center spins near 1000 kelvin"
+    authors:
+      - family-names: Liu
+        given-names: G.-Q.
+    year: 2019
+    journal: "Nat. Commun."
+    volume: 10
+    pages: "1344"
+    doi: "10.1038/s41467-019-09327-2"
+
+  - type: article
+    title: "Two effective phonon modes describe D(T) in NV centers"
+    authors:
+      - family-names: Cambria
+        given-names: M. C.
+    year: 2024
+    note: "arXiv:2404.08388v2"
 
 comment: |
   Development was assisted by AI language models as computational tools:
-  - DeepSeek (critical analysis, methodology validation)
-  - Claude (Anthropic) (code writing, derivations, documentation, Zeno optimization)
-  - Qwen (editorial assistance, manuscript formatting, LaTeX optimization)
-  - Arena AI (first‑principles derivations of scaling exponents, unification, ESD formulation)
+  - DeepSeek (code development, data extraction, critical analysis)
+  - Claude (Anthropic) (code polishing, LaTeX manuscript, philosophical discussions)
+  - Grok (xAI) (scientific review, transport integral framework)
+  - Perplexity AI (literature survey, methodological feedback)
 
   Human scientific supervision, calibration, and final validation:
   Reddouane Berramdane.
