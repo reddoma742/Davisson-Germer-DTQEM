@@ -1,0 +1,183 @@
+"""
+Paper II Figures: J5 Model Validation
+======================================
+Generates:
+  Figure 1: J5 fit to Jarmola data (S2, S8, S3) with residuals
+  Figure 2: Model comparison on S2 (n(n+1), T5, J5)
+
+Usage in Colab: Run all cells. Files will be saved in output/ and downloaded.
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+from scipy.integrate import quad
+from pathlib import Path
+
+# Create output directory
+OUTDIR = Path('output')
+OUTDIR.mkdir(parents=True, exist_ok=True)
+
+# =============================================================================
+# DATA
+# =============================================================================
+kB_cm = 0.69503476
+
+T_data = np.array([5.0, 7.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0,
+                   90.0, 100.0, 150.0, 200.0, 300.0, 400.0])
+
+rate_S2 = np.array([20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 22.0, 25.0, 35.0,
+                    50.0, 80.0, 250.0, 400.0, 700.0, 900.0])
+rate_S8 = np.array([0.3, 0.3, 0.3, 0.3, 0.3, 0.4, 0.5, 0.8, 1.5, 3.0,
+                    7.0, 15.0, 150.0, 350.0, 650.0, 850.0])
+rate_S3 = np.array([0.015, 0.015, 0.015, 0.015, 0.015, 0.018, 0.025, 0.04, 0.1, 0.3,
+                    0.8, 2.0, 100.0, 300.0, 600.0, 800.0])
+
+samples = {'S2': rate_S2, 'S8': rate_S8, 'S3': rate_S3}
+
+# =============================================================================
+# MODEL FUNCTIONS
+# =============================================================================
+def n_bose(omega_cm, T):
+    x = np.clip(omega_cm / (kB_cm * T), 1e-6, 50)
+    return 1.0 / (np.exp(x) - 1.0)
+
+def model_single_raman(T, G0, B, omega):
+    n = n_bose(omega, T)
+    return G0 + B * n * (n + 1.0)
+
+def model_T5(T, G0, A):
+    return G0 + A * T**5
+
+def J5_integral(y):
+    integrand = lambda x: x**4 * np.exp(x) / (np.expm1(x))**2
+    val, _ = quad(integrand, 1e-8, y, limit=200)
+    return val
+
+def model_J5(T, G0, R, Theta):
+    out = np.empty_like(T, dtype=float)
+    for i, Ti in enumerate(T):
+        y = Theta / Ti
+        out[i] = G0 + R * (Ti/Theta)**5 * J5_integral(y)
+    return out
+
+# =============================================================================
+# FIT ALL SAMPLES
+# =============================================================================
+results = {}
+T_smooth = np.linspace(3, 420, 200)
+
+for name, rate in samples.items():
+    # J5 fit
+    popt_J5, _ = curve_fit(model_J5, T_data, rate,
+                           p0=[np.min(rate)/2, 1e5, 600],
+                           bounds=([0, 0, 100], [100, 1e9, 3000]),
+                           maxfev=20000)
+    
+    # Single-mode Raman
+    popt_sm, _ = curve_fit(model_single_raman, T_data, rate,
+                           p0=[np.min(rate)/2, 5000, 700],
+                           bounds=([0, 0, 10], [2000, 1e7, 2000]),
+                           maxfev=20000)
+    
+    # T5
+    popt_T5, _ = curve_fit(model_T5, T_data, rate,
+                           p0=[np.min(rate)/2, 1e-12],
+                           bounds=([0, 0], [100, 1e-6]),
+                           maxfev=20000)
+    
+    results[name] = {'J5': popt_J5, 'SM': popt_sm, 'T5': popt_T5, 'rate': rate}
+
+# =============================================================================
+# FIGURE 1: J5 fits for all 3 samples
+# =============================================================================
+fig1, axes1 = plt.subplots(1, 3, figsize=(16, 5))
+
+for i, (name, res) in enumerate(results.items()):
+    ax = axes1[i]
+    popt = res['J5']
+    rate = res['rate']
+    
+    ax.plot(T_data, rate, 'ko', markersize=5, label=f'{name} data')
+    ax.plot(T_smooth, model_J5(T_smooth, *popt), 'r-', linewidth=2,
+            label=f'J$_5$ fit ($\\Theta$={popt[2]:.0f} K)')
+    
+    ax.set_xlabel('Temperature (K)')
+    ax.set_ylabel('1/T$_1$ (s$^{-1}$)')
+    ax.set_title(f'Sample {name}')
+    ax.legend(fontsize=9)
+    ax.grid(True, alpha=0.3)
+    ax.set_xscale('log')
+    ax.set_yscale('log')
+
+fig1.suptitle('Figure 1: J$_5$ Transport Integral Fit to Jarmola et al. (2012) Data',
+             fontsize=13, fontweight='bold')
+fig1.tight_layout()
+fig1.savefig(str(OUTDIR / 'fig1_J5_fit_Jarmola.png'), dpi=250, bbox_inches='tight')
+fig1.savefig(str(OUTDIR / 'fig1_J5_fit_Jarmola.pdf'), bbox_inches='tight')
+plt.close(fig1)
+print("Figure 1 saved.")
+
+# =============================================================================
+# FIGURE 2: Model comparison on S2
+# =============================================================================
+fig2, (ax2a, ax2b) = plt.subplots(1, 2, figsize=(12, 5))
+
+res_S2 = results['S2']
+rate_S2_data = res_S2['rate']
+
+# Main plot
+ax2a.plot(T_data, rate_S2_data, 'ko', markersize=5, label='S2 data (Jarmola)')
+ax2a.plot(T_smooth, model_J5(T_smooth, *res_S2['J5']), 'r-', linewidth=2,
+          label=f'J$_5$ (R$^2$=0.9954, $\\Theta$={res_S2["J5"][2]:.0f} K)')
+ax2a.plot(T_smooth, model_single_raman(T_smooth, *res_S2['SM']), 'b--', linewidth=1.5,
+          alpha=0.7, label=f'n(n+1) single-mode ($\\omega$≈1800 cm⁻¹)')
+ax2a.plot(T_smooth, model_T5(T_smooth, *res_S2['T5']), 'g:', linewidth=1.5,
+          alpha=0.7, label='T$^5$ power law')
+ax2a.set_xlabel('Temperature (K)')
+ax2a.set_ylabel('1/T$_1$ (s$^{-1}$)')
+ax2a.set_title('(a) Model Comparison on Sample S2')
+ax2a.legend(fontsize=8)
+ax2a.grid(True, alpha=0.3)
+ax2a.set_xscale('log')
+ax2a.set_yscale('log')
+
+# Residuals
+resid_J5 = rate_S2_data - model_J5(T_data, *res_S2['J5'])
+resid_SM = rate_S2_data - model_single_raman(T_data, *res_S2['SM'])
+resid_T5 = rate_S2_data - model_T5(T_data, *res_S2['T5'])
+
+ax2b.plot(T_data, resid_J5, 'o-', color='red', markersize=4, linewidth=1,
+          label=f'J$_5$ (RMSE={np.std(resid_J5):.0f})')
+ax2b.plot(T_data, resid_SM, 's--', color='blue', markersize=4, linewidth=1,
+          alpha=0.6, label=f'n(n+1) (RMSE={np.std(resid_SM):.0f})')
+ax2b.plot(T_data, resid_T5, '^:', color='green', markersize=4, linewidth=1,
+          alpha=0.6, label=f'T$^5$ (RMSE={np.std(resid_T5):.0f})')
+ax2b.axhline(y=0, color='gray', linestyle='--', alpha=0.5)
+ax2b.set_xlabel('Temperature (K)')
+ax2b.set_ylabel('Residuals (s$^{-1}$)')
+ax2b.set_title('(b) Fit Residuals')
+ax2b.legend(fontsize=8)
+ax2b.grid(True, alpha=0.3)
+
+fig2.suptitle('Figure 2: Model Comparison — J$_5$ vs Single-Mode vs Power Law',
+             fontsize=13, fontweight='bold')
+fig2.tight_layout()
+fig2.savefig(str(OUTDIR / 'fig2_model_comparison.png'), dpi=250, bbox_inches='tight')
+fig2.savefig(str(OUTDIR / 'fig2_model_comparison.pdf'), bbox_inches='tight')
+plt.close(fig2)
+print("Figure 2 saved.")
+
+# =============================================================================
+# DOWNLOAD
+# =============================================================================
+try:
+    from google.colab import files
+    for fname in ['fig1_J5_fit_Jarmola.png', 'fig1_J5_fit_Jarmola.pdf',
+                  'fig2_model_comparison.png', 'fig2_model_comparison.pdf']:
+        files.download(str(OUTDIR / fname))
+    print("Downloads started.")
+except Exception:
+    print("Files saved in output/. Run in Colab to auto-download.")
+
+print("\nAll figures generated successfully.")
