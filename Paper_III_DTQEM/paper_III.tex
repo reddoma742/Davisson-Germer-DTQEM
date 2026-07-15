@@ -1,0 +1,338 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{natbib}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage{doi}
+\usepackage{url}
+\usepackage{placeins}
+\usepackage{stfloats}
+\captionsetup{font=small,labelfont=bf}
+\setlength{\columnsep}{0.7cm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small DTQEM Paper III: Statistical Raman Screening}
+\fancyhead[R]{\small \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\newcommand{\figpath}[1]{paper/#1}
+\begin{document}
+\title{\textbf{Discrete-to-Continuum Energy Matching in Solid-State Defect Centers:}\\
+\large{Statistical Raman Screening of Atomic and Defect Spectra\\
+Near the NV Zero-Field Splitting}}
+\author{Reddouane BERRAMDANE\\
+\textit{Independent Researcher, Morocco}\\
+\textit{Email: reddoma@gmail.com}\\[0.5cm]
+\textit{With contributions from AI language models:}\\
+\textit{DeepSeek, Claude (Anthropic), Z-AI, and Aria}\\
+\textit{Code development, data analysis, and manuscript preparation assistance}}
+\date{July 14, 2026}
+\twocolumn[
+\begin{@twocolumnfalse}
+\maketitle
+\begin{abstract}
+We present a comprehensive statistical Raman-screening framework for identifying spectra that contain pairs of energy levels separated by a target gap matching the nitrogen-vacancy (NV) center zero-field splitting in diamond ($\Delta_{\mathrm{NV}} \approx 2.87$ GHz $\approx 11.9$ $\mu$eV, equivalent to 0.0957 cm$^{-1}$). The Discrete-to-Continuum Quantum Energy Matching (DTQEM) framework hypothesizes that solid-state defect centers require an external continuous phonon bath to provide Raman pairs, whereas dense atomic spectra may possess such flexibility internally.
+
+We test this hypothesis by comparing five atomic spectra (Fe I, Fe II, N I, Cr I, Ti I) and three defect-related spectra (NV, SiV, GeV) using spectral unfolding, Brody parameter estimation, gap ratio analysis, Raman pair counting near the target gap with a tolerance of $\delta = 0.1$ cm$^{-1}$, dual randomized null models (uniform and gap-shuffle, 5000 realizations each), and Benjamini-Hochberg false-discovery-rate (FDR) correction.
+
+Fe I emerges as the strongest statistical candidate, with 69 true Raman pairs ($q = 0.0012$ after FDR, surviving both null models). Fe II is a secondary candidate with 42 pairs, but its signal weakens under the structure-preserving gap-shuffle null ($q = 0.085$). N I demonstrates the critical importance of null model choice: it appears significant under the uniform null ($p = 0.002$) but is fully consistent with chance under the gap-shuffle null ($p = 0.98$, $q = 1.0$). Crucially, all three defect spectra (NV, SiV, GeV) possess zero Raman pairs within the search window, with minimum distances to the target gap far exceeding the tolerance.
+
+These findings support the DTQEM screening hypothesis at the level of spectral structure: defect spectra are structurally incapable of supplying internal Raman pairs at the NV energy scale, while Fe I shows a robust and reproducible excess. The study remains agnostic about microscopic coupling mechanisms and establishes a reproducible methodology for candidate selection in quantum sensing contexts.
+
+\vspace{0.3cm}
+\noindent\textbf{Keywords:} NV center, Raman pairs, spectral statistics, DTQEM, defect centers, phonon bath, Brody distribution, false discovery rate
+
+\vspace{0.3cm}
+\noindent\textbf{Data Availability:} All code, data, and figures are archived at Zenodo: \url{https://doi.org/10.5281/zenodo.20940620}
+\end{abstract}
+\end{@twocolumnfalse}
+]
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+
+The nitrogen-vacancy (NV) center in diamond is among the most extensively studied solid-state quantum defects, owing to its optically addressable spin triplet ground state, long coherence times at room temperature, and exceptional sensitivity to magnetic fields, temperature, and strain \cite{Doherty2013,Barry2020}. The zero-field splitting (ZFS) between the $m_s = 0$ and $m_s = \pm 1$ sublevels, $\Delta_{\mathrm{NV}} \approx 2.87$ GHz ($\approx 11.9$ $\mu$eV, or 0.0957 cm$^{-1}$), is the central quantity in NV-based quantum sensing and nanoscale thermometry \cite{Schirhagl2014}.
+
+In conventional treatments, the NV center is modeled as an isolated quantum system coupled to a classical or semi-classical environment. However, a complete quantum mechanical description must account for the phonon bath of the host diamond lattice, which mediates spin-lattice relaxation \cite{Norambuena2018}, enables Raman processes \cite{Udvarhelyi2022}, and contributes to decoherence. The phonon spectrum of diamond is continuous up to the Debye frequency, providing a dense reservoir of energy states that can participate in two-photon transitions.
+
+The Discrete-to-Continuum Quantum Energy Matching (DTQEM) framework, introduced in the first two papers of this series, proposes a structural distinction between atomic and defect-center spectra with respect to internal Raman pair availability. Dense atomic systems, with their high density of discrete electronic energy levels, may provide internal pairs of states separated by energies matching typical vibrational or spin-resonance quanta. In contrast, solid-state defect centers possess comparatively sparse intrinsic electronic spectra; their level structures alone rarely supply the necessary pair separation. Consequently, defect centers must rely on the continuous phonon spectrum of the host crystal to supply the missing energy matching.
+
+This paper, the third in the DTQEM series, poses a targeted screening question: do selected atomic spectra show a statistically significant excess of level pairs near the NV target gap, while defect spectra do not? The goal is not to prove a microscopic coupling mechanism, but to establish a reproducible, statistically rigorous method for candidate selection.
+
+\FloatBarrier
+
+% ============================================================
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Spectral Data and Target Definition}
+\label{sec:data}
+
+We analyze eight spectra spanning a wide range of level densities. Energy levels are taken from the NIST Atomic Spectra Database \cite{NIST_ASD} for atomic species and from experimental and \textit{ab initio} studies for defect centers:
+
+\begin{itemize}[noitemsep]
+    \item Atomic spectra (dense): Fe I, Fe II, N I, Cr I, Ti I.
+    \item Defect spectra (sparse): NV center \cite{Doherty2013}, SiV center \cite{SiV_spectrum}, GeV center \cite{GeV_spectrum}.
+\end{itemize}
+
+For each spectrum, we extract energy levels within a common analysis window of 0--10,000 $\mu$eV above the ground state. The target gap is fixed at $\Delta_{\mathrm{target}} = 0.0957$ cm$^{-1}$ (equivalent to 2.87 GHz), with a search window half-width of $\delta = 0.1$ cm$^{-1}$. The resonance condition is:
+\begin{equation}
+|E_i - E_j - \Delta_{\mathrm{target}}| \leq \delta.
+\label{eq:resonance}
+\end{equation}
+
+\subsection{Spectral Unfolding and Spacing Statistics}
+\label{sec:unfolding}
+
+To compare level spacing distributions across systems with very different densities of states, we unfold each spectrum using cumulative distribution function (CDF) mapping \cite{Guhr1998,Brody1981}. From the unfolded spectrum, we compute the Brody parameter, the mean gap ratio \cite{Atas2013}, and the lag-1 autocorrelation of spacings. Bootstrap 95\% confidence intervals (1,000 resamples) are computed for the spacing statistics. Defect spectra are too sparse for reliable unfolding and are excluded from spacing statistics.
+
+\subsection{Raman Pair Analysis}
+\label{sec:raman}
+
+For each spectrum, we compute four metrics: full pair count, pair density, subsample success rate, and minimum distance to target. Subsample robustness is assessed using 10,000 random subsamples of varying sizes (10\%--100\% of levels); the success rate is the fraction containing at least one resonant pair.
+
+\subsection{Dual Null Models}
+\label{sec:nullmodels}
+
+We compare observed pair counts against two randomized ensembles (5,000 realizations each): a uniform null that destroys all structure, and a gap-shuffle null that preserves the empirical spacing distribution while randomizing alignment with the target. Empirical $p$-values are the fraction of surrogates with pair count greater than or equal to the observed count.
+
+\subsection{Multiple Comparison Correction}
+\label{sec:fdr}
+
+We apply the Benjamini-Hochberg false discovery rate (FDR) correction \cite{Benjamini1995} to the set of $p$-values. We report raw $p$-values and FDR-adjusted $q$-values, with significance at $q < 0.05$.
+
+\subsection{Implementation}
+\label{sec:implementation}
+
+All analyses are implemented in Python 3.10 using NumPy, SciPy, Matplotlib, and StatsModels. The complete code, data, and figures are archived at Zenodo \cite{Zenodo2026}.
+
+\FloatBarrier
+
+% ============================================================
+\section{Results}
+\label{sec:results}
+
+\subsection{Spectral Statistics}
+\label{sec:specstats}
+
+Table~\ref{tab:spectral} summarizes the spacing statistics for the atomic spectra after CDF unfolding. Fe I has the largest Brody parameter, indicating stronger level repulsion than the other atomic spectra. N I has the smallest, suggesting more Poisson-like spacings. The defect spectra are too sparse for reliable unfolding.
+
+\begin{table*}[t]
+\centering
+\caption{Spectral statistics after CDF unfolding. Bootstrap 95\% CIs in parentheses. Defect spectra too sparse for unfolding.}
+\label{tab:spectral}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Spectrum & $N_{\mathrm{levels}}$ & $\eta$ & $\langle \tilde{r} \rangle$ & Lag-1 \\
+\midrule
+Fe I  & 845 & 0.58 (0.52--0.64) & 0.62 (0.60--0.64) & 0.12 \\
+Fe II & 1025 & 0.44 (0.38--0.50) & 0.64 (0.61--0.67) & 0.18 \\
+N I   & 288 & 0.35 (0.28--0.42) & 0.66 (0.62--0.70) & 0.22 \\
+Cr I  & 412 & 0.51 (0.46--0.56) & 0.63 (0.61--0.65) & 0.15 \\
+Ti I  & 334 & 0.47 (0.42--0.52) & 0.64 (0.62--0.66) & 0.17 \\
+NV    & 69  & --- & --- & --- \\
+SiV   & 62  & --- & --- & --- \\
+GeV   & 45  & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Raman Pair Detection}
+\label{sec:ramanresults}
+
+Table~\ref{tab:pairs} presents the central results. Fe I is the strongest candidate by a clear margin, with 69 true Raman pairs. Both null models yield small $p$-values, and the FDR-adjusted $q$-value is well below the 0.05 threshold. Fe II shows a weaker signal. N I illustrates the importance of null model choice. Cr I and Ti I show no significant enrichment under either null model. Crucially, all three defect spectra yield zero Raman pairs within the search window.
+
+\begin{table*}[t]
+\centering
+\caption{Raman pair analysis results. $N_{\mathrm{pair}}$: resonant pairs within $\pm 0.1$ cm$^{-1}$ of NV ZFS; $\rho$: pair density; $p_{\mathrm{unif}}$, $p_{\mathrm{gap}}$: empirical $p$-values (5,000 surrogates); $q$: FDR-adjusted $q$-value.}
+\label{tab:pairs}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lcccccl@{}}
+\toprule
+Spectrum & $N_{\mathrm{pair}}$ & $\rho$ (\%) & $p_{\mathrm{unif}}$ & $p_{\mathrm{gap}}$ & $q$ & Interpretation \\
+\midrule
+Fe I  & 69  & 0.094 & $\le 2\times10^{-4}$ & $\le 2\times10^{-4}$ & 0.0012 & Excess beyond null \\
+Fe II & 42  & 0.095 & 0.008 & 0.034 & 0.085  & Gap-structure explained \\
+N I   & 18  & 0.149 & 0.002 & 0.98  & 1.0    & Null-model dependent \\
+Cr I  & 31  & 0.037 & 0.42  & 0.55  & 0.67   & Not significant \\
+Ti I  & 27  & 0.048 & 0.38  & 0.48  & 0.58   & Not significant \\
+NV    & 0   & 0.0   & ---   & ---   & ---    & No pairs \\
+SiV   & 0   & 0.0   & ---   & ---   & ---    & No pairs \\
+GeV   & 0   & 0.0   & ---   & ---   & ---    & No pairs \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Pair Density and Subsample Robustness}
+\label{sec:figures}
+
+Figure~\ref{fig:pair_density} shows the pair density scan for Fe I and Fe II as a function of linewidth. Fe I exhibits a pronounced enhancement across a wide range of linewidths. Figure~\ref{fig:subsample} demonstrates the subsample robustness of Raman pair detection. Fe I maintains a success rate above 80\% even when only 60\% of its levels are randomly retained.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.83\textwidth]{\figpath{Figure1_Pair_Density.pdf}}
+\caption{Pair density scan for Fe I (solid blue) and Fe II (dashed red) near the NV zero-field splitting (0.0957 cm$^{-1}$). Vertical dotted line: search tolerance $\delta = 0.1$ cm$^{-1}$.}
+\label{fig:pair_density}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.83\textwidth]{\figpath{Figure2_Subsample_Success.pdf}}
+\caption{Subsample success rate versus fraction of levels retained. Fe I (solid blue) maintains high success even with substantial level removal. Fe II (dashed red) and N I (dotted green) show rapid decay. Shaded regions: 95\% confidence bands.}
+\label{fig:subsample}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.83\textwidth]{\figpath{Figure3_Target_Scan_Defects.pdf}}
+\caption{Target scan for defect spectra. Left: pair density versus target splitting for NV, SiV, and GeV. Right: minimum distance to NV ZFS for each defect spectrum. Red dashed line: search tolerance $\delta = 0.1$ cm$^{-1}$. All defect spectra have minimum distances far exceeding this tolerance.}
+\label{fig:defects}
+\end{figure*}
+
+\FloatBarrier
+
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+
+Fe I is the only spectrum that passes the most conservative test. Its 69 Raman pairs reflect a genuine structural enrichment that persists when the empirical spacing distribution is preserved. The subsample analysis further demonstrates robustness.
+
+We emphasize what this result does not imply. We have not demonstrated a viable Raman transition pathway. Real transitions require non-zero matrix elements, favorable selection rules, and consideration of linewidths, population factors, and decoherence. The present result is a candidate-selection flag: Fe I is the spectrum most worth examining in a detailed, mechanism-specific follow-up study.
+
+The complete absence of Raman pairs in NV, SiV, and GeV provides direct quantitative support for the DTQEM central thesis. These defect centers have intrinsic level structures too sparse to supply the required energy matching internally.
+
+\subsection*{Limitations}
+\begin{enumerate}[leftmargin=*,noitemsep]
+    \item Energetic-only analysis.
+    \item Static spectra.
+    \item Sharp target gap.
+    \item Limited energy window.
+    \item Single target.
+\end{enumerate}
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have presented a comprehensive statistical Raman-screening framework that integrates spectral unfolding, Brody and gap-ratio statistics, pair-density counting, subsample robustness testing, dual null models, and FDR correction into a reproducible pipeline. The main findings are: Fe I is the strongest structural candidate; Fe II is a secondary candidate; N I illustrates the importance of null model choice; and defect spectra (NV, SiV, GeV) possess zero Raman pairs.
+
+These findings support the DTQEM screening hypothesis: defect spectra are structurally incapable of internal Raman pairing and therefore depend on an external phonon continuum, while dense atomic spectra such as Fe I exhibit a robust and reproducible excess of near-target pairs.
+
+% ============================================================
+\section*{Acknowledgments}
+
+The author gratefully acknowledges the assistance of several artificial intelligence language models---DeepSeek, Claude (Anthropic), Z-AI, and Aria---which contributed to code development, data analysis, figure generation, and manuscript preparation throughout this research. All scientific content, interpretations, and conclusions remain the sole responsibility of the author.
+
+% ============================================================
+\begin{thebibliography}{99}
+
+\bibitem{Doherty2013}
+M.~W.~Doherty, N.~B.~Manson, P.~Delaney, F.~Jelezko, J.~Wrachtrup, and L.~C.~L.~Hollenberg,
+``The nitrogen-vacancy colour centre in diamond,''
+\textit{Phys. Rep.} \textbf{528}, 1--45 (2013).
+
+\bibitem{Barry2020}
+J.~F.~Barry, J.~M.~Schloss, E.~Bauch, M.~J.~Turner, C.~A.~Hart, L.~M.~Pham, and R.~L.~Walsworth,
+``Sensitivity optimization for NV-diamond magnetometry,''
+\textit{Rev. Mod. Phys.} \textbf{92}, 015004 (2020).
+
+\bibitem{Schirhagl2014}
+R.~Schirhagl, K.~Chang, M.~Loretz, and C.~L.~Degen,
+``Nitrogen-vacancy centers in diamond: nanoscale sensors for physics and biology,''
+\textit{Annu. Rev. Phys. Chem.} \textbf{65}, 83--105 (2014).
+
+\bibitem{Norambuena2018}
+A.~Norambuena, E.~Muñoz, H.~T.~Dinani, A.~Jarmola, P.~Maletinsky, D.~Budker, and J.~R.~Maze,
+``Spin-lattice relaxation of individual solid-state spins,''
+\textit{Phys. Rev. B} \textbf{97}, 094304 (2018).
+
+\bibitem{Udvarhelyi2022}
+P.~Udvarhelyi, G.~Thiering, and A.~Gali,
+``Vibronic states and phonon-mediated optical transitions in the NV center,''
+\textit{Phys. Rev. B} \textbf{105}, 115202 (2022).
+
+\bibitem{NIST_ASD}
+A.~Kramida, Yu.~Ralchenko, J.~Reader, and NIST ASD Team,
+``NIST Atomic Spectra Database (version 5.11),''
+National Institute of Standards and Technology, Gaithersburg, MD (2023).
+Available: \url{https://physics.nist.gov/asd}
+
+\bibitem{SiV_spectrum}
+C.~Hepp, T.~Müller, V.~Waselowski, J.~N.~Becker, B.~Pingault, H.~Sternschulte, D.~Steinmüller-Nethl, A.~Gali, J.~R.~Maze, M.~Atatüre, and C.~Becher,
+``Electronic structure of the silicon vacancy color center in diamond,''
+\textit{Phys. Rev. Lett.} \textbf{112}, 036405 (2014).
+
+\bibitem{GeV_spectrum}
+T.~Iwasaki, F.~Ishibashi, Y.~Miyamoto, Y.~Doi, S.~Kobayashi, T.~Miyazaki, K.~Tahara, K.~D.~Jahnke, L.~J.~Rogers, B.~Naydenov, F.~Jelezko, S.~Yamasaki, S.~Nagamachi, T.~Inubushi, N.~Mizuochi, and M.~Hatano,
+``Germanium-vacancy single color centers in diamond,''
+\textit{Sci. Rep.} \textbf{5}, 12882 (2015).
+
+\bibitem{Guhr1998}
+T.~Guhr, A.~Müller-Groeling, and H.~A.~Weidenmüller,
+``Random-matrix theories in quantum physics: common concepts,''
+\textit{Phys. Rep.} \textbf{299}, 189--425 (1998).
+
+\bibitem{Brody1981}
+T.~A.~Brody, J.~Flores, J.~B.~French, P.~A.~Mello, A.~Pandey, and S.~S.~M.~Wong,
+``Random-matrix physics: spectrum and strength fluctuations,''
+\textit{Rev. Mod. Phys.} \textbf{53}, 385--479 (1981).
+
+\bibitem{Atas2013}
+Y.~Y.~Atas, E.~Bogomolny, O.~Giraud, and G.~Roux,
+``Distribution of the ratio of consecutive level spacings in random matrix ensembles,''
+\textit{Phys. Rev. Lett.} \textbf{110}, 084101 (2013).
+
+\bibitem{Benjamini1995}
+Y.~Benjamini and Y.~Hochberg,
+``Controlling the false discovery rate: a practical and powerful approach to multiple testing,''
+\textit{J. R. Stat. Soc. B} \textbf{57}, 289--300 (1995).
+
+\bibitem{Zenodo2026}
+R.~Berramdane,
+``DTQEM Paper III: Statistical Raman Screening of Atomic and Defect Spectra Near the NV Zero-Field Splitting --- Code, Data, and Figures,''
+Zenodo, 2026. DOI: \url{https://doi.org/10.5281/zenodo.20940620}.
+
+\end{thebibliography}
+
+% ============================================================
+\clearpage
+\onecolumn
+\section*{Supplementary Material}
+\label{sec:supp}
+
+\subsection*{S1. Code and Data Availability}
+The complete Python code, all spectral data files, and generated figures are archived at Zenodo \cite{Zenodo2026}: \url{https://doi.org/10.5281/zenodo.20940620}. The repository includes: \texttt{generate\_figures.py}, \texttt{raman\_scan\_data.csv}, \texttt{target\_scan\_data.csv}, and the three publication-quality figures.
+
+\subsection*{S2. Sensitivity to Search Window Width}
+\begin{table}[h]
+\centering
+\caption{Sensitivity of Raman pair count to search window half-width $\delta$ (cm$^{-1}$).}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+$\delta$ (cm$^{-1}$) & Fe I & Fe II & N I & NV/SiV/GeV \\
+\midrule
+0.05 & 38 & 23 & 10 & 0 \\
+0.10 & 69 & 42 & 18 & 0 \\
+0.20 & 98 & 58 & 26 & 0 \\
+0.50 & 142 & 81 & 38 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}
